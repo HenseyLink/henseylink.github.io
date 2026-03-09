@@ -15,9 +15,6 @@
     <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- YooKassa Widget -->
-    <script src="https://yookassa.ru/checkout-widget/v1/checkout-widget.js"></script>
-
     <script>
         tailwind.config = {
             theme: {
@@ -229,11 +226,11 @@
                                 <span>Техподдержка 24/7</span>
                             </li>
                         </ul>
-
-                <button id="pay-button" class="w-full bg-brand hover:bg-brand-dark text-black py-4 rounded-xl font-bold text-lg transition-all duration-200 shadow-lg shadow-white/10 hover:shadow-white/20 transform hover:-translate-y-1">
+                        
+                        <button id="open-payment-modal" class="w-full bg-brand hover:bg-brand-dark text-black py-4 rounded-xl font-bold text-lg transition-all duration-200 shadow-lg shadow-white/10 hover:shadow-white/20 transform hover:-translate-y-1">
                             Купить подписку
                         </button>
-                <div id="payment-form" class="mt-4"></div>
+                        
                         <p class="text-center text-xs text-gray-500 mt-4">Гарантия возврата средств 7 дней</p>
                     </div>
                 </div>
@@ -328,45 +325,80 @@
         </div>
     </footer>
 
-<script>
-    document.getElementById('pay-button').addEventListener('click', function() {
-        const button = this;
-        const widgetContainer = document.getElementById('payment-form');
-        
-        // Визуальная индикация загрузки
-        button.disabled = true;
-        const originalText = button.innerHTML;
-        button.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Загрузка...';
+    <!-- Payment Modal -->
+    <div id="payment-modal" class="fixed inset-0 z-[100] hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <!-- Backdrop -->
+        <div class="fixed inset-0 bg-black/80 backdrop-blur-sm transition-opacity" aria-hidden="true"></div>
 
-        // --- ЛОГИКА ИНТЕГРАЦИИ ---
-        // Инициализация виджета. Все параметры обязательные, кроме объекта customization.
-        const checkout = new window.YooMoneyCheckoutWidget({
-            confirmation_token: 'confirmation-token', //Токен, который перед проведением оплаты нужно получить от ЮKassa
-            return_url: window.location.href, //Ссылка на страницу завершения оплаты
+        <div class="fixed inset-0 z-10 overflow-y-auto">
+            <div class="flex min-h-full items-center justify-center p-4 text-center sm:p-0">
+                <!-- Modal Panel -->
+                <div class="relative transform overflow-hidden rounded-2xl bg-dark-800 border border-dark-700 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+                    
+                    <!-- Close Button -->
+                    <div class="absolute top-4 right-4 z-10">
+                        <button type="button" id="close-payment-modal" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fa-solid fa-xmark text-2xl"></i>
+                        </button>
+                    </div>
 
-            //Настройка виджета
-            customization: {
-                //Настройка способа отображения
-                modal: true
-            },
-            error_callback: function(error) {
-                //Обработка ошибок инициализации
-                console.error(error);
-                button.disabled = false;
-                button.innerHTML = originalText;
-            }
-        });
+                    <div class="px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
+                        <h3 class="text-xl font-bold leading-6 text-white mb-6 text-center">Оформление подписки</h3>
+                        
+                        <!-- YooKassa Form -->
+                        <form class="yoomoney-payment-form flex flex-col gap-5" action="https://yookassa.ru/integration/simplepay/payment" method="post" accept-charset="utf-8">
+                            <!-- Hidden Products Data -->
+                            <div class="ym-products hidden">
+                                <div class="ym-product-line">
+                                    <span class="ym-product-price" data-price="250" data-id="301" data-count="1">250,00&nbsp;₽</span>
+                                </div>
+                                <input type="hidden" name="text" value="Безопасный интернет">
+                                <input type="hidden" name="price" value="250">
+                                <input type="hidden" name="quantity" value="1">
+                                <input type="hidden" name="paymentSubjectType" value="service">
+                                <input type="hidden" name="paymentMethodType" value="full_prepayment">
+                                <input type="hidden" name="tax" value="1">
+                            </div>
+                            <input value="" type="hidden" name="ym_merchant_receipt">
+                            
+                            <div class="ym-customer-info">
+                                <label class="block text-sm font-medium text-gray-400 mb-2">Email для чека</label>
+                                <input name="cps_email" class="ym-input w-full bg-dark-900 border border-dark-700 rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-brand focus:ring-1 focus:ring-brand transition-all" placeholder="your@email.com" type="email" required>
+                            </div>
+                            
+                            <div class="ym-hidden-inputs"></div>
 
-        //Отображение платежной формы в модальном окне
-        checkout.render()
-            //Метод возвращает Promise, исполнение которого говорит о полной загрузке платежной формы (можно не использовать).
-            .then(() => {
-                //Код, который нужно выполнить после отображения платежной формы.
-                button.disabled = false;
-                button.innerHTML = originalText;
-            });
-    });
-</script>
+                            <div class="ym-hidden-inputs">
+                                <input name="shopSuccessURL" type="hidden" value="https://link.melodico.xyz/success">
+                                <input name="shopFailURL" type="hidden" value="https://link.melodico.xyz/error">
+                            </div>
+                            
+                            <div class="ym-payment-btn-block">
+                                <input name="sum" class="ym-input ym-sum-input hidden" type="number" step="any" value="250">
+                                <button data-text="Заплатить" class="ym-btn-pay w-full bg-brand hover:bg-brand-dark text-black font-bold py-4 rounded-xl text-lg transition-all shadow-lg shadow-white/10 hover:shadow-white/20 transform hover:-translate-y-1 flex justify-center items-center gap-2">
+                                    <span class="ym-text-crop">Оплатить</span> <span class="ym-price-output">250,00&nbsp;₽</span>
+                                </button>
+                                <div class="flex justify-center mt-4 opacity-40 hover:opacity-80 transition-opacity">
+                                    <img src="https://yookassa.ru/integration/simplepay/img/iokassa-gray.svg?v=1.33.0" class="ym-logo h-6" alt="ЮKassa">
+                                </div>
+                            </div>
+                            <input name="shopId" type="hidden" value="1296050">
+                        </form>
+                        <script src="https://yookassa.ru/integration/simplepay/js/yookassa_construct_form.js?v=1.33.0"></script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const modal = document.getElementById('payment-modal');
+        const openBtn = document.getElementById('open-payment-modal');
+        const closeBtn = document.getElementById('close-payment-modal');
+
+        openBtn.addEventListener('click', () => modal.classList.remove('hidden'));
+        closeBtn.addEventListener('click', () => modal.classList.add('hidden'));
+    </script>
 
 </body>
 </html>

@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>melodico - Интернет, каким он должен быть</title>
+    <meta name="description" content="VPN для защиты данных и анонимности в сети. VLESS, Hysteria2, Shadowsocks, WireGuard.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts (Inter) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Unbounded', 'bold'],
+                    },
+                    colors: {
+                        brand: {
+                            DEFAULT: '#ffffff', // White accent
+                            dark: '#e5e5e5',
+                        },
+                        dark: {
+                            900: '#000000', // Main bg
+                            800: '#121212', // Card bg
+                            700: '#262626',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #000000;
+            color: #f8fafc;
+        }
+        .glass-nav {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #ffffff, #737373);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass-nav transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center gap-3 cursor-pointer" onclick="window.scrollTo(0,0)">
+
+                    <span class="font-bold text-xl tracking-tight">melodico</span>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#features" class="text-gray-300 hover:text-white transition-colors text-sm font-medium">Преимущества</a>
+                    <a href="#pricing" class="text-gray-300 hover:text-white transition-colors text-sm font-medium">Тарифы</a>
+                    <a href="#faq" class="text-gray-300 hover:text-white transition-colors text-sm font-medium">FAQ</a>
+                </div>
+
+                <!-- CTA Button (Replaced "В консоль" with "Купить") -->
+                <div class="hidden md:flex items-center">
+                    <a href="#pricing" class="bg-brand hover:bg-brand-dark text-black px-6 py-2.5 rounded-lg font-medium transition-all duration-200 shadow-lg shadow-white/10 hover:shadow-white/20 transform hover:-translate-y-0.5">
+                        Купить
+                    </a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button class="text-gray-300 hover:text-white focus:outline-none">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+        <!-- Background Glow -->
+        <div class="absolute top-0 left-1/2 w-full -translate-x-1/2 h-full z-0 pointer-events-none">
+            <div class="absolute top-20 left-1/4 w-96 h-96 bg-white/5 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-20 right-1/4 w-96 h-96 bg-white/5 rounded-full blur-3xl"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-dark-800 border border-dark-700 mb-8 animate-fade-in-up">
+                <span class="w-2 h-2 rounded-full bg-white animate-pulse"></span>
+                <span class="text-sm text-gray-300 font-medium">Работаем в России, Китае и Иране</span>
+            </div>
+            
+            <h1 class="text-5xl md:text-7xl font-bold tracking-tight mb-8 leading-tight">
+                Интернет, каким он <br>
+                <span class="gradient-text">и должен быть</span>
+            </h1>
+            
+            <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-400 mb-10">
+                VPN для защиты данных и анонимности в сети. Поддержка VLESS обеспечивает максимальную скорость без ограничений.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#pricing" class="bg-brand hover:bg-brand-dark text-black px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-200 shadow-xl shadow-white/10 hover:shadow-white/20 transform hover:-translate-y-1">
+                    Купить доступ
+                </a>
+                <a href="#features" class="bg-dark-800 hover:bg-dark-700 text-white border border-dark-700 px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-200">
+                    Узнать больше
+                </a>
+            </div>
+
+            <!-- Supported Platforms -->
+            <div class="mt-16 pt-8 border-t border-dark-800/50">
+                <p class="text-sm text-gray-500 mb-6 uppercase tracking-wider font-semibold">Поддерживаемые платформы</p>
+                <div class="flex justify-center gap-8 text-gray-400 text-3xl">
+                    <i class="fa-brands fa-apple hover:text-white transition-colors" title="iOS & macOS"></i>
+                    <i class="fa-brands fa-android hover:text-white transition-colors" title="Android"></i>
+                    <i class="fa-brands fa-windows hover:text-white transition-colors" title="Windows"></i>
+                    <i class="fa-brands fa-linux hover:text-white transition-colors" title="Linux"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-24 bg-dark-800/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Разрабатываем лучший сервис</h2>
+                <p class="text-gray-400 text-lg">Почему тысячи пользователей выбирают именно melodico?</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="bg-dark-800 p-8 rounded-2xl border border-dark-700 hover:border-brand/50 transition-colors group">
+                    <div class="w-14 h-14 bg-white/5 rounded-xl flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-bolt text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Высокая скорость</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        Наши серверы оптимизированы для стриминга 4K и онлайн-игр. Минимальный пинг и отсутствие буферизации.
+                    </p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="bg-dark-800 p-8 rounded-2xl border border-dark-700 hover:border-brand/50 transition-colors group">
+                    <div class="w-14 h-14 bg-white/5 rounded-xl flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-shield-cat text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Полная анонимность</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        Мы не ведем логи вашей активности. Ваш трафик надежно зашифрован современными протоколами.
+                    </p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="bg-dark-800 p-8 rounded-2xl border border-dark-700 hover:border-brand/50 transition-colors group">
+                    <div class="w-14 h-14 bg-white/5 rounded-xl flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-globe text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Обход блокировок</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        Протокол VLESS маскирует трафик под обычный веб-серфинг, обходя любые ограничения.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section (Modified: Single Plan) -->
+    <section id="pricing" class="py-24 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Простой и честный тариф</h2>
+                <p class="text-gray-400 text-lg">Никаких скрытых условий. Полный доступ ко всем функциям.</p>
+            </div>
+
+            <div class="max-w-md mx-auto">
+                <div class="bg-dark-800 rounded-3xl p-1 border border-dark-700 shadow-2xl relative">
+                    <!-- Popular Badge -->
+                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-white text-black px-4 py-1 rounded-full text-sm font-bold shadow-lg">
+                        ХИТ ПРОДАЖ
+                    </div>
+
+                    <div class="bg-dark-900/50 rounded-[20px] p-8 md:p-10 h-full flex flex-col">
+                        <h3 class="text-2xl font-bold text-white mb-2">Все включено</h3>
+                        <p class="text-gray-400 text-sm mb-6">Максимальные возможности без ограничений</p>
+                        
+                        <div class="flex items-baseline gap-2 mb-8">
+                            <span class="text-5xl font-bold text-white">250 ₽</span>
+                            <span class="text-gray-400">/ месяц</span>
+                        </div>
+
+                        <ul class="space-y-4 mb-10 flex-1">
+                            <li class="flex items-center gap-3 text-gray-300">
+                                <i class="fa-solid fa-check text-white"></i>
+                                <span>Безлимитный трафик</span>
+                            </li>
+                            <li class="flex items-center gap-3 text-gray-300">
+                                <i class="fa-solid fa-check text-white"></i>
+                                <span>До 5 устройств одновременно</span>
+                            </li>
+                            <li class="flex items-center gap-3 text-gray-300">
+                                <i class="fa-solid fa-check text-white"></i>
+                                <span>Обход ограничений мобильного интернета</span>
+                            </li>
+                            <li class="flex items-center gap-3 text-gray-300">
+                                <i class="fa-solid fa-check text-white"></i>
+                                <span>Высокая скорость (до 5 Гбит/с)</span>
+                            </li>
+                            <li class="flex items-center gap-3 text-gray-300">
+                                <i class="fa-solid fa-check text-white"></i>
+                                <span>Техподдержка 24/7</span>
+                            </li>
+                        </ul>
+
+                        <button class="w-full bg-brand hover:bg-brand-dark text-black py-4 rounded-xl font-bold text-lg transition-all duration-200 shadow-lg shadow-white/10 hover:shadow-white/20 transform hover:-translate-y-1">
+                            Купить подписку
+                        </button>
+                        <p class="text-center text-xs text-gray-500 mt-4">Гарантия возврата средств 7 дней</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-24 bg-dark-800/30">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold mb-12 text-center">Частые вопросы</h2>
+            
+            <div class="space-y-4">
+                <details class="group bg-dark-800 rounded-xl border border-dark-700 overflow-hidden transition-all">
+                    <summary class="flex justify-between items-center p-6 cursor-pointer list-none">
+                        <span class="font-medium text-lg">Как настроить после покупки?</span>
+                        <span class="transition group-open:rotate-180">
+                            <i class="fa-solid fa-chevron-down text-gray-400"></i>
+                        </span>
+                    </summary>
+                    <div class="px-6 pb-6 text-gray-400">
+                        После оплаты вы получите ключ доступа и подробную инструкцию для вашего устройства (iOS, Android, PC). Настройка занимает не более 2 минут.
+                    </div>
+                </details>
+
+                <details class="group bg-dark-800 rounded-xl border border-dark-700 overflow-hidden transition-all">
+                    <summary class="flex justify-between items-center p-6 cursor-pointer list-none">
+                        <span class="font-medium text-lg">Работает ли Telegram и YouTube?</span>
+                        <span class="transition group-open:rotate-180">
+                            <i class="fa-solid fa-chevron-down text-gray-400"></i>
+                        </span>
+                    </summary>
+                    <div class="px-6 pb-6 text-gray-400">
+                        Да, наш сервис специально разработан для доступа к заблокированным ресурсам, включая социальные сети и стриминговые платформы, в высоком качестве.
+                    </div>
+                </details>
+
+                <details class="group bg-dark-800 rounded-xl border border-dark-700 overflow-hidden transition-all">
+                    <summary class="flex justify-between items-center p-6 cursor-pointer list-none">
+                        <span class="font-medium text-lg">Можно ли вернуть деньги?</span>
+                        <span class="transition group-open:rotate-180">
+                            <i class="fa-solid fa-chevron-down text-gray-400"></i>
+                        </span>
+                    </summary>
+                    <div class="px-6 pb-6 text-gray-400">
+                        Если сервис вам не подойдет по техническим причинам, мы вернем полную стоимость подписки в течение 7 дней после покупки.
+                    </div>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark-900 border-t border-dark-800 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <div class="col-span-1 md:col-span-2">
+                    <div class="flex items-center gap-3 mb-6">
+                        <span class="font-bold text-xl">melodico</span>
+                    </div>
+                    <p class="text-gray-400 max-w-sm">
+                        Современный сервис для свободы в интернете. Безопасность, анонимность и высокая скорость без компромиссов.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-6 text-white">Сервис</h4>
+                    <ul class="space-y-4 text-gray-400">
+                        <li><a href="#" class="hover:text-brand transition-colors">Тарифы</a></li>
+                        <li><a href="#" class="hover:text-brand transition-colors">Скачать приложение</a></li>
+                        <li><a href="#" class="hover:text-brand transition-colors">Статус серверов</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold mb-6 text-white">Поддержка</h4>
+                    <ul class="space-y-4 text-gray-400">
+                        <li><a href="#" class="hover:text-brand transition-colors">База знаний</a></li>
+                        <li><a href="#" class="hover:text-brand transition-colors">Telegram</a></li>
+                        <li><a href="#" class="hover:text-brand transition-colors">Контакты</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-dark-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-gray-500 text-sm">© 2026 melodico. Все права защищены.</p>
+                <div class="flex gap-6 text-sm text-gray-500">
+                    <a href="#" class="hover:text-white transition-colors">Политика конфиденциальности</a>
+                    <a href="#" class="hover:text-white transition-colors">Условия использования</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

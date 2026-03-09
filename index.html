@@ -15,6 +15,9 @@
     <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+    <!-- YooKassa Widget -->
+    <script src="https://yookassa.ru/checkout-widget/v1/checkout-widget.js"></script>
+
     <script>
         tailwind.config = {
             theme: {
@@ -227,9 +230,10 @@
                             </li>
                         </ul>
 
-                        <button class="w-full bg-brand hover:bg-brand-dark text-black py-4 rounded-xl font-bold text-lg transition-all duration-200 shadow-lg shadow-white/10 hover:shadow-white/20 transform hover:-translate-y-1">
+                <button id="pay-button" class="w-full bg-brand hover:bg-brand-dark text-black py-4 rounded-xl font-bold text-lg transition-all duration-200 shadow-lg shadow-white/10 hover:shadow-white/20 transform hover:-translate-y-1">
                             Купить подписку
                         </button>
+                <div id="payment-form" class="mt-4"></div>
                         <p class="text-center text-xs text-gray-500 mt-4">Гарантия возврата средств 7 дней</p>
                     </div>
                 </div>
@@ -323,6 +327,46 @@
             </div>
         </div>
     </footer>
+
+<script>
+    document.getElementById('pay-button').addEventListener('click', function() {
+        const button = this;
+        const widgetContainer = document.getElementById('payment-form');
+        
+        // Визуальная индикация загрузки
+        button.disabled = true;
+        const originalText = button.innerHTML;
+        button.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Загрузка...';
+
+        // --- ЛОГИКА ИНТЕГРАЦИИ ---
+        // Инициализация виджета. Все параметры обязательные, кроме объекта customization.
+        const checkout = new window.YooMoneyCheckoutWidget({
+            confirmation_token: 'confirmation-token', //Токен, который перед проведением оплаты нужно получить от ЮKassa
+            return_url: window.location.href, //Ссылка на страницу завершения оплаты
+
+            //Настройка виджета
+            customization: {
+                //Настройка способа отображения
+                modal: true
+            },
+            error_callback: function(error) {
+                //Обработка ошибок инициализации
+                console.error(error);
+                button.disabled = false;
+                button.innerHTML = originalText;
+            }
+        });
+
+        //Отображение платежной формы в модальном окне
+        checkout.render()
+            //Метод возвращает Promise, исполнение которого говорит о полной загрузке платежной формы (можно не использовать).
+            .then(() => {
+                //Код, который нужно выполнить после отображения платежной формы.
+                button.disabled = false;
+                button.innerHTML = originalText;
+            });
+    });
+</script>
 
 </body>
 </html>

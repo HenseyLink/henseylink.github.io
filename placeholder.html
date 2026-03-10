@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Раздел в разработке — melodico</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 512'%3E%3Cpath d='M0 336c0 79.5 64.5 144 144 144H512c70.7 0 128-57.3 128-128c0-61.9-44-113.6-102.4-125.4c4.1-10.7 6.4-22.4 6.4-34.6c0-53-43-96-96-96c-19.7 0-38.1 6-53.3 16.2C363.2 41.9 311.4 0 256 0C167.6 0 96 71.6 96 160c0 2.7 .1 5.4 .2 8.1C40.2 196.5 0 264 0 336z' fill='white'/%3E%3C/svg%3E" type="image/svg+xml">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Unbounded:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Unbounded', 'bold'],
+                    },
+                    colors: {
+                        brand: {
+                            DEFAULT: '#ffffff',
+                            dark: '#e5e5e5',
+                        },
+                        dark: {
+                            900: '#000000',
+                            800: '#121212',
+                            700: '#262626',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="antialiased min-h-screen flex items-center justify-center p-6 bg-white text-black dark:bg-dark-900 dark:text-white transition-colors duration-300">
+    <script>
+        // Помещено в body для предотвращения "мерцания" темы при загрузке
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+    <div class="max-w-xl w-full bg-gray-50 dark:bg-dark-800 border border-gray-200 dark:border-dark-700 rounded-3xl p-8 text-center shadow-2xl">
+        <div class="text-4xl font-bold mb-4">Раздел в разработке</div>
+        <p class="text-gray-500 dark:text-gray-400 text-lg mb-8">Функционал сайта расширяется постепенно. В скором времени эти возможности будут доступны.</p>
+        <a href="index.html" class="inline-flex items-center justify-center bg-black text-white dark:bg-brand dark:text-black px-6 py-3 rounded-xl font-semibold">Вернуться на главную</a>
+    </div>
+</body>
+</html>

@@ -18,6 +18,7 @@
 
     <script>
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
                     fontFamily: {
@@ -38,49 +39,45 @@
             }
         }
     </script>
-    <style>
-        body {
-            background-color: #000000;
-            color: #f8fafc;
-        }
-        .glass-nav {
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        .gradient-text {
-            background: linear-gradient(to right, #ffffff, #737373);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-    </style>
 </head>
-<body class="antialiased">
+<body class="antialiased bg-white text-black dark:bg-dark-900 dark:text-white transition-colors duration-300">
+
+    <script>
+        // Помещено в body для предотвращения "мерцания" темы при загрузке
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
 
     <!-- Navigation -->
-    <nav class="fixed w-full z-50 glass-nav transition-all duration-300">
+    <nav class="fixed w-full z-50 transition-all duration-300 bg-white/80 dark:bg-black/80 backdrop-blur-xl border-b border-gray-200/80 dark:border-white/5">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
                 <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center gap-3 cursor-pointer" onclick="window.scrollTo(0,0)">
-                    <i class="fa-solid fa-cloud text-white text-xl"></i>
-                    <span class="font-bold text-xl tracking-tight">melodico</span>
+                    <i class="fa-solid fa-cloud text-black dark:text-white text-xl"></i>
+                    <span class="font-bold text-xl tracking-tight text-black dark:text-white">melodico</span>
                 </div>
 
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="#features" class="text-gray-300 hover:text-white transition-colors text-sm font-medium">Преимущества</a>
-                    <a href="#pricing" class="text-gray-300 hover:text-white transition-colors text-sm font-medium">Тарифы</a>
-                    <a href="#faq" class="text-gray-300 hover:text-white transition-colors text-sm font-medium">FAQ</a>
+                    <a href="#features" class="text-gray-500 dark:text-gray-300 hover:text-black dark:hover:text-white transition-colors text-sm font-medium">Преимущества</a>
+                    <a href="#pricing" class="text-gray-500 dark:text-gray-300 hover:text-black dark:hover:text-white transition-colors text-sm font-medium">Тарифы</a>
+                    <a href="#faq" class="text-gray-500 dark:text-gray-300 hover:text-black dark:hover:text-white transition-colors text-sm font-medium">FAQ</a>
                 </div>
 
-                <!-- CTA Button (Replaced "В консоль" with "Купить") -->
+                <!-- CTA Button and Theme Switcher -->
                 <div class="flex items-center">
-                    <a href="#pricing" class="bg-brand hover:bg-brand-dark text-black px-6 py-2.5 rounded-lg font-medium transition-all duration-200 shadow-lg shadow-white/10 hover:shadow-white/20 transform hover:-translate-y-0.5">
+                    <a href="#pricing" class="bg-dark-900 text-white dark:bg-brand dark:hover:bg-brand-dark dark:text-black px-6 py-2.5 rounded-lg font-medium transition-all duration-200 shadow-lg shadow-black/5 dark:shadow-white/10 hover:shadow-black/10 dark:hover:shadow-white/20 transform hover:-translate-y-0.5">
                         Купить
                     </a>
+                    <button id="theme-toggle" type="button" class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-dark-700 focus:outline-none rounded-lg text-sm p-2.5 ml-2">
+                        <i id="theme-toggle-dark-icon" class="fa-solid fa-moon text-lg hidden"></i>
+                        <i id="theme-toggle-light-icon" class="fa-solid fa-sun text-lg hidden"></i>
+                    </button>
                 </div>
-
             </div>
         </div>
     </nav>
@@ -88,86 +85,86 @@
     <!-- Hero Section -->
     <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
         <!-- Background Glow -->
-        <div class="absolute top-0 left-1/2 w-full -translate-x-1/2 h-full z-0 pointer-events-none">
-            <div class="absolute top-20 left-1/4 w-96 h-96 bg-white/5 rounded-full blur-3xl"></div>
-            <div class="absolute bottom-20 right-1/4 w-96 h-96 bg-white/5 rounded-full blur-3xl"></div>
+        <div class="absolute top-0 left-1/2 w-full -translate-x-1/2 h-full z-0 pointer-events-none opacity-70 dark:opacity-100">
+            <div class="absolute top-20 left-1/4 w-96 h-96 bg-gray-300/50 dark:bg-white/5 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-20 right-1/4 w-96 h-96 bg-gray-300/50 dark:bg-white/5 rounded-full blur-3xl"></div>
         </div>
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-dark-800 border border-dark-700 mb-8 animate-fade-in-up">
-                <span class="w-2 h-2 rounded-full bg-white animate-pulse"></span>
-                <span class="text-sm text-gray-300 font-medium">Работаем в России, Китае и Иране</span>
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gray-100 dark:bg-dark-800 border border-gray-200 dark:border-dark-700 mb-8 animate-fade-in-up">
+                <span class="w-2 h-2 rounded-full bg-black dark:bg-white animate-pulse"></span>
+                <span class="text-sm text-gray-600 dark:text-gray-300 font-medium">Работаем в России, Китае и Иране</span>
             </div>
             
             <h1 class="text-5xl md:text-7xl font-bold tracking-tight mb-8 leading-tight">
                 Интернет, каким он <br>
-                <span class="gradient-text">и должен быть</span>
+                <span class="bg-gradient-to-r from-neutral-800 to-neutral-500 dark:from-white dark:to-neutral-400 text-transparent bg-clip-text">и должен быть</span>
             </h1>
             
-            <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-400 mb-10">
+            <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-500 dark:text-gray-400 mb-10">
                 VPN для защиты данных и анонимности в сети. Поддержка VLESS обеспечивает максимальную скорость без ограничений.
             </p>
             
             <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="#pricing" class="bg-brand hover:bg-brand-dark text-black px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-200 shadow-xl shadow-white/10 hover:shadow-white/20 transform hover:-translate-y-1">
+                <a href="#pricing" class="bg-dark-900 text-white dark:bg-brand dark:hover:bg-brand-dark dark:text-black px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-200 shadow-xl shadow-black/5 dark:shadow-white/10 hover:shadow-black/10 dark:hover:shadow-white/20 transform hover:-translate-y-1">
                     Купить доступ
                 </a>
-                <a href="#features" class="bg-dark-800 hover:bg-dark-700 text-white border border-dark-700 px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-200">
+                <a href="#features" class="bg-gray-100 dark:bg-dark-800 hover:bg-gray-200 dark:hover:bg-dark-700 text-black dark:text-white border border-gray-200 dark:border-dark-700 px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-200">
                     Узнать больше
                 </a>
             </div>
 
             <!-- Supported Platforms -->
-            <div class="mt-16 pt-8 border-t border-dark-800/50">
+            <div class="mt-16 pt-8 border-t border-gray-200 dark:border-dark-800/50">
                 <p class="text-sm text-gray-500 mb-6 uppercase tracking-wider font-semibold">Поддерживаемые платформы</p>
-                <div class="flex justify-center gap-8 text-gray-400 text-3xl">
-                    <i class="fa-brands fa-apple hover:text-white transition-colors" title="iOS & macOS"></i>
-                    <i class="fa-brands fa-android hover:text-white transition-colors" title="Android"></i>
-                    <i class="fa-brands fa-windows hover:text-white transition-colors" title="Windows"></i>
-                    <i class="fa-brands fa-linux hover:text-white transition-colors" title="Linux"></i>
+                <div class="flex justify-center gap-8 text-gray-400 dark:text-gray-500 text-3xl">
+                    <i class="fa-brands fa-apple hover:text-black dark:hover:text-white transition-colors" title="iOS & macOS"></i>
+                    <i class="fa-brands fa-android hover:text-black dark:hover:text-white transition-colors" title="Android"></i>
+                    <i class="fa-brands fa-windows hover:text-black dark:hover:text-white transition-colors" title="Windows"></i>
+                    <i class="fa-brands fa-linux hover:text-black dark:hover:text-white transition-colors" title="Linux"></i>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Features Section -->
-    <section id="features" class="py-24 bg-dark-800/30">
+    <section id="features" class="py-24 bg-gray-50 dark:bg-dark-800/30">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <h2 class="text-3xl md:text-4xl font-bold mb-4">Разрабатываем лучший сервис</h2>
-                <p class="text-gray-400 text-lg">Почему тысячи пользователей выбирают именно melodico?</p>
+                <p class="text-gray-500 dark:text-gray-400 text-lg">Почему тысячи пользователей выбирают именно melodico?</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Feature 1 -->
-                <div class="bg-dark-800 p-8 rounded-2xl border border-dark-700 hover:border-brand/50 transition-colors group">
-                    <div class="w-14 h-14 bg-white/5 rounded-xl flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform">
+                <div class="bg-white dark:bg-dark-800 p-8 rounded-2xl border border-gray-200 dark:border-dark-700 hover:border-black/10 dark:hover:border-brand/50 transition-all group">
+                    <div class="w-14 h-14 bg-black/5 dark:bg-white/5 rounded-xl flex items-center justify-center text-black dark:text-white mb-6 group-hover:scale-110 transition-transform">
                         <i class="fa-solid fa-bolt text-2xl"></i>
                     </div>
                     <h3 class="text-xl font-bold mb-3">Высокая скорость</h3>
-                    <p class="text-gray-400 leading-relaxed">
+                    <p class="text-gray-500 dark:text-gray-400 leading-relaxed">
                         Наши серверы оптимизированы для стриминга 4K и онлайн-игр. Минимальный пинг и отсутствие буферизации.
                     </p>
                 </div>
 
                 <!-- Feature 2 -->
-                <div class="bg-dark-800 p-8 rounded-2xl border border-dark-700 hover:border-brand/50 transition-colors group">
-                    <div class="w-14 h-14 bg-white/5 rounded-xl flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform">
+                <div class="bg-white dark:bg-dark-800 p-8 rounded-2xl border border-gray-200 dark:border-dark-700 hover:border-black/10 dark:hover:border-brand/50 transition-all group">
+                    <div class="w-14 h-14 bg-black/5 dark:bg-white/5 rounded-xl flex items-center justify-center text-black dark:text-white mb-6 group-hover:scale-110 transition-transform">
                         <i class="fa-solid fa-shield-cat text-2xl"></i>
                     </div>
                     <h3 class="text-xl font-bold mb-3">Полная анонимность</h3>
-                    <p class="text-gray-400 leading-relaxed">
+                    <p class="text-gray-500 dark:text-gray-400 leading-relaxed">
                         Мы не ведем логи вашей активности. Ваш трафик надежно зашифрован современными протоколами.
                     </p>
                 </div>
 
                 <!-- Feature 3 -->
-                <div class="bg-dark-800 p-8 rounded-2xl border border-dark-700 hover:border-brand/50 transition-colors group">
-                    <div class="w-14 h-14 bg-white/5 rounded-xl flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform">
+                <div class="bg-white dark:bg-dark-800 p-8 rounded-2xl border border-gray-200 dark:border-dark-700 hover:border-black/10 dark:hover:border-brand/50 transition-all group">
+                    <div class="w-14 h-14 bg-black/5 dark:bg-white/5 rounded-xl flex items-center justify-center text-black dark:text-white mb-6 group-hover:scale-110 transition-transform">
                         <i class="fa-solid fa-globe text-2xl"></i>
                     </div>
                     <h3 class="text-xl font-bold mb-3">Обход блокировок</h3>
-                    <p class="text-gray-400 leading-relaxed">
+                    <p class="text-gray-500 dark:text-gray-400 leading-relaxed">
                         Протокол VLESS маскирует трафик под обычный веб-серфинг, обходя любые ограничения.
                     </p>
                 </div>
@@ -180,49 +177,49 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="text-center mb-16">
                 <h2 class="text-3xl md:text-4xl font-bold mb-4">Простой и честный тариф</h2>
-                <p class="text-gray-400 text-lg">Никаких скрытых условий. Полный доступ ко всем функциям.</p>
+                <p class="text-gray-500 dark:text-gray-400 text-lg">Никаких скрытых условий. Полный доступ ко всем функциям.</p>
             </div>
 
             <div class="max-w-md mx-auto">
-                <div class="bg-dark-800 rounded-3xl p-1 border border-dark-700 shadow-2xl relative">
+                <div class="bg-white dark:bg-dark-800 rounded-3xl p-1 border border-gray-200 dark:border-dark-700 shadow-2xl relative">
                     <!-- Popular Badge -->
-                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-white text-black px-4 py-1 rounded-full text-sm font-bold shadow-lg">
+                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-black dark:bg-white text-white dark:text-black px-4 py-1 rounded-full text-sm font-bold shadow-lg">
                         ХИТ ПРОДАЖ
                     </div>
 
-                    <div class="bg-dark-900/50 rounded-[20px] p-8 md:p-10 h-full flex flex-col">
-                        <h3 class="text-2xl font-bold text-white mb-2">Все включено</h3>
-                        <p class="text-gray-400 text-sm mb-6">Максимальные возможности без ограничений</p>
+                    <div class="bg-gray-50 dark:bg-dark-900/50 rounded-[20px] p-8 md:p-10 h-full flex flex-col text-black dark:text-white">
+                        <h3 class="text-2xl font-bold mb-2">Все включено</h3>
+                        <p class="text-gray-500 dark:text-gray-400 text-sm mb-6">Максимальные возможности без ограничений</p>
                         
                         <div class="flex items-baseline gap-2 mb-8">
-                            <span class="text-5xl font-bold text-white">250 ₽</span>
-                            <span class="text-gray-400">/ месяц</span>
+                            <span class="text-5xl font-bold">250 ₽</span>
+                            <span class="text-gray-500 dark:text-gray-400">/ месяц</span>
                         </div>
 
                         <ul class="space-y-4 mb-10 flex-1">
-                            <li class="flex items-center gap-3 text-gray-300">
-                                <i class="fa-solid fa-check text-white"></i>
+                            <li class="flex items-center gap-3 text-gray-700 dark:text-gray-300">
+                                <i class="fa-solid fa-check text-black dark:text-white"></i>
                                 <span>Безлимитный трафик</span>
                             </li>
-                            <li class="flex items-center gap-3 text-gray-300">
-                                <i class="fa-solid fa-check text-white"></i>
+                            <li class="flex items-center gap-3 text-gray-700 dark:text-gray-300">
+                                <i class="fa-solid fa-check text-black dark:text-white"></i>
                                 <span>До 5 устройств одновременно</span>
                             </li>
-                            <li class="flex items-center gap-3 text-gray-300">
-                                <i class="fa-solid fa-check text-white"></i>
+                            <li class="flex items-center gap-3 text-gray-700 dark:text-gray-300">
+                                <i class="fa-solid fa-check text-black dark:text-white"></i>
                                 <span>Обход ограничений мобильного интернета</span>
                             </li>
-                            <li class="flex items-center gap-3 text-gray-300">
-                                <i class="fa-solid fa-check text-white"></i>
+                            <li class="flex items-center gap-3 text-gray-700 dark:text-gray-300">
+                                <i class="fa-solid fa-check text-black dark:text-white"></i>
                                 <span>Высокая скорость (до 5 Гбит/с)</span>
                             </li>
-                            <li class="flex items-center gap-3 text-gray-300">
-                                <i class="fa-solid fa-check text-white"></i>
+                            <li class="flex items-center gap-3 text-gray-700 dark:text-gray-300">
+                                <i class="fa-solid fa-check text-black dark:text-white"></i>
                                 <span>Техподдержка 24/7</span>
                             </li>
                         </ul>
                         
-                        <button id="open-payment-modal" class="w-full bg-brand hover:bg-brand-dark text-black py-4 rounded-xl font-bold text-lg transition-all duration-200 shadow-lg shadow-white/10 hover:shadow-white/20 transform hover:-translate-y-1">
+                        <button id="open-payment-modal" class="w-full bg-dark-900 text-white dark:bg-brand dark:hover:bg-brand-dark dark:text-black py-4 rounded-xl font-bold text-lg transition-all duration-200 shadow-lg shadow-black/5 dark:shadow-white/10 hover:shadow-black/10 dark:hover:shadow-white/20 transform hover:-translate-y-1">
                             Купить подписку
                         </button>
                         
@@ -234,43 +231,43 @@
     </section>
 
     <!-- FAQ Section -->
-    <section id="faq" class="py-24 bg-dark-800/30">
+    <section id="faq" class="py-24 bg-gray-50 dark:bg-dark-800/30">
         <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="text-3xl font-bold mb-12 text-center">Частые вопросы</h2>
             
             <div class="space-y-4">
-                <details class="group bg-dark-800 rounded-xl border border-dark-700 overflow-hidden transition-all">
+                <details class="group bg-white dark:bg-dark-800 rounded-xl border border-gray-200 dark:border-dark-700 overflow-hidden transition-all">
                     <summary class="flex justify-between items-center p-6 cursor-pointer list-none">
                         <span class="font-medium text-lg">Как настроить после покупки?</span>
                         <span class="transition group-open:rotate-180">
-                            <i class="fa-solid fa-chevron-down text-gray-400"></i>
+                            <i class="fa-solid fa-chevron-down text-gray-500 dark:text-gray-400"></i>
                         </span>
                     </summary>
-                    <div class="px-6 pb-6 text-gray-400">
+                    <div class="px-6 pb-6 text-gray-500 dark:text-gray-400">
                         После оплаты вы получите ключ доступа и подробную инструкцию для вашего устройства (iOS, Android, PC). Настройка занимает не более 2 минут.
                     </div>
                 </details>
 
-                <details class="group bg-dark-800 rounded-xl border border-dark-700 overflow-hidden transition-all">
+                <details class="group bg-white dark:bg-dark-800 rounded-xl border border-gray-200 dark:border-dark-700 overflow-hidden transition-all">
                     <summary class="flex justify-between items-center p-6 cursor-pointer list-none">
                         <span class="font-medium text-lg">Работает ли Telegram и YouTube?</span>
                         <span class="transition group-open:rotate-180">
-                            <i class="fa-solid fa-chevron-down text-gray-400"></i>
+                            <i class="fa-solid fa-chevron-down text-gray-500 dark:text-gray-400"></i>
                         </span>
                     </summary>
-                    <div class="px-6 pb-6 text-gray-400">
+                    <div class="px-6 pb-6 text-gray-500 dark:text-gray-400">
                         Да, наш сервис специально разработан для доступа к заблокированным ресурсам, включая социальные сети и стриминговые платформы, в высоком качестве.
                     </div>
                 </details>
 
-                <details class="group bg-dark-800 rounded-xl border border-dark-700 overflow-hidden transition-all">
+                <details class="group bg-white dark:bg-dark-800 rounded-xl border border-gray-200 dark:border-dark-700 overflow-hidden transition-all">
                     <summary class="flex justify-between items-center p-6 cursor-pointer list-none">
                         <span class="font-medium text-lg">Можно ли вернуть деньги?</span>
                         <span class="transition group-open:rotate-180">
-                            <i class="fa-solid fa-chevron-down text-gray-400"></i>
+                            <i class="fa-solid fa-chevron-down text-gray-500 dark:text-gray-400"></i>
                         </span>
                     </summary>
-                    <div class="px-6 pb-6 text-gray-400">
+                    <div class="px-6 pb-6 text-gray-500 dark:text-gray-400">
                         Если сервис вам не подойдет по техническим причинам, мы вернем полную стоимость подписки в течение 7 дней после покупки.
                     </div>
                 </details>
@@ -279,38 +276,39 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-dark-900 border-t border-dark-800 pt-16 pb-8">
+    <footer class="bg-gray-50 dark:bg-dark-900 border-t border-gray-200 dark:border-dark-800 pt-16 pb-8">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
                 <div class="col-span-1 md:col-span-2">
                     <div class="flex items-center gap-3 mb-6">
+                        <i class="fa-solid fa-cloud text-black dark:text-white text-xl"></i>
                         <span class="font-bold text-xl">melodico</span>
                     </div>
-                    <p class="text-gray-400 max-w-sm">
+                    <p class="text-gray-500 dark:text-gray-400 max-w-sm">
                         Современный сервис для свободы в интернете. Безопасность, анонимность и высокая скорость без компромиссов.
                     </p>
                 </div>
                 
                 <div>
-                    <h4 class="font-bold mb-6 text-white">Сервис</h4>
-                    <ul class="space-y-4 text-gray-400">
-                        <li><a href="#" class="hover:text-brand transition-colors">Тарифы</a></li>
-                        <li><a href="#" class="hover:text-brand transition-colors">Скачать приложение</a></li>
-                        <li><a href="#" class="hover:text-brand transition-colors">Статус серверов</a></li>
+                    <h4 class="font-bold mb-6 text-black dark:text-white">Сервис</h4>
+                    <ul class="space-y-4 text-gray-500 dark:text-gray-400">
+                        <li><a href="#" class="hover:text-black dark:hover:text-brand transition-colors">Тарифы</a></li>
+                        <li><a href="#" class="hover:text-black dark:hover:text-brand transition-colors">Скачать приложение</a></li>
+                        <li><a href="#" class="hover:text-black dark:hover:text-brand transition-colors">Статус серверов</a></li>
                     </ul>
                 </div>
 
                 <div>
-                    <h4 class="font-bold mb-6 text-white">Поддержка</h4>
-                    <ul class="space-y-4 text-gray-400">
-                        <li><a href="#" class="hover:text-brand transition-colors">База знаний</a></li>
-                        <li><a href="#" class="hover:text-brand transition-colors">Telegram</a></li>
-                        <li><a href="#" class="hover:text-brand transition-colors">Контакты</a></li>
+                    <h4 class="font-bold mb-6 text-black dark:text-white">Поддержка</h4>
+                    <ul class="space-y-4 text-gray-500 dark:text-gray-400">
+                        <li><a href="#" class="hover:text-black dark:hover:text-brand transition-colors">База знаний</a></li>
+                        <li><a href="#" class="hover:text-black dark:hover:text-brand transition-colors">Telegram</a></li>
+                        <li><a href="#" class="hover:text-black dark:hover:text-brand transition-colors">Контакты</a></li>
                     </ul>
                 </div>
             </div>
             
-            <div class="border-t border-dark-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="border-t border-gray-200 dark:border-dark-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
                 <p class="text-gray-500 text-sm">© 2026 melodico. Все права защищены.</p>
             </div>
         </div>
@@ -324,17 +322,17 @@
         <div class="fixed inset-0 z-10 overflow-y-auto">
             <div class="flex min-h-full items-center justify-center p-4 text-center sm:p-0">
                 <!-- Modal Panel -->
-                <div class="relative transform overflow-hidden rounded-2xl bg-dark-800 border border-dark-700 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+                <div class="relative transform overflow-hidden rounded-2xl bg-white dark:bg-dark-800 border border-gray-200 dark:border-dark-700 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
                     
                     <!-- Close Button -->
                     <div class="absolute top-4 right-4 z-10">
-                        <button type="button" id="close-payment-modal" class="text-gray-400 hover:text-white transition-colors">
+                        <button type="button" id="close-payment-modal" class="text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">
                             <i class="fa-solid fa-xmark text-2xl"></i>
                         </button>
                     </div>
 
                     <div class="px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
-                        <h3 class="text-xl font-bold leading-6 text-white mb-6 text-center px-10">Оформление подписки</h3>
+                        <h3 class="text-xl font-bold leading-6 text-black dark:text-white mb-6 text-center px-10">Оформление подписки</h3>
                         
                         <!-- YooKassa Form -->
                         <form class="yoomoney-payment-form flex flex-col gap-5" action="https://yookassa.ru/integration/simplepay/payment" method="post" accept-charset="utf-8">
@@ -353,8 +351,8 @@
                             <input value="" type="hidden" name="ym_merchant_receipt">
                             
                             <div class="ym-customer-info">
-                                <label class="block text-sm font-medium text-gray-400 mb-2">Email для чека</label>
-                                <input name="cps_email" class="ym-input w-full bg-dark-900 border border-dark-700 rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-brand focus:ring-1 focus:ring-brand transition-all" placeholder="your@email.com" type="email" required>
+                                <label class="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">Email для чека</label>
+                                <input name="cps_email" class="ym-input w-full bg-gray-100 dark:bg-dark-900 border border-gray-300 dark:border-dark-700 rounded-xl px-4 py-3 text-black dark:text-white placeholder-gray-500 dark:placeholder-gray-600 focus:outline-none focus:border-black dark:focus:border-brand focus:ring-1 focus:ring-black dark:focus:ring-brand transition-all" placeholder="your@email.com" type="email" required>
                             </div>
                             
                             <div class="ym-hidden-inputs"></div>
@@ -366,19 +364,19 @@
                             
                             <div class="ym-payment-btn-block">
                                 <input name="sum" class="ym-input ym-sum-input hidden" type="number" step="any" value="250">
-                                <button data-text="Заплатить" class="ym-btn-pay w-full bg-brand hover:bg-brand-dark text-black font-bold py-4 rounded-xl text-lg transition-all shadow-lg shadow-white/10 hover:shadow-white/20 transform hover:-translate-y-1 flex justify-center items-center gap-2">
+                                <button data-text="Заплатить" class="ym-btn-pay w-full bg-dark-900 text-white dark:bg-brand dark:hover:bg-brand-dark dark:text-black font-bold py-4 rounded-xl text-lg transition-all shadow-lg shadow-black/5 dark:shadow-white/10 hover:shadow-black/10 dark:hover:shadow-white/20 transform hover:-translate-y-1 flex justify-center items-center gap-2">
                                     <span class="ym-text-crop">Оплатить</span> <span class="ym-price-output">250,00&nbsp;₽</span>
                                 </button>
-                                <div class="flex justify-center mt-4 opacity-40 hover:opacity-80 transition-opacity">
+                                <div class="flex justify-center mt-4 text-black dark:text-white opacity-40 hover:opacity-80 transition-opacity">
                                     <svg width="114" height="27" viewBox="0 0 114 27" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <g clip-path="url(#clip0_52_10)">
-                                    <path d="M59.3827 7.348H55.7087L53.0599 11.9619H51.6929V2.05054H48.1897V19.9081H51.6929V15.0379H53.0599L56.4777 19.9081H60.408L55.8796 13.4145L59.3827 7.348Z" fill="white"/>
-                                    <path d="M85.6996 13.2436C85.016 12.7309 84.1616 12.4746 83.3926 12.2183C83.1363 12.1328 82.88 12.0474 82.6236 11.9619C82.5382 11.9619 82.4527 11.8765 82.4527 11.8765C81.9401 11.7056 81.4274 11.5347 81.4274 11.0221C81.4274 10.7657 81.5983 10.5094 81.7692 10.2531C82.0255 10.0822 82.2819 9.99676 82.6236 9.99676C83.3072 9.91132 83.9053 10.1676 84.5034 10.5094L84.5888 10.5949L86.4686 8.45878L86.3831 8.37334C86.1268 8.20245 85.8705 7.94613 85.6141 7.86068C84.9306 7.51891 84.4179 7.34802 84.0762 7.26258C83.7344 7.17714 82.7945 7.00625 81.6838 7.26258C81.1711 7.34802 80.4021 7.51891 79.6331 8.11701C78.7787 8.80055 78.266 9.65498 78.1806 10.5949C78.1806 10.9366 78.0952 12.1328 78.7787 13.0727C79.4622 13.9271 80.573 14.3544 81.342 14.6107C81.4274 14.6107 81.4274 14.6107 81.5129 14.6961C81.5983 14.6961 81.6838 14.7816 81.8546 14.7816C83.1363 15.2088 83.4781 15.3797 83.649 15.7214C83.8198 15.9778 83.8198 16.1487 83.8198 16.1487C83.8198 16.7468 83.0508 17.0031 82.5382 17.174C81.8546 17.3449 81.0857 17.0885 80.4876 16.7468C80.0603 16.405 79.6331 15.9778 79.2913 15.5506C79.1205 15.7214 77.1553 17.6866 77.1553 17.6866L77.2407 17.7721C77.9243 18.6265 79.1205 19.7373 80.9148 20.079C81.1711 20.1645 81.5129 20.1645 81.9401 20.1645C82.0255 20.1645 82.1964 20.1645 82.2819 20.1645C83.1363 20.1645 84.4179 19.9936 85.5287 19.1392C85.8705 18.8828 86.554 18.3702 86.8958 17.3449C87.2376 16.405 87.1521 15.2942 86.554 14.3544C86.4686 13.9271 86.1268 13.5854 85.6996 13.2436Z" fill="white"/>
-                                    <path d="M96.9778 13.2436C96.2942 12.7309 95.4398 12.4746 94.6708 12.2183C94.4145 12.1328 94.1581 12.0474 93.9018 11.9619C93.8164 11.9619 93.7309 11.8765 93.7309 11.8765C93.2183 11.7056 92.7056 11.5347 92.7056 11.0221C92.7056 10.7657 92.8765 10.5094 93.0474 10.2531C93.3037 10.0822 93.56 9.99676 93.9018 9.99676C94.5854 9.91132 95.1835 10.1676 95.7816 10.5094L95.867 10.5949L97.7467 8.45878L97.6613 8.37334C97.405 8.20245 97.1486 7.94613 96.8923 7.86068C96.2088 7.51891 95.6961 7.34802 95.3543 7.26258C95.0126 7.17714 94.0727 7.00625 92.9619 7.26258C92.4493 7.34802 91.6803 7.51891 90.9113 8.11701C90.0569 8.80055 89.5442 9.65498 89.4588 10.5949C89.4588 10.9366 89.3733 12.1328 90.0569 13.0727C90.7404 13.9271 91.8512 14.3544 92.6202 14.6107C92.7056 14.6107 92.7056 14.6107 92.7911 14.6961C92.8765 14.6961 92.9619 14.7816 93.1328 14.7816C94.4145 15.2088 94.7562 15.3797 94.9271 15.7214C95.098 15.9778 95.098 16.1487 95.098 16.1487C95.098 16.7468 94.329 17.0031 93.8164 17.174C93.1328 17.3449 92.3638 17.0885 91.7657 16.7468C91.3385 16.405 90.9113 15.9778 90.5695 15.5506C90.3986 15.7214 88.4333 17.6866 88.4333 17.6866L88.5189 17.7721C89.2024 18.6265 90.3986 19.7373 92.193 20.079C92.4493 20.1645 92.7911 20.1645 93.2183 20.1645C93.3037 20.1645 93.4746 20.1645 93.56 20.1645C94.4145 20.1645 95.6961 19.9936 96.8069 19.1392C97.1486 18.8828 97.8322 18.3702 98.174 17.3449C98.5157 16.405 98.4303 15.2942 97.8322 14.3544C97.7467 13.9271 97.405 13.5854 96.9778 13.2436Z" fill="white"/>
-                                    <path d="M70.8323 7.34811V8.54432H70.6614C69.5507 7.519 68.3544 7.00635 67.0728 7.00635C65.3639 7.00635 63.7405 7.68989 62.6298 8.88609C61.519 10.0823 60.9209 11.7057 60.9209 13.5C60.9209 15.3798 61.519 17.0032 62.6298 18.1994C63.7405 19.3956 65.2785 20.0791 66.9874 20.0791C68.269 20.0791 69.5507 19.5665 70.6614 18.6266H70.8323V19.7374H74.4209V7.17723H70.8323V7.34811ZM71.0032 13.6709C71.0032 14.7817 70.6614 15.7215 70.0633 16.4905C69.4652 17.1741 68.6108 17.5158 67.5855 17.5158C66.6456 17.5158 65.8766 17.1741 65.1931 16.4051C64.5949 15.7215 64.2532 14.7817 64.2532 13.5855C64.2532 12.4747 64.5949 11.6203 65.1931 10.8513C65.7912 10.1677 66.6456 9.74052 67.5855 9.74052C68.6108 9.74052 69.3798 10.0823 70.0633 10.7658C70.6614 11.6203 71.0032 12.5601 71.0032 13.6709Z" fill="white"/>
-                                    <path d="M110.222 7.34811V8.54432H110.051C108.94 7.519 107.744 7.00635 106.462 7.00635C104.753 7.00635 103.13 7.68989 102.019 8.88609C100.908 10.0823 100.31 11.7057 100.31 13.5C100.31 15.3798 100.908 17.0032 102.019 18.1994C103.13 19.3956 104.668 20.0791 106.377 20.0791C107.658 20.0791 108.94 19.5665 110.051 18.6266H110.222V19.7374H113.81V7.17723H110.222V7.34811ZM110.393 13.6709C110.393 14.7817 110.051 15.7215 109.453 16.4905C108.855 17.1741 108 17.5158 106.975 17.5158C106.035 17.5158 105.266 17.1741 104.582 16.4051C103.984 15.7215 103.643 14.7817 103.643 13.5855C103.643 12.4747 103.984 11.6203 104.582 10.8513C105.181 10.1677 106.035 9.74052 106.975 9.74052C108 9.74052 108.769 10.0823 109.453 10.7658C110.051 11.6203 110.393 12.5601 110.393 13.6709Z" fill="white"/>
-                                    <path d="M24.4365 0C16.9175 0 10.9365 6.06646 10.9365 13.5C10.9365 21.019 17.0029 27 24.4365 27C31.87 27 37.9365 20.9335 37.9365 13.5C38.0219 6.06646 31.87 0 24.4365 0ZM24.4365 18.5411C21.7023 18.5411 19.3953 16.2342 19.3953 13.5C19.3953 10.7658 21.7023 8.45886 24.4365 8.45886C27.1707 8.45886 29.4776 10.7658 29.4776 13.5C29.4776 16.2342 27.2561 18.5411 24.4365 18.5411Z" fill="white"/>
-                                    <path d="M10.9367 3.93036V23.5823H6.1519L0 3.93036H10.9367Z" fill="white"/>
+                                    <path d="M59.3827 7.348H55.7087L53.0599 11.9619H51.6929V2.05054H48.1897V19.9081H51.6929V15.0379H53.0599L56.4777 19.9081H60.408L55.8796 13.4145L59.3827 7.348Z" fill="currentColor"/>
+                                    <path d="M85.6996 13.2436C85.016 12.7309 84.1616 12.4746 83.3926 12.2183C83.1363 12.1328 82.88 12.0474 82.6236 11.9619C82.5382 11.9619 82.4527 11.8765 82.4527 11.8765C81.9401 11.7056 81.4274 11.5347 81.4274 11.0221C81.4274 10.7657 81.5983 10.5094 81.7692 10.2531C82.0255 10.0822 82.2819 9.99676 82.6236 9.99676C83.3072 9.91132 83.9053 10.1676 84.5034 10.5094L84.5888 10.5949L86.4686 8.45878L86.3831 8.37334C86.1268 8.20245 85.8705 7.94613 85.6141 7.86068C84.9306 7.51891 84.4179 7.34802 84.0762 7.26258C83.7344 7.17714 82.7945 7.00625 81.6838 7.26258C81.1711 7.34802 80.4021 7.51891 79.6331 8.11701C78.7787 8.80055 78.266 9.65498 78.1806 10.5949C78.1806 10.9366 78.0952 12.1328 78.7787 13.0727C79.4622 13.9271 80.573 14.3544 81.342 14.6107C81.4274 14.6107 81.4274 14.6107 81.5129 14.6961C81.5983 14.6961 81.6838 14.7816 81.8546 14.7816C83.1363 15.2088 83.4781 15.3797 83.649 15.7214C83.8198 15.9778 83.8198 16.1487 83.8198 16.1487C83.8198 16.7468 83.0508 17.0031 82.5382 17.174C81.8546 17.3449 81.0857 17.0885 80.4876 16.7468C80.0603 16.405 79.6331 15.9778 79.2913 15.5506C79.1205 15.7214 77.1553 17.6866 77.1553 17.6866L77.2407 17.7721C77.9243 18.6265 79.1205 19.7373 80.9148 20.079C81.1711 20.1645 81.5129 20.1645 81.9401 20.1645C82.0255 20.1645 82.1964 20.1645 82.2819 20.1645C83.1363 20.1645 84.4179 19.9936 85.5287 19.1392C85.8705 18.8828 86.554 18.3702 86.8958 17.3449C87.2376 16.405 87.1521 15.2942 86.554 14.3544C86.4686 13.9271 86.1268 13.5854 85.6996 13.2436Z" fill="currentColor"/>
+                                    <path d="M96.9778 13.2436C96.2942 12.7309 95.4398 12.4746 94.6708 12.2183C94.4145 12.1328 94.1581 12.0474 93.9018 11.9619C93.8164 11.9619 93.7309 11.8765 93.7309 11.8765C93.2183 11.7056 92.7056 11.5347 92.7056 11.0221C92.7056 10.7657 92.8765 10.5094 93.0474 10.2531C93.3037 10.0822 93.56 9.99676 93.9018 9.99676C94.5854 9.91132 95.1835 10.1676 95.7816 10.5094L95.867 10.5949L97.7467 8.45878L97.6613 8.37334C97.405 8.20245 97.1486 7.94613 96.8923 7.86068C96.2088 7.51891 95.6961 7.34802 95.3543 7.26258C95.0126 7.17714 94.0727 7.00625 92.9619 7.26258C92.4493 7.34802 91.6803 7.51891 90.9113 8.11701C90.0569 8.80055 89.5442 9.65498 89.4588 10.5949C89.4588 10.9366 89.3733 12.1328 90.0569 13.0727C90.7404 13.9271 91.8512 14.3544 92.6202 14.6107C92.7056 14.6107 92.7056 14.6107 92.7911 14.6961C92.8765 14.6961 92.9619 14.7816 93.1328 14.7816C94.4145 15.2088 94.7562 15.3797 94.9271 15.7214C95.098 15.9778 95.098 16.1487 95.098 16.1487C95.098 16.7468 94.329 17.0031 93.8164 17.174C93.1328 17.3449 92.3638 17.0885 91.7657 16.7468C91.3385 16.405 90.9113 15.9778 90.5695 15.5506C90.3986 15.7214 88.4333 17.6866 88.4333 17.6866L88.5189 17.7721C89.2024 18.6265 90.3986 19.7373 92.193 20.079C92.4493 20.1645 92.7911 20.1645 93.2183 20.1645C93.3037 20.1645 93.4746 20.1645 93.56 20.1645C94.4145 20.1645 95.6961 19.9936 96.8069 19.1392C97.1486 18.8828 97.8322 18.3702 98.174 17.3449C98.5157 16.405 98.4303 15.2942 97.8322 14.3544C97.7467 13.9271 97.405 13.5854 96.9778 13.2436Z" fill="currentColor"/>
+                                    <path d="M70.8323 7.34811V8.54432H70.6614C69.5507 7.519 68.3544 7.00635 67.0728 7.00635C65.3639 7.00635 63.7405 7.68989 62.6298 8.88609C61.519 10.0823 60.9209 11.7057 60.9209 13.5C60.9209 15.3798 61.519 17.0032 62.6298 18.1994C63.7405 19.3956 65.2785 20.0791 66.9874 20.0791C68.269 20.0791 69.5507 19.5665 70.6614 18.6266H70.8323V19.7374H74.4209V7.17723H70.8323V7.34811ZM71.0032 13.6709C71.0032 14.7817 70.6614 15.7215 70.0633 16.4905C69.4652 17.1741 68.6108 17.5158 67.5855 17.5158C66.6456 17.5158 65.8766 17.1741 65.1931 16.4051C64.5949 15.7215 64.2532 14.7817 64.2532 13.5855C64.2532 12.4747 64.5949 11.6203 65.1931 10.8513C65.7912 10.1677 66.6456 9.74052 67.5855 9.74052C68.6108 9.74052 69.3798 10.0823 70.0633 10.7658C70.6614 11.6203 71.0032 12.5601 71.0032 13.6709Z" fill="currentColor"/>
+                                    <path d="M110.222 7.34811V8.54432H110.051C108.94 7.519 107.744 7.00635 106.462 7.00635C104.753 7.00635 103.13 7.68989 102.019 8.88609C100.908 10.0823 100.31 11.7057 100.31 13.5C100.31 15.3798 100.908 17.0032 102.019 18.1994C103.13 19.3956 104.668 20.0791 106.377 20.0791C107.658 20.0791 108.94 19.5665 110.051 18.6266H110.222V19.7374H113.81V7.17723H110.222V7.34811ZM110.393 13.6709C110.393 14.7817 110.051 15.7215 109.453 16.4905C108.855 17.1741 108 17.5158 106.975 17.5158C106.035 17.5158 105.266 17.1741 104.582 16.4051C103.984 15.7215 103.643 14.7817 103.643 13.5855C103.643 12.4747 103.984 11.6203 104.582 10.8513C105.181 10.1677 106.035 9.74052 106.975 9.74052C108 9.74052 108.769 10.0823 109.453 10.7658C110.051 11.6203 110.393 12.5601 110.393 13.6709Z" fill="currentColor"/>
+                                    <path d="M24.4365 0C16.9175 0 10.9365 6.06646 10.9365 13.5C10.9365 21.019 17.0029 27 24.4365 27C31.87 27 37.9365 20.9335 37.9365 13.5C38.0219 6.06646 31.87 0 24.4365 0ZM24.4365 18.5411C21.7023 18.5411 19.3953 16.2342 19.3953 13.5C19.3953 10.7658 21.7023 8.45886 24.4365 8.45886C27.1707 8.45886 29.4776 10.7658 29.4776 13.5C29.4776 16.2342 27.2561 18.5411 24.4365 18.5411Z" fill="currentColor"/>
+                                    <path d="M10.9367 3.93036V23.5823H6.1519L0 3.93036H10.9367Z" fill="currentColor"/>
                                     </g>
                                     <defs>
                                     <clipPath id="clip0_52_10">
@@ -404,6 +402,34 @@
 
         openBtn.addEventListener('click', () => modal.classList.remove('hidden'));
         closeBtn.addEventListener('click', () => modal.classList.add('hidden'));
+
+        // Theme switcher logic
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+        const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+
+        function applyTheme(theme) {
+            if (theme === 'dark') {
+                document.documentElement.classList.add('dark');
+                themeToggleLightIcon.classList.remove('hidden');
+                themeToggleDarkIcon.classList.add('hidden');
+            } else {
+                document.documentElement.classList.remove('dark');
+                themeToggleDarkIcon.classList.remove('hidden');
+                themeToggleLightIcon.classList.add('hidden');
+            }
+        }
+
+        // Apply the theme on initial load based on localStorage or system preference
+        const savedTheme = localStorage.getItem('color-theme');
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        applyTheme(savedTheme || (systemPrefersDark ? 'dark' : 'light'));
+
+        themeToggleBtn.addEventListener('click', () => {
+            const newTheme = document.documentElement.classList.contains('dark') ? 'light' : 'dark';
+            localStorage.setItem('color-theme', newTheme);
+            applyTheme(newTheme);
+        });
     </script>
 
 </body>

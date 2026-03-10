@@ -10,7 +10,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     
     <!-- Google Fonts (Inter) -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Unbounded:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -74,18 +74,12 @@
                 </div>
 
                 <!-- CTA Button (Replaced "В консоль" with "Купить") -->
-                <div class="hidden md:flex items-center">
+                <div class="flex items-center">
                     <a href="#pricing" class="bg-brand hover:bg-brand-dark text-black px-6 py-2.5 rounded-lg font-medium transition-all duration-200 shadow-lg shadow-white/10 hover:shadow-white/20 transform hover:-translate-y-0.5">
                         Купить
                     </a>
                 </div>
 
-                <!-- Mobile menu button -->
-                <div class="md:hidden flex items-center">
-                    <button class="text-gray-300 hover:text-white focus:outline-none">
-                        <i class="fa-solid fa-bars text-2xl"></i>
-                    </button>
-                </div>
             </div>
         </div>
     </nav>
@@ -317,10 +311,6 @@
             
             <div class="border-t border-dark-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
                 <p class="text-gray-500 text-sm">© 2026 melodico. Все права защищены.</p>
-                <div class="flex gap-6 text-sm text-gray-500">
-                    <a href="#" class="hover:text-white transition-colors">Политика конфиденциальности</a>
-                    <a href="#" class="hover:text-white transition-colors">Условия использования</a>
-                </div>
             </div>
         </div>
     </footer>
@@ -343,7 +333,7 @@
                     </div>
 
                     <div class="px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
-                        <h3 class="text-xl font-bold leading-6 text-white mb-6 text-center">Оформление подписки</h3>
+                        <h3 class="text-xl font-bold leading-6 text-white mb-6 text-center px-10">Оформление подписки</h3>
                         
                         <!-- YooKassa Form -->
                         <form class="yoomoney-payment-form flex flex-col gap-5" action="https://yookassa.ru/integration/simplepay/payment" method="post" accept-charset="utf-8">

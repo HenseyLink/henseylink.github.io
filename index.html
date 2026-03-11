@@ -8,6 +8,8 @@
     <meta name="description" content="VPN для защиты данных и анонимности в сети. VLESS, Hysteria2, Shadowsocks, WireGuard.">
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 512'%3E%3Cpath d='M0 336c0 79.5 64.5 144 144 144H512c70.7 0 128-57.3 128-128c0-61.9-44-113.6-102.4-125.4c4.1-10.7 6.4-22.4 6.4-34.6c0-53-43-96-96-96c-19.7 0-38.1 6-53.3 16.2C363.2 41.9 311.4 0 256 0C167.6 0 96 71.6 96 160c0 2.7 .1 5.4 .2 8.1C40.2 196.5 0 264 0 336z' fill='white'/%3E%3C/svg%3E" type="image/svg+xml">
     
+    <link rel="stylesheet" href="custom.css">
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
@@ -127,6 +129,24 @@
         </div>
     </section>
 
+    <!-- Regions Section -->
+    <section id="regions" class="py-16 bg-white dark:bg-dark-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl md:text-4xl font-bold mb-3">Доступные регионы</h2>
+                <p class="text-gray-500 dark:text-gray-400 text-lg">Подключайтесь к серверам в ключевых странах</p>
+            </div>
+            <div class="flex flex-wrap justify-center gap-3">
+                <span class="region-chip px-4 py-2 rounded-full bg-gray-100 dark:bg-dark-800 border border-gray-200 dark:border-dark-700 text-sm font-medium">🇩🇪 Германия</span>
+                <span class="region-chip px-4 py-2 rounded-full bg-gray-100 dark:bg-dark-800 border border-gray-200 dark:border-dark-700 text-sm font-medium">🇪🇪 Эстония</span>
+                <span class="region-chip px-4 py-2 rounded-full bg-gray-100 dark:bg-dark-800 border border-gray-200 dark:border-dark-700 text-sm font-medium">🇱🇻 Латвия</span>
+                <span class="region-chip px-4 py-2 rounded-full bg-gray-100 dark:bg-dark-800 border border-gray-200 dark:border-dark-700 text-sm font-medium">🇫🇮 Финляндия</span>
+                <span class="region-chip px-4 py-2 rounded-full bg-gray-100 dark:bg-dark-800 border border-gray-200 dark:border-dark-700 text-sm font-medium">🇺🇸 США</span>
+                <span class="region-chip px-4 py-2 rounded-full bg-gray-100 dark:bg-dark-800 border border-gray-200 dark:border-dark-700 text-sm font-medium">🇯🇵 Япония</span>
+            </div>
+        </div>
+    </section>
+
     <!-- Features Section -->
     <section id="features" class="py-24 bg-gray-50 dark:bg-dark-800/30">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -236,39 +256,45 @@
             <h2 class="text-3xl font-bold mb-12 text-center">Частые вопросы</h2>
             
             <div class="space-y-4">
-                <details class="group bg-white dark:bg-dark-800 rounded-xl border border-gray-200 dark:border-dark-700 overflow-hidden transition-all">
+                <details class="faq-item group bg-white dark:bg-dark-800 rounded-xl border border-gray-200 dark:border-dark-700 overflow-hidden transition-all">
                     <summary class="flex justify-between items-center p-6 cursor-pointer list-none">
                         <span class="font-medium text-lg">Как настроить после покупки?</span>
                         <span class="transition group-open:rotate-180">
                             <i class="fa-solid fa-chevron-down text-gray-500 dark:text-gray-400"></i>
                         </span>
                     </summary>
-                    <div class="px-6 pb-6 text-gray-500 dark:text-gray-400">
-                        После оплаты вы получите ключ доступа и подробную инструкцию для вашего устройства (iOS, Android, PC). Настройка занимает не более 2 минут.
+                    <div class="faq-content text-gray-500 dark:text-gray-400">
+                        <div class="faq-content-inner px-6 pb-6">
+                            После оплаты вы получите ключ доступа и подробную инструкцию для вашего устройства (iOS, Android, PC). Настройка занимает не более 2 минут.
+                        </div>
                     </div>
                 </details>
 
-                <details class="group bg-white dark:bg-dark-800 rounded-xl border border-gray-200 dark:border-dark-700 overflow-hidden transition-all">
+                <details class="faq-item group bg-white dark:bg-dark-800 rounded-xl border border-gray-200 dark:border-dark-700 overflow-hidden transition-all">
                     <summary class="flex justify-between items-center p-6 cursor-pointer list-none">
                         <span class="font-medium text-lg">Работает ли Telegram и YouTube?</span>
                         <span class="transition group-open:rotate-180">
                             <i class="fa-solid fa-chevron-down text-gray-500 dark:text-gray-400"></i>
                         </span>
                     </summary>
-                    <div class="px-6 pb-6 text-gray-500 dark:text-gray-400">
-                        Да, наш сервис специально разработан для доступа к заблокированным ресурсам, включая социальные сети и стриминговые платформы, в высоком качестве.
+                    <div class="faq-content text-gray-500 dark:text-gray-400">
+                        <div class="faq-content-inner px-6 pb-6">
+                            Да, наш сервис специально разработан для доступа к заблокированным ресурсам, включая социальные сети и стриминговые платформы, в высоком качестве.
+                        </div>
                     </div>
                 </details>
 
-                <details class="group bg-white dark:bg-dark-800 rounded-xl border border-gray-200 dark:border-dark-700 overflow-hidden transition-all">
+                <details class="faq-item group bg-white dark:bg-dark-800 rounded-xl border border-gray-200 dark:border-dark-700 overflow-hidden transition-all">
                     <summary class="flex justify-between items-center p-6 cursor-pointer list-none">
                         <span class="font-medium text-lg">Можно ли вернуть деньги?</span>
                         <span class="transition group-open:rotate-180">
                             <i class="fa-solid fa-chevron-down text-gray-500 dark:text-gray-400"></i>
                         </span>
                     </summary>
-                    <div class="px-6 pb-6 text-gray-500 dark:text-gray-400">
-                        Если сервис вам не подойдет по техническим причинам, мы вернем полную стоимость подписки в течение 7 дней после покупки.
+                    <div class="faq-content text-gray-500 dark:text-gray-400">
+                        <div class="faq-content-inner px-6 pb-6">
+                            Если сервис вам не подойдет по техническим причинам, мы вернем полную стоимость подписки в течение 7 дней после покупки.
+                        </div>
                     </div>
                 </details>
             </div>
@@ -314,14 +340,14 @@
     </footer>
 
     <!-- Payment Modal -->
-    <div id="payment-modal" class="fixed inset-0 z-[100] hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+    <div id="payment-modal" class="payment-modal fixed inset-0 z-[100]" aria-labelledby="modal-title" role="dialog" aria-modal="true" aria-hidden="true">
         <!-- Backdrop -->
-        <div class="fixed inset-0 bg-black/80 backdrop-blur-sm transition-opacity" aria-hidden="true"></div>
+        <div class="payment-backdrop fixed inset-0 bg-black/80 backdrop-blur-sm" aria-hidden="true"></div>
 
         <div class="fixed inset-0 z-10 overflow-y-auto">
             <div class="flex min-h-full items-center justify-center p-4 text-center sm:p-0">
                 <!-- Modal Panel -->
-                <div class="relative transform overflow-hidden rounded-2xl bg-white dark:bg-dark-800 border border-gray-200 dark:border-dark-700 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+                <div class="payment-panel relative transform overflow-hidden rounded-2xl bg-white dark:bg-dark-800 border border-gray-200 dark:border-dark-700 text-left shadow-xl sm:my-8 sm:w-full sm:max-w-lg">
                     
                     <!-- Close Button -->
                     <div class="absolute top-4 right-4 z-10">
@@ -399,8 +425,18 @@
         const openBtn = document.getElementById('open-payment-modal');
         const closeBtn = document.getElementById('close-payment-modal');
 
-        openBtn.addEventListener('click', () => modal.classList.remove('hidden'));
-        closeBtn.addEventListener('click', () => modal.classList.add('hidden'));
+        const openModal = () => {
+            modal.classList.add('is-open');
+            modal.setAttribute('aria-hidden', 'false');
+        };
+
+        const closeModal = () => {
+            modal.classList.remove('is-open');
+            modal.setAttribute('aria-hidden', 'true');
+        };
+
+        openBtn.addEventListener('click', openModal);
+        closeBtn.addEventListener('click', closeModal);
 
         // Theme switcher logic
         const themeToggleBtn = document.getElementById('theme-toggle');

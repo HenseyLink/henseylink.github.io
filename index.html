@@ -76,8 +76,8 @@
                         Купить
                     </a>
                     <button id="theme-toggle" type="button" class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-dark-700 focus:outline-none rounded-lg text-sm p-2.5 ml-2">
-                        <i id="theme-toggle-dark-icon" class="fa-solid fa-moon text-lg hidden"></i>
-                        <i id="theme-toggle-light-icon" class="fa-solid fa-sun text-lg hidden"></i>
+                        <i id="theme-toggle-dark-icon" class="fa-solid fa-moon text-lg block dark:hidden"></i>
+                        <i id="theme-toggle-light-icon" class="fa-solid fa-sun text-lg hidden dark:block"></i>
                     </button>
                 </div>
             </div>
@@ -137,12 +137,12 @@
                 <p class="text-gray-500 dark:text-gray-400 text-lg">Подключайтесь к серверам в ключевых странах</p>
             </div>
             <div class="flex flex-wrap justify-center gap-3">
-                <span class="region-chip px-4 py-2 rounded-full bg-gray-100 dark:bg-dark-800 border border-gray-200 dark:border-dark-700 text-sm font-medium">🇩🇪 Германия</span>
-                <span class="region-chip px-4 py-2 rounded-full bg-gray-100 dark:bg-dark-800 border border-gray-200 dark:border-dark-700 text-sm font-medium">🇪🇪 Эстония</span>
-                <span class="region-chip px-4 py-2 rounded-full bg-gray-100 dark:bg-dark-800 border border-gray-200 dark:border-dark-700 text-sm font-medium">🇱🇻 Латвия</span>
-                <span class="region-chip px-4 py-2 rounded-full bg-gray-100 dark:bg-dark-800 border border-gray-200 dark:border-dark-700 text-sm font-medium">🇫🇮 Финляндия</span>
-                <span class="region-chip px-4 py-2 rounded-full bg-gray-100 dark:bg-dark-800 border border-gray-200 dark:border-dark-700 text-sm font-medium">🇺🇸 США</span>
-                <span class="region-chip px-4 py-2 rounded-full bg-gray-100 dark:bg-dark-800 border border-gray-200 dark:border-dark-700 text-sm font-medium">🇯🇵 Япония</span>
+                <span class="region-chip px-4 py-2 rounded-full bg-gray-100 dark:bg-dark-800 border border-gray-200 dark:border-dark-700 text-sm font-medium"><img class="region-flag" src="flags/de.svg" alt="Флаг Германии">Германия</span>
+                <span class="region-chip px-4 py-2 rounded-full bg-gray-100 dark:bg-dark-800 border border-gray-200 dark:border-dark-700 text-sm font-medium"><img class="region-flag" src="flags/ee.svg" alt="Флаг Эстонии">Эстония</span>
+                <span class="region-chip px-4 py-2 rounded-full bg-gray-100 dark:bg-dark-800 border border-gray-200 dark:border-dark-700 text-sm font-medium"><img class="region-flag" src="flags/lv.svg" alt="Флаг Латвии">Латвия</span>
+                <span class="region-chip px-4 py-2 rounded-full bg-gray-100 dark:bg-dark-800 border border-gray-200 dark:border-dark-700 text-sm font-medium"><img class="region-flag" src="flags/fi.svg" alt="Флаг Финляндии">Финляндия</span>
+                <span class="region-chip px-4 py-2 rounded-full bg-gray-100 dark:bg-dark-800 border border-gray-200 dark:border-dark-700 text-sm font-medium"><img class="region-flag" src="flags/us.svg" alt="Флаг США">США</span>
+                <span class="region-chip px-4 py-2 rounded-full bg-gray-100 dark:bg-dark-800 border border-gray-200 dark:border-dark-700 text-sm font-medium"><img class="region-flag" src="flags/jp.svg" alt="Флаг Японии">Япония</span>
             </div>
         </div>
     </section>
@@ -436,18 +436,12 @@
 
         // Theme switcher logic
         const themeToggleBtn = document.getElementById('theme-toggle');
-        const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
-        const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
 
         function applyTheme(theme) {
             if (theme === 'dark') {
                 document.documentElement.classList.add('dark');
-                themeToggleLightIcon.classList.remove('hidden');
-                themeToggleDarkIcon.classList.add('hidden');
             } else {
                 document.documentElement.classList.remove('dark');
-                themeToggleDarkIcon.classList.remove('hidden');
-                themeToggleLightIcon.classList.add('hidden');
             }
         }
 

@@ -9,6 +9,31 @@
     transition: transform 150ms ease, box-shadow 150ms ease, border-color 150ms ease, background-color 150ms ease;
 }
 
+.region-flag {
+    width: 1.6rem;
+    height: 1rem;
+    border-radius: 0.25rem;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1) inset;
+    display: inline-block;
+    object-fit: cover;
+}
+
+#theme-toggle-dark-icon {
+    display: inline-block;
+}
+
+#theme-toggle-light-icon {
+    display: none;
+}
+
+.dark #theme-toggle-dark-icon {
+    display: none;
+}
+
+.dark #theme-toggle-light-icon {
+    display: inline-block;
+}
+
 .region-chip:hover {
     transform: translateY(-2px);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);

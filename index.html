@@ -480,8 +480,11 @@
         });
 
         // 3D hover tilt for new region banner
-        const newRegionCard = document.querySelector('.new-region-card');
-        if (newRegionCard && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        const initNewRegionTilt = () => {
+            const newRegionCard = document.querySelector('.new-region-card');
+            if (!newRegionCard || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+            const wrap = newRegionCard.closest('.new-region-wrap') || newRegionCard;
             const baseTiltX = 8;
             const baseTiltY = -10;
             const maxExtraTilt = 8;
@@ -516,8 +519,14 @@
                 applyTilt(baseTiltX, baseTiltY);
             };
 
-            newRegionCard.addEventListener('mousemove', onMove);
-            newRegionCard.addEventListener('mouseleave', onLeave);
+            wrap.addEventListener('pointermove', onMove, { passive: true });
+            wrap.addEventListener('pointerleave', onLeave);
+        };
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initNewRegionTilt);
+        } else {
+            initNewRegionTilt();
         }
     </script>
 

@@ -18,6 +18,173 @@
     object-fit: cover;
 }
 
+.new-region-wrap {
+    perspective: 1200px;
+    display: flex;
+    justify-content: center;
+}
+
+.new-region-card {
+    position: relative;
+    border-radius: 28px;
+    padding: 28px 32px;
+    max-width: 900px;
+    width: 100%;
+    background: linear-gradient(140deg, #ffffff 0%, #f3f4f6 60%, #e8eaee 100%);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    transform-style: preserve-3d;
+    --tilt-x: 8deg;
+    --tilt-y: -10deg;
+    transform: rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
+    transition: transform 160ms ease;
+    will-change: transform;
+    overflow: hidden;
+}
+
+.dark .new-region-card {
+    background: linear-gradient(140deg, #0b0b0b 0%, #1a1a1a 60%, #232323 100%);
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.new-region-card::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: 30px;
+    background: linear-gradient(120deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
+    opacity: 0.7;
+    transform: translateZ(-40px);
+    pointer-events: none;
+}
+
+.dark .new-region-card::before {
+    background: linear-gradient(120deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0));
+    opacity: 0.6;
+}
+
+.new-region-body {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    transform: translateZ(50px);
+}
+
+.new-region-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.35rem 0.9rem;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transform: translateZ(55px);
+}
+
+.dark .new-region-tag {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.new-region-flag {
+    width: 86px;
+    height: 64px;
+    border-radius: 18px;
+    background: linear-gradient(160deg, rgba(0, 0, 0, 0.08), rgba(255, 255, 255, 0));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+    transform: translateZ(65px);
+}
+
+.dark .new-region-flag {
+    background: linear-gradient(160deg, rgba(255, 255, 255, 0.08), rgba(0, 0, 0, 0));
+    box-shadow: 0 16px 34px rgba(0, 0, 0, 0.6);
+}
+
+.new-region-flag img {
+    width: 64px;
+    height: 42px;
+    border-radius: 10px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.new-region-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-top: 0.4rem;
+    margin-bottom: 0.5rem;
+}
+
+.new-region-kicker {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.dark .new-region-kicker {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.new-region-text {
+    color: rgba(0, 0, 0, 0.6);
+    max-width: 28rem;
+}
+
+.dark .new-region-text {
+    color: rgba(255, 255, 255, 0.65);
+}
+
+.new-region-orbit {
+    position: absolute;
+    top: 22px;
+    right: 26px;
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    border: 1px dashed rgba(0, 0, 0, 0.2);
+    transform: translateZ(30px);
+}
+
+.dark .new-region-orbit {
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.new-region-orbit::after {
+    content: "";
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    width: 10px;
+    height: 10px;
+    background: #111;
+    border-radius: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 0 0 6px rgba(0, 0, 0, 0.12);
+}
+
+.dark .new-region-orbit::after {
+    background: #fff;
+    box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.18);
+}
+
+@media (max-width: 640px) {
+    .new-region-card {
+        transform: rotateX(4deg) rotateY(-4deg);
+        padding: 24px;
+    }
+
+    .new-region-body {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
 #theme-toggle-dark-icon {
     display: inline-block;
 }
@@ -102,6 +269,14 @@
     .region-chip:hover {
         transform: none;
         box-shadow: none;
+    }
+
+    .new-region-card,
+    .new-region-body,
+    .new-region-flag,
+    .new-region-tag,
+    .new-region-orbit {
+        transform: none;
     }
 
     .faq-content,

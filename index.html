@@ -129,6 +129,28 @@
         </div>
     </section>
 
+    <!-- New Region Highlight -->
+    <section class="py-14 bg-gray-50 dark:bg-dark-900/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="new-region-wrap">
+                <div class="new-region-card border border-gray-200/80 dark:border-white/10">
+                    <div class="new-region-orbit"></div>
+                    <div class="new-region-body">
+                        <div class="new-region-flag">
+                            <img src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 2' preserveAspectRatio='none'%3E%3Crect width='3' height='2' fill='%23AA151B'/%3E%3Crect y='0.5' width='3' height='1' fill='%23F1BF00'/%3E%3C/svg%3E" alt="Флаг Испании">
+                        </div>
+                        <div>
+                            <span class="new-region-tag">Новый регион</span>
+                            <p class="new-region-kicker mt-4">Добавился новый регион</p>
+                            <h3 class="new-region-title">Испания</h3>
+                            <p class="new-region-text">Европейский сервер с устойчивой скоростью и низкой задержкой для стриминга и работы.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Regions Section -->
     <section id="regions" class="py-16 bg-white dark:bg-dark-900">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -138,6 +160,7 @@
             </div>
             <div class="flex flex-wrap justify-center gap-3">
                 <span class="region-chip px-4 py-2 rounded-full bg-gray-100 dark:bg-dark-800 border border-gray-200 dark:border-dark-700 text-sm font-medium"><img class="region-flag" src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 2' preserveAspectRatio='none'%3E%3Crect width='3' height='0.6667' y='0' fill='%23000'/%3E%3Crect width='3' height='0.6667' y='0.6667' fill='%23DD0000'/%3E%3Crect width='3' height='0.6667' y='1.3333' fill='%23FFCE00'/%3E%3C/svg%3E" alt="Флаг Германии">Германия</span>
+                <span class="region-chip px-4 py-2 rounded-full bg-gray-100 dark:bg-dark-800 border border-gray-200 dark:border-dark-700 text-sm font-medium"><img class="region-flag" src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 2' preserveAspectRatio='none'%3E%3Crect width='3' height='2' fill='%23AA151B'/%3E%3Crect y='0.5' width='3' height='1' fill='%23F1BF00'/%3E%3C/svg%3E" alt="Флаг Испании">Испания</span>
                 <span class="region-chip px-4 py-2 rounded-full bg-gray-100 dark:bg-dark-800 border border-gray-200 dark:border-dark-700 text-sm font-medium"><img class="region-flag" src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 2' preserveAspectRatio='none'%3E%3Crect width='3' height='0.6667' y='0' fill='%230072CE'/%3E%3Crect width='3' height='0.6667' y='0.6667' fill='%23000'/%3E%3Crect width='3' height='0.6667' y='1.3333' fill='%23fff'/%3E%3C/svg%3E" alt="Флаг Эстонии">Эстония</span>
                 <span class="region-chip px-4 py-2 rounded-full bg-gray-100 dark:bg-dark-800 border border-gray-200 dark:border-dark-700 text-sm font-medium"><img class="region-flag" src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 2' preserveAspectRatio='none'%3E%3Crect width='3' height='2' fill='%239E1B32'/%3E%3Crect width='3' height='0.4' y='0.8' fill='%23fff'/%3E%3C/svg%3E" alt="Флаг Латвии">Латвия</span>
                 <span class="region-chip px-4 py-2 rounded-full bg-gray-100 dark:bg-dark-800 border border-gray-200 dark:border-dark-700 text-sm font-medium"><img class="region-flag" src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 11' preserveAspectRatio='none'%3E%3Crect width='18' height='11' fill='%23fff'/%3E%3Crect x='5' width='3' height='11' fill='%23003580'/%3E%3Crect y='4' width='18' height='3' fill='%23003580'/%3E%3C/svg%3E" alt="Флаг Финляндии">Финляндия</span>
@@ -455,6 +478,47 @@
             localStorage.setItem('color-theme', newTheme);
             applyTheme(newTheme);
         });
+
+        // 3D hover tilt for new region banner
+        const newRegionCard = document.querySelector('.new-region-card');
+        if (newRegionCard && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            const baseTiltX = 8;
+            const baseTiltY = -10;
+            const maxExtraTilt = 8;
+            let rafId = null;
+            let lastX = baseTiltX;
+            let lastY = baseTiltY;
+
+            const applyTilt = (x, y) => {
+                newRegionCard.style.setProperty('--tilt-x', `${x}deg`);
+                newRegionCard.style.setProperty('--tilt-y', `${y}deg`);
+            };
+
+            const onMove = (event) => {
+                const rect = newRegionCard.getBoundingClientRect();
+                const relX = (event.clientX - rect.left) / rect.width;
+                const relY = (event.clientY - rect.top) / rect.height;
+
+                const targetTiltY = baseTiltY + (relX - 0.5) * maxExtraTilt * 2;
+                const targetTiltX = baseTiltX + (0.5 - relY) * maxExtraTilt * 2;
+
+                lastX = targetTiltX;
+                lastY = targetTiltY;
+
+                if (rafId) return;
+                rafId = requestAnimationFrame(() => {
+                    applyTilt(lastX, lastY);
+                    rafId = null;
+                });
+            };
+
+            const onLeave = () => {
+                applyTilt(baseTiltX, baseTiltY);
+            };
+
+            newRegionCard.addEventListener('mousemove', onMove);
+            newRegionCard.addEventListener('mouseleave', onLeave);
+        }
     </script>
 
 </body>

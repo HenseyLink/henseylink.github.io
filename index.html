@@ -43,7 +43,7 @@
         }
     </script>
 </head>
-<body class="antialiased bg-white text-black dark:bg-dark-900 dark:text-white transition-colors duration-300">
+<body class="site-shell antialiased bg-white text-black dark:bg-dark-900 dark:text-white transition-colors duration-300">
     <script>
         // Помещено в body для предотвращения "мерцания" темы при загрузке
         if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
@@ -54,67 +54,68 @@
     </script>
 
     <!-- Navigation -->
-    <nav class="fixed w-full z-50 transition-all duration-300 bg-white/80 dark:bg-black/80 backdrop-blur-xl border-b border-gray-200/80 dark:border-white/5">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-20">
-                <!-- Logo -->
-                <div class="flex-shrink-0 flex items-center gap-3 cursor-pointer" onclick="window.scrollTo(0,0)">
-                    <i class="fa-solid fa-cloud text-black dark:text-white text-xl"></i>
-                    <span class="font-bold text-xl tracking-tight text-black dark:text-white">melodico</span>
-                </div>
-
-                <!-- Desktop Menu -->
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="#features" class="text-gray-500 dark:text-gray-300 hover:text-black dark:hover:text-white transition-colors text-sm font-medium">Преимущества</a>
-                    <a href="#pricing" class="text-gray-500 dark:text-gray-300 hover:text-black dark:hover:text-white transition-colors text-sm font-medium">Тарифы</a>
-                    <a href="#faq" class="text-gray-500 dark:text-gray-300 hover:text-black dark:hover:text-white transition-colors text-sm font-medium">FAQ</a>
-                </div>
-
-                <!-- Theme Switcher -->
-                <div class="flex items-center">
-                    <button id="theme-toggle" type="button" class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-dark-700 focus:outline-none rounded-lg text-sm p-2.5 ml-2">
-                        <i id="theme-toggle-dark-icon" class="fa-solid fa-moon text-lg block dark:hidden"></i>
-                        <i id="theme-toggle-light-icon" class="fa-solid fa-sun text-lg hidden dark:block"></i>
+    <nav class="fixed top-5 left-0 right-0 z-50 px-4 sm:px-6 lg:px-8">
+        <div class="glass-nav max-w-6xl mx-auto px-3 sm:px-5 py-3">
+            <div class="flex items-center justify-between gap-3">
+                <a href="#top" class="inline-flex items-center gap-3 px-4 sm:px-5 py-3 rounded-full glass-chip">
+                    <span class="w-9 h-9 rounded-full glass-surface inline-flex items-center justify-center">
+                        <i class="fa-solid fa-cloud text-sm"></i>
+                    </span>
+                    <span class="font-semibold text-lg tracking-tight">melodico</span>
+                </a>
+                <div class="flex items-center gap-2">
+                    <div class="hidden md:flex items-center gap-2 p-1 rounded-full glass-surface">
+                        <a href="#features" class="liquid-nav-link text-sm font-medium">Преимущества</a>
+                        <a href="#pricing" class="liquid-nav-link text-sm font-medium">Тарифы</a>
+                        <a href="#faq" class="liquid-nav-link text-sm font-medium">FAQ</a>
+                    </div>
+                    <button id="mobile-menu-toggle" type="button" class="md:hidden glass-button glass-chip w-12 h-12 inline-flex items-center justify-center text-gray-700 dark:text-gray-200" aria-expanded="false" aria-controls="mobile-menu">
+                        <i class="fa-solid fa-bars text-base"></i>
                     </button>
+                    <button id="theme-toggle" type="button" class="glass-button glass-chip w-12 h-12 inline-flex items-center justify-center text-gray-700 dark:text-gray-200">
+                        <i id="theme-toggle-dark-icon" class="fa-solid fa-moon text-base block dark:hidden"></i>
+                        <i id="theme-toggle-light-icon" class="fa-solid fa-sun text-base hidden dark:block"></i>
+                    </button>
+                </div>
+            </div>
+            <div id="mobile-menu" class="mobile-drawer glass-surface md:hidden">
+                <div class="flex flex-col gap-2 p-1">
+                    <a href="#features" class="mobile-drawer-link liquid-nav-link text-sm font-medium">Преимущества</a>
+                    <a href="#pricing" class="mobile-drawer-link liquid-nav-link text-sm font-medium">Тарифы</a>
+                    <a href="#faq" class="mobile-drawer-link liquid-nav-link text-sm font-medium">FAQ</a>
                 </div>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
-        <!-- Background Glow -->
-        <div class="absolute top-0 left-1/2 w-full -translate-x-1/2 h-full z-0 pointer-events-none opacity-70 dark:opacity-100">
-            <div class="absolute top-20 left-1/4 w-96 h-96 bg-gray-300/50 dark:bg-white/5 rounded-full blur-3xl"></div>
-            <div class="absolute bottom-20 right-1/4 w-96 h-96 bg-gray-300/50 dark:bg-white/5 rounded-full blur-3xl"></div>
-        </div>
-
+    <section id="top" class="liquid-section relative pt-36 pb-20 lg:pt-44 lg:pb-28 overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gray-100 dark:bg-dark-800 border border-gray-200 dark:border-dark-700 mb-8 animate-fade-in-up">
+            <div class="inline-flex items-center gap-2 px-5 py-3 rounded-full glass-chip mb-8 animate-fade-in-up">
                 <span class="w-2 h-2 rounded-full bg-black dark:bg-white animate-pulse"></span>
                 <span class="text-sm text-gray-600 dark:text-gray-300 font-medium">Работаем в России, Китае и Иране</span>
             </div>
             
-            <h1 class="text-5xl md:text-7xl font-bold tracking-tight mb-8 leading-tight">
+            <h1 class="liquid-hero-title font-bold tracking-tight mb-8">
                 Интернет, каким он <br>
-                <span class="bg-gradient-to-r from-neutral-800 to-neutral-500 dark:from-white dark:to-neutral-400 text-transparent bg-clip-text">и должен быть</span>
+                <span class="bg-gradient-to-r from-slate-800 via-slate-500 to-slate-300 dark:from-white dark:via-slate-300 dark:to-slate-500 text-transparent bg-clip-text">и должен быть</span>
             </h1>
             
-            <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-500 dark:text-gray-400 mb-10">
+            <p class="mt-4 max-w-3xl mx-auto text-lg md:text-xl liquid-muted mb-10">
                 VPN для защиты данных и анонимности в сети. Поддержка VLESS обеспечивает максимальную скорость без ограничений.
             </p>
             
             <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="#pricing" class="bg-dark-900 text-white dark:bg-brand dark:hover:bg-brand-dark dark:text-black px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-200 shadow-xl shadow-black/5 dark:shadow-white/10 hover:shadow-black/10 dark:hover:shadow-white/20 transform hover:-translate-y-1">
+                <a href="#pricing" class="glass-button glass-button-primary px-8 py-4 font-semibold text-lg inline-flex items-center justify-center">
                     Купить доступ
                 </a>
-                <a href="#features" class="bg-gray-100 dark:bg-dark-800 hover:bg-gray-200 dark:hover:bg-dark-700 text-black dark:text-white border border-gray-200 dark:border-dark-700 px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-200">
+                <a href="#features" class="glass-button glass-button-secondary px-8 py-4 font-semibold text-lg inline-flex items-center justify-center">
                     Узнать больше
                 </a>
             </div>
 
             <!-- Supported Platforms -->
-            <div class="mt-16 pt-8 border-t border-gray-200 dark:border-dark-800/50">
+            <div class="glass-panel mt-16 p-8 max-w-4xl mx-auto">
                 <p class="text-sm text-gray-500 mb-6 uppercase tracking-wider font-semibold">Поддерживаемые платформы</p>
                 <div class="flex justify-center gap-8 text-gray-400 dark:text-gray-500 text-3xl">
                     <i class="fa-brands fa-apple hover:text-black dark:hover:text-white transition-colors" title="iOS & macOS"></i>
@@ -127,7 +128,8 @@
     </section>
 
     <!-- New Region Highlight -->
-    <section class="py-14 bg-gray-50 dark:bg-dark-900/60">
+    <!-- Чтобы вернуть баннер нового региона, уберите класс `hidden` у секции ниже -->
+    <section class="liquid-section py-14 hidden" data-toggle-section="new-region-banner">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="new-region-wrap">
                 <div class="new-region-card border border-gray-200/80 dark:border-white/10">
@@ -149,62 +151,60 @@
     </section>
 
     <!-- Regions Section -->
-    <section id="regions" class="py-16 bg-white dark:bg-dark-900">
+    <section id="regions" class="liquid-section py-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-10">
                 <h2 class="text-3xl md:text-4xl font-bold mb-3">Доступные регионы</h2>
                 <p class="text-gray-500 dark:text-gray-400 text-lg">Подключайтесь к серверам в ключевых странах</p>
             </div>
             <div class="flex flex-wrap justify-center gap-3">
-                <span class="region-chip px-4 py-2 rounded-full bg-gray-100 dark:bg-dark-800 border border-gray-200 dark:border-dark-700 text-sm font-medium"><img class="region-flag" src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 2' preserveAspectRatio='none'%3E%3Crect width='3' height='0.6667' y='0' fill='%23000'/%3E%3Crect width='3' height='0.6667' y='0.6667' fill='%23DD0000'/%3E%3Crect width='3' height='0.6667' y='1.3333' fill='%23FFCE00'/%3E%3C/svg%3E" alt="Флаг Германии">Германия</span>
-                <span class="region-chip px-4 py-2 rounded-full bg-gray-100 dark:bg-dark-800 border border-gray-200 dark:border-dark-700 text-sm font-medium"><img class="region-flag" src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 2' preserveAspectRatio='none'%3E%3Crect width='3' height='2' fill='%23AA151B'/%3E%3Crect y='0.5' width='3' height='1' fill='%23F1BF00'/%3E%3C/svg%3E" alt="Флаг Испании">Испания</span>
-                <span class="region-chip px-4 py-2 rounded-full bg-gray-100 dark:bg-dark-800 border border-gray-200 dark:border-dark-700 text-sm font-medium"><img class="region-flag" src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 2' preserveAspectRatio='none'%3E%3Crect width='3' height='0.6667' y='0' fill='%230072CE'/%3E%3Crect width='3' height='0.6667' y='0.6667' fill='%23000'/%3E%3Crect width='3' height='0.6667' y='1.3333' fill='%23fff'/%3E%3C/svg%3E" alt="Флаг Эстонии">Эстония</span>
-                <span class="region-chip px-4 py-2 rounded-full bg-gray-100 dark:bg-dark-800 border border-gray-200 dark:border-dark-700 text-sm font-medium"><img class="region-flag" src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 2' preserveAspectRatio='none'%3E%3Crect width='3' height='2' fill='%239E1B32'/%3E%3Crect width='3' height='0.4' y='0.8' fill='%23fff'/%3E%3C/svg%3E" alt="Флаг Латвии">Латвия</span>
-                <span class="region-chip px-4 py-2 rounded-full bg-gray-100 dark:bg-dark-800 border border-gray-200 dark:border-dark-700 text-sm font-medium"><img class="region-flag" src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 11' preserveAspectRatio='none'%3E%3Crect width='18' height='11' fill='%23fff'/%3E%3Crect x='5' width='3' height='11' fill='%23003580'/%3E%3Crect y='4' width='18' height='3' fill='%23003580'/%3E%3C/svg%3E" alt="Флаг Финляндии">Финляндия</span>
-                <span class="region-chip px-4 py-2 rounded-full bg-gray-100 dark:bg-dark-800 border border-gray-200 dark:border-dark-700 text-sm font-medium"><img class="region-flag" src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 19 10' preserveAspectRatio='none'%3E%3Crect width='19' height='10' fill='%23B22234'/%3E%3Cg fill='%23fff'%3E%3Crect y='1' width='19' height='1'/%3E%3Crect y='3' width='19' height='1'/%3E%3Crect y='5' width='19' height='1'/%3E%3Crect y='7' width='19' height='1'/%3E%3Crect y='9' width='19' height='1'/%3E%3C/g%3E%3Crect width='7.6' height='5.6' fill='%233C3B6E'/%3E%3C/svg%3E" alt="Флаг США">США</span>
-                <span class="region-chip px-4 py-2 rounded-full bg-gray-100 dark:bg-dark-800 border border-gray-200 dark:border-dark-700 text-sm font-medium"><img class="region-flag" src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 2' preserveAspectRatio='none'%3E%3Crect width='3' height='2' fill='%23fff'/%3E%3Ccircle cx='1.5' cy='1' r='0.6' fill='%23BC002D'/%3E%3C/svg%3E" alt="Флаг Японии">Япония</span>
+                <span class="region-chip glass-chip px-4 py-2 text-sm font-medium"><img class="region-flag" src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 9 6' preserveAspectRatio='none'%3E%3Crect width='9' height='2' y='0' fill='%23fff'/%3E%3Crect width='9' height='2' y='2' fill='%230039A6'/%3E%3Crect width='9' height='2' y='4' fill='%23D52B1E'/%3E%3C/svg%3E" alt="Флаг России">Россия</span>
+                <span class="region-chip glass-chip px-4 py-2 text-sm font-medium"><img class="region-flag" src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 2' preserveAspectRatio='none'%3E%3Crect width='3' height='0.6667' y='0' fill='%23000'/%3E%3Crect width='3' height='0.6667' y='0.6667' fill='%23DD0000'/%3E%3Crect width='3' height='0.6667' y='1.3333' fill='%23FFCE00'/%3E%3C/svg%3E" alt="Флаг Германии">Германия</span>
+                <span class="region-chip glass-chip px-4 py-2 text-sm font-medium"><img class="region-flag" src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 2' preserveAspectRatio='none'%3E%3Crect width='3' height='2' fill='%23AA151B'/%3E%3Crect y='0.5' width='3' height='1' fill='%23F1BF00'/%3E%3C/svg%3E" alt="Флаг Испании">Испания</span>
+                <span class="region-chip glass-chip px-4 py-2 text-sm font-medium"><img class="region-flag" src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 2' preserveAspectRatio='none'%3E%3Crect width='3' height='0.6667' y='0' fill='%230072CE'/%3E%3Crect width='3' height='0.6667' y='0.6667' fill='%23000'/%3E%3Crect width='3' height='0.6667' y='1.3333' fill='%23fff'/%3E%3C/svg%3E" alt="Флаг Эстонии">Эстония</span>
+                <span class="region-chip glass-chip px-4 py-2 text-sm font-medium"><img class="region-flag" src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 19 10' preserveAspectRatio='none'%3E%3Crect width='19' height='10' fill='%23B22234'/%3E%3Cg fill='%23fff'%3E%3Crect y='1' width='19' height='1'/%3E%3Crect y='3' width='19' height='1'/%3E%3Crect y='5' width='19' height='1'/%3E%3Crect y='7' width='19' height='1'/%3E%3Crect y='9' width='19' height='1'/%3E%3C/g%3E%3Crect width='7.6' height='5.6' fill='%233C3B6E'/%3E%3C/svg%3E" alt="Флаг США">США</span>
             </div>
         </div>
     </section>
 
     <!-- Features Section -->
-    <section id="features" class="py-24 bg-gray-50 dark:bg-dark-800/30">
+    <section id="features" class="liquid-section py-24">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <h2 class="text-3xl md:text-4xl font-bold mb-4">Разрабатываем лучший сервис</h2>
                 <p class="text-gray-500 dark:text-gray-400 text-lg">Почему тысячи пользователей выбирают именно melodico?</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="liquid-grid liquid-grid-3">
                 <!-- Feature 1 -->
-                <div class="bg-white dark:bg-dark-800 p-8 rounded-2xl border border-gray-200 dark:border-dark-700 hover:border-black/10 dark:hover:border-brand/50 transition-all group">
-                    <div class="w-14 h-14 bg-black/5 dark:bg-white/5 rounded-xl flex items-center justify-center text-black dark:text-white mb-6 group-hover:scale-110 transition-transform">
+                <div class="liquid-card group">
+                    <div class="glass-chip w-14 h-14 flex items-center justify-center text-black dark:text-white mb-6 group-hover:scale-110 transition-transform">
                         <i class="fa-solid fa-bolt text-2xl"></i>
                     </div>
                     <h3 class="text-xl font-bold mb-3">Высокая скорость</h3>
-                    <p class="text-gray-500 dark:text-gray-400 leading-relaxed">
+                    <p class="liquid-muted leading-relaxed">
                         Наши серверы оптимизированы для стриминга 4K и онлайн-игр. Минимальный пинг и отсутствие буферизации.
                     </p>
                 </div>
 
                 <!-- Feature 2 -->
-                <div class="bg-white dark:bg-dark-800 p-8 rounded-2xl border border-gray-200 dark:border-dark-700 hover:border-black/10 dark:hover:border-brand/50 transition-all group">
-                    <div class="w-14 h-14 bg-black/5 dark:bg-white/5 rounded-xl flex items-center justify-center text-black dark:text-white mb-6 group-hover:scale-110 transition-transform">
+                <div class="liquid-card group">
+                    <div class="glass-chip w-14 h-14 flex items-center justify-center text-black dark:text-white mb-6 group-hover:scale-110 transition-transform">
                         <i class="fa-solid fa-shield-cat text-2xl"></i>
                     </div>
                     <h3 class="text-xl font-bold mb-3">Полная анонимность</h3>
-                    <p class="text-gray-500 dark:text-gray-400 leading-relaxed">
+                    <p class="liquid-muted leading-relaxed">
                         Мы не ведем логи вашей активности. Ваш трафик надежно зашифрован современными протоколами.
                     </p>
                 </div>
 
                 <!-- Feature 3 -->
-                <div class="bg-white dark:bg-dark-800 p-8 rounded-2xl border border-gray-200 dark:border-dark-700 hover:border-black/10 dark:hover:border-brand/50 transition-all group">
-                    <div class="w-14 h-14 bg-black/5 dark:bg-white/5 rounded-xl flex items-center justify-center text-black dark:text-white mb-6 group-hover:scale-110 transition-transform">
+                <div class="liquid-card group">
+                    <div class="glass-chip w-14 h-14 flex items-center justify-center text-black dark:text-white mb-6 group-hover:scale-110 transition-transform">
                         <i class="fa-solid fa-globe text-2xl"></i>
                     </div>
                     <h3 class="text-xl font-bold mb-3">Обход блокировок</h3>
-                    <p class="text-gray-500 dark:text-gray-400 leading-relaxed">
+                    <p class="liquid-muted leading-relaxed">
                         Протокол VLESS маскирует трафик под обычный веб-серфинг, обходя любые ограничения.
                     </p>
                 </div>
@@ -213,7 +213,7 @@
     </section>
 
     <!-- Pricing Section -->
-    <section id="pricing" class="py-24 relative overflow-hidden">
+    <section id="pricing" class="liquid-section py-24 relative overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="text-center mb-16">
                 <h2 class="text-3xl md:text-4xl font-bold mb-4">Два тарифа под разные задачи</h2>
@@ -221,15 +221,17 @@
             </div>
 
             <div class="max-w-5xl mx-auto">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 justify-items-center">
-                <div class="bg-white dark:bg-dark-800 rounded-3xl p-1 border border-gray-200 dark:border-dark-700 shadow-2xl relative w-full max-w-md">
-                    <div class="bg-gray-50 dark:bg-dark-900/50 rounded-[20px] p-8 md:p-10 h-full flex flex-col text-black dark:text-white">
+                <div class="liquid-grid liquid-grid-2 justify-items-center">
+                <div class="pricing-card-wrap">
+                <div class="liquid-card liquid-promo pricing-card relative w-full max-w-md">
+                        <div class="pricing-copy">
                         <h3 class="text-2xl font-bold mb-2">Мелодичный интернет</h3>
-                        <p class="text-gray-500 dark:text-gray-400 text-sm mb-6">Максимальные возможности без ограничений</p>
+                        <p class="liquid-muted text-sm mb-6">Максимальные возможности без ограничений</p>
+                        </div>
                         
                         <div class="flex items-baseline gap-2 mb-8">
-                            <span class="text-5xl font-bold">200 ₽</span>
-                            <span class="text-gray-500 dark:text-gray-400">/ месяц</span>
+                            <span class="liquid-price font-bold">200 ₽</span>
+                            <span class="liquid-muted">/ месяц</span>
                         </div>
 
                         <ul class="space-y-4 mb-10 flex-1">
@@ -237,39 +239,41 @@
                                 <i class="fa-solid fa-check text-black dark:text-white"></i>
                                 <span>Безлимитный трафик</span>
                             </li>
-                            <li class="flex items-center gap-3 text-gray-700 dark:text-gray-300">
+                            <li class="flex items-center gap-3 liquid-muted">
                                 <i class="fa-solid fa-check text-black dark:text-white"></i>
                                 <span>До 5 устройств одновременно</span>
                             </li>
-                            <li class="flex items-center gap-3 text-gray-700 dark:text-gray-300">
+                            <li class="flex items-center gap-3 liquid-muted">
                                 <i class="fa-solid fa-check text-black dark:text-white"></i>
                                 <span>Высокая скорость до 5 Гбит/с</span>
                             </li>
-                            <li class="flex items-center gap-3 text-gray-700 dark:text-gray-300">
+                            <li class="flex items-center gap-3 liquid-muted">
                                 <i class="fa-solid fa-check text-black dark:text-white"></i>
                                 <span>Поддержка всех типов подключений</span>
                             </li>
                         </ul>
                         
-                        <a href="https://pay.melodico.online/buy?type=standard" class="w-full bg-dark-900 text-white dark:bg-brand dark:hover:bg-brand-dark dark:text-black py-4 rounded-xl font-bold text-lg transition-all duration-200 shadow-lg shadow-black/5 dark:shadow-white/10 hover:shadow-black/10 dark:hover:shadow-white/20 transform hover:-translate-y-1 inline-flex items-center justify-center">
+                        <a href="https://pay.melodico.online/buy?type=standard" class="glass-button glass-button-primary w-full py-4 font-bold text-lg inline-flex items-center justify-center">
                             Купить подписку
                         </a>
                         
-                        <p class="text-center text-xs text-gray-500 mt-4">Гарантия возврата средств 7 дней</p>
-                    </div>
+                        <p class="text-center text-xs liquid-muted mt-4">Гарантия возврата средств 7 дней</p>
+                </div>
                 </div>
 
-                <div class="bg-white dark:bg-dark-800 rounded-3xl p-1 border border-gray-200 dark:border-dark-700 shadow-2xl relative w-full max-w-md">
-                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-black dark:bg-white text-white dark:text-black px-4 py-1 rounded-full text-sm font-bold shadow-lg">
+                <div class="pricing-card-wrap">
+                    <div class="pricing-popular-badge glass-chip px-4 py-1 text-sm font-bold shadow-lg">
                         ХИТ ПРОДАЖ
                     </div>
-                    <div class="bg-gray-50 dark:bg-dark-900/50 rounded-[20px] p-8 md:p-10 h-full flex flex-col text-black dark:text-white">
+                <div class="liquid-card liquid-promo pricing-card pricing-card-popular relative w-full max-w-md">
+                        <div class="pricing-copy">
                         <h3 class="text-2xl font-bold mb-2">Белый интернет</h3>
-                        <p class="text-gray-500 dark:text-gray-400 text-sm mb-6">Специально для мобильного интернета</p>
+                        <p class="liquid-muted text-sm mb-6">Специально для мобильного интернета</p>
+                        </div>
                         
                         <div class="flex items-baseline gap-2 mb-8">
-                            <span class="text-5xl font-bold">250 ₽</span>
-                            <span class="text-gray-500 dark:text-gray-400">/ месяц</span>
+                            <span class="liquid-price font-bold">250 ₽</span>
+                            <span class="liquid-muted">/ месяц</span>
                         </div>
 
                         <ul class="space-y-4 mb-10 flex-1">
@@ -291,12 +295,12 @@
                             </li>
                         </ul>
                         
-                        <a href="https://pay.melodico.online/buy?type=mobile" class="w-full bg-dark-900 text-white dark:bg-brand dark:hover:bg-brand-dark dark:text-black py-4 rounded-xl font-bold text-lg transition-all duration-200 shadow-lg shadow-black/5 dark:shadow-white/10 hover:shadow-black/10 dark:hover:shadow-white/20 transform hover:-translate-y-1 inline-flex items-center justify-center">
+                        <a href="https://pay.melodico.online/buy?type=mobile" class="glass-button glass-button-primary w-full py-4 font-bold text-lg inline-flex items-center justify-center">
                             Купить подписку
                         </a>
                         
-                        <p class="text-center text-xs text-gray-500 mt-4">Гарантия возврата средств 7 дней</p>
-                    </div>
+                        <p class="text-center text-xs liquid-muted mt-4">Гарантия возврата средств 7 дней</p>
+                </div>
                 </div>
             </div>
             </div>
@@ -304,47 +308,47 @@
     </section>
 
     <!-- FAQ Section -->
-    <section id="faq" class="py-24 bg-gray-50 dark:bg-dark-800/30">
+    <section id="faq" class="liquid-section py-24">
         <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="text-3xl font-bold mb-12 text-center">Частые вопросы</h2>
             
             <div class="space-y-4">
-                <details class="faq-item group bg-white dark:bg-dark-800 rounded-xl border border-gray-200 dark:border-dark-700 overflow-hidden transition-all">
+                <details class="faq-item group liquid-card liquid-card-subtle overflow-hidden transition-all">
                     <summary class="flex justify-between items-center p-6 cursor-pointer list-none">
                         <span class="font-medium text-lg">Как настроить после покупки?</span>
                         <span class="transition group-open:rotate-180">
                             <i class="fa-solid fa-chevron-down text-gray-500 dark:text-gray-400"></i>
                         </span>
                     </summary>
-                    <div class="faq-content text-gray-500 dark:text-gray-400">
+                    <div class="faq-content liquid-muted">
                         <div class="faq-content-inner px-6 pb-6">
                             После оплаты вы получите ключ доступа и подробную инструкцию для вашего устройства (iOS, Android, PC). Настройка занимает не более 2 минут.
                         </div>
                     </div>
                 </details>
 
-                <details class="faq-item group bg-white dark:bg-dark-800 rounded-xl border border-gray-200 dark:border-dark-700 overflow-hidden transition-all">
+                <details class="faq-item group liquid-card liquid-card-subtle overflow-hidden transition-all">
                     <summary class="flex justify-between items-center p-6 cursor-pointer list-none">
                         <span class="font-medium text-lg">Работает ли Telegram и YouTube?</span>
                         <span class="transition group-open:rotate-180">
                             <i class="fa-solid fa-chevron-down text-gray-500 dark:text-gray-400"></i>
                         </span>
                     </summary>
-                    <div class="faq-content text-gray-500 dark:text-gray-400">
+                    <div class="faq-content liquid-muted">
                         <div class="faq-content-inner px-6 pb-6">
                             Да, наш сервис специально разработан для доступа к заблокированным ресурсам, включая социальные сети и стриминговые платформы, в высоком качестве.
                         </div>
                     </div>
                 </details>
 
-                <details class="faq-item group bg-white dark:bg-dark-800 rounded-xl border border-gray-200 dark:border-dark-700 overflow-hidden transition-all">
+                <details class="faq-item group liquid-card liquid-card-subtle overflow-hidden transition-all">
                     <summary class="flex justify-between items-center p-6 cursor-pointer list-none">
                         <span class="font-medium text-lg">Можно ли вернуть деньги?</span>
                         <span class="transition group-open:rotate-180">
                             <i class="fa-solid fa-chevron-down text-gray-500 dark:text-gray-400"></i>
                         </span>
                     </summary>
-                    <div class="faq-content text-gray-500 dark:text-gray-400">
+                    <div class="faq-content liquid-muted">
                         <div class="faq-content-inner px-6 pb-6">
                             Если сервис вам не подойдет по техническим причинам, мы вернем полную стоимость подписки в течение 7 дней после покупки.
                         </div>
@@ -355,22 +359,22 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-50 dark:bg-dark-900 border-t border-gray-200 dark:border-dark-800 pt-16 pb-8">
+    <footer class="liquid-section pt-16 pb-8">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+            <div class="glass-panel grid grid-cols-1 md:grid-cols-4 gap-12 mb-12 p-8 md:p-10">
                 <div class="col-span-1 md:col-span-2">
                     <div class="flex items-center gap-3 mb-6">
-                        <i class="fa-solid fa-cloud text-black dark:text-white text-xl"></i>
+                        <span class="w-10 h-10 rounded-full glass-chip inline-flex items-center justify-center"><i class="fa-solid fa-cloud text-black dark:text-white text-lg"></i></span>
                         <span class="font-bold text-xl">melodico</span>
                     </div>
-                    <p class="text-gray-500 dark:text-gray-400 max-w-sm">
+                    <p class="liquid-muted max-w-sm">
                         Современный сервис для свободы в интернете. Безопасность, анонимность и высокая скорость без компромиссов.
                     </p>
                 </div>
                 
                 <div>
                     <h4 class="font-bold mb-6 text-black dark:text-white">Сервис</h4>
-                    <ul class="space-y-4 text-gray-500 dark:text-gray-400">
+                    <ul class="space-y-4 liquid-muted">
                         <li><a href="#pricing" class="hover:text-black dark:hover:text-brand transition-colors">Тарифы</a></li>
                         <li><a href="placeholder.html" class="hover:text-black dark:hover:text-brand transition-colors">Статус серверов</a></li>
                     </ul>
@@ -378,7 +382,7 @@
 
                 <div>
                     <h4 class="font-bold mb-6 text-black dark:text-white">Поддержка</h4>
-                    <ul class="space-y-4 text-gray-500 dark:text-gray-400">
+                    <ul class="space-y-4 liquid-muted">
                         <li><a href="placeholder.html" class="hover:text-black dark:hover:text-brand transition-colors">База знаний</a></li>
                         <li><a href="https://t.me/melodiceo" class="hover:text-black dark:hover:text-brand transition-colors">Telegram</a></li>
                         
@@ -386,8 +390,8 @@
                 </div>
             </div>
             
-            <div class="border-t border-gray-200 dark:border-dark-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-                <p class="text-gray-500 text-sm">© 2026 melodico. Все права защищены.</p>
+            <div class="pt-2 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="liquid-muted text-sm">© 2026 melodico. Все права защищены.</p>
             </div>
         </div>
     </footer>
@@ -395,6 +399,8 @@
     <script>
         // Theme switcher logic
         const themeToggleBtn = document.getElementById('theme-toggle');
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
 
         function applyTheme(theme) {
             if (theme === 'dark') {
@@ -414,6 +420,24 @@
             localStorage.setItem('color-theme', newTheme);
             applyTheme(newTheme);
         });
+
+        if (mobileMenuToggle && mobileMenu) {
+            mobileMenuToggle.addEventListener('click', () => {
+                const isOpen = mobileMenu.classList.toggle('is-open');
+                mobileMenuToggle.setAttribute('aria-expanded', String(isOpen));
+                mobileMenuToggle.innerHTML = isOpen
+                    ? '<i class="fa-solid fa-xmark text-base"></i>'
+                    : '<i class="fa-solid fa-bars text-base"></i>';
+            });
+
+            mobileMenu.querySelectorAll('a').forEach((link) => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.remove('is-open');
+                    mobileMenuToggle.setAttribute('aria-expanded', 'false');
+                    mobileMenuToggle.innerHTML = '<i class="fa-solid fa-bars text-base"></i>';
+                });
+            });
+        }
 
         // 3D hover tilt for new region banner
         const initNewRegionTilt = () => {

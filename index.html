@@ -55,7 +55,8 @@
 
     <!-- Navigation -->
     <nav class="fixed top-5 left-0 right-0 z-50 px-4 sm:px-6 lg:px-8">
-        <div class="glass-nav max-w-6xl mx-auto px-3 sm:px-5 py-3">
+        <div class="relative max-w-6xl mx-auto">
+        <div id="site-header-shell" class="glass-nav px-3 sm:px-5 py-3">
             <div class="flex items-center justify-between gap-3">
                 <a href="#top" class="inline-flex items-center gap-3 px-4 sm:px-5 py-3 rounded-full glass-chip">
                     <span class="w-9 h-9 rounded-full glass-surface inline-flex items-center justify-center">
@@ -78,7 +79,8 @@
                     </button>
                 </div>
             </div>
-            <div id="mobile-menu" class="mobile-drawer glass-surface md:hidden">
+        </div>
+            <div id="mobile-menu" class="mobile-drawer glass-surface md:hidden absolute">
                 <div class="flex flex-col gap-2 p-1">
                     <a href="#features" class="mobile-drawer-link liquid-nav-link text-sm font-medium">Преимущества</a>
                     <a href="#pricing" class="mobile-drawer-link liquid-nav-link text-sm font-medium">Тарифы</a>
@@ -422,19 +424,48 @@
         });
 
         if (mobileMenuToggle && mobileMenu) {
-            mobileMenuToggle.addEventListener('click', () => {
-                const isOpen = mobileMenu.classList.toggle('is-open');
-                mobileMenuToggle.setAttribute('aria-expanded', String(isOpen));
+            let isAnimatingMenu = false;
+
+            const setMenuIcon = (isOpen) => {
                 mobileMenuToggle.innerHTML = isOpen
                     ? '<i class="fa-solid fa-xmark text-base"></i>'
                     : '<i class="fa-solid fa-bars text-base"></i>';
+                mobileMenuToggle.setAttribute('aria-expanded', String(isOpen));
+            };
+
+            const openMobileMenu = () => {
+                if (isAnimatingMenu || mobileMenu.classList.contains('is-open')) return;
+                isAnimatingMenu = true;
+                requestAnimationFrame(() => {
+                    mobileMenu.classList.add('is-open');
+                    setMenuIcon(true);
+                    window.setTimeout(() => {
+                        isAnimatingMenu = false;
+                    }, 240);
+                });
+            };
+
+            const closeMobileMenu = () => {
+                if (isAnimatingMenu || !mobileMenu.classList.contains('is-open')) return;
+                isAnimatingMenu = true;
+                mobileMenu.classList.remove('is-open');
+                setMenuIcon(false);
+                window.setTimeout(() => {
+                    isAnimatingMenu = false;
+                }, 240);
+            };
+
+            mobileMenuToggle.addEventListener('click', () => {
+                if (mobileMenu.classList.contains('is-open')) {
+                    closeMobileMenu();
+                } else {
+                    openMobileMenu();
+                }
             });
 
             mobileMenu.querySelectorAll('a').forEach((link) => {
                 link.addEventListener('click', () => {
-                    mobileMenu.classList.remove('is-open');
-                    mobileMenuToggle.setAttribute('aria-expanded', 'false');
-                    mobileMenuToggle.innerHTML = '<i class="fa-solid fa-bars text-base"></i>';
+                    closeMobileMenu();
                 });
             });
         }

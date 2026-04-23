@@ -111,6 +111,7 @@ body {
     border-radius: 999px;
     background: color-mix(in srgb, var(--glass-fill-strong) 84%, transparent);
     box-shadow: var(--glass-shadow-strong), var(--glass-highlight);
+    transition: border-radius 220ms ease, box-shadow 220ms ease;
 }
 
 .glass-panel {
@@ -159,17 +160,17 @@ body {
     max-height: 0;
     opacity: 0;
     overflow: hidden;
-    transition: max-height 220ms ease, opacity 180ms ease, margin-top 180ms ease;
-    margin-left: -0.75rem;
-    margin-right: -0.75rem;
-    margin-bottom: -0.75rem;
+    pointer-events: none;
+    transition: max-height 220ms ease, opacity 180ms ease, transform 220ms ease;
     border-radius: 2rem;
+    transform: translateY(10px);
 }
 
 .mobile-drawer.is-open {
     max-height: 18rem;
     opacity: 1;
-    margin-top: 0.85rem;
+    pointer-events: auto;
+    transform: translateY(0);
 }
 
 .mobile-drawer-link {
@@ -631,20 +632,84 @@ body {
     }
 }
 
-@media (max-width: 640px) {
-    .pricing-card-wrap {
-        --pricing-badge-height: 3rem;
+@media (max-width: 767px) {
+    .glass-nav {
+        --header-shell-pad: 0.65rem;
+        --header-control-size: 3.45rem;
+        padding-top: var(--header-shell-pad);
+        padding-bottom: var(--header-shell-pad);
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
     }
 
     .glass-nav {
-        border-radius: 1.5rem;
+        border-radius: 999px;
+    }
+
+    .glass-nav > .flex {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        min-height: var(--header-control-size);
+        align-items: center;
+        gap: 0.75rem;
+    }
+
+    .glass-nav > .flex > a.glass-chip {
+        height: var(--header-control-size);
+        min-height: var(--header-control-size);
+        padding-top: 0.4rem;
+        padding-bottom: 0.4rem;
+        padding-left: 0.8rem;
+        padding-right: 0.95rem;
+        gap: 0.75rem;
+        justify-self: start;
+        align-self: center;
+    }
+
+    .glass-nav > .flex > a.glass-chip .glass-surface {
+        width: 2.65rem;
+        height: 2.65rem;
+        flex: 0 0 2.65rem;
+    }
+
+    .glass-nav > .flex > a.glass-chip .glass-surface i {
+        font-size: 0.8rem;
+    }
+
+    .glass-nav > .flex > a.glass-chip span:last-child {
+        font-size: 1rem;
+        line-height: 1;
+    }
+
+    .glass-nav > .flex > div {
+        display: flex;
+        gap: 0.5rem;
+        justify-self: end;
+        align-self: center;
+    }
+
+    .glass-nav > .flex > div > button {
+        width: var(--header-control-size);
+        height: var(--header-control-size);
+        flex: 0 0 var(--header-control-size);
+    }
+
+    .glass-nav > .flex > div > button i {
+        font-size: 1.05rem;
+        line-height: 1;
     }
 
     .mobile-drawer {
-        margin-left: -0.5rem;
-        margin-right: -0.5rem;
-        margin-bottom: -0.5rem;
-        border-radius: 1.5rem;
+        top: calc(100% + 1.25rem);
+        left: 0.4rem;
+        right: 0.4rem;
+        border-radius: 2rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .pricing-card-wrap {
+        --pricing-badge-height: 3rem;
     }
 
     .new-region-card {

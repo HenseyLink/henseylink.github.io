@@ -6,6 +6,7 @@
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://yookassa.ru https://yoomoney.ru https://yastatic.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com data:; img-src 'self' data: https://yastatic.net; connect-src 'self' https://pay.melodico.online https://yookassa.ru https://yoomoney.ru https://yastatic.net; form-action https:; frame-src https://yookassa.ru https://yoomoney.ru; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests">
     <title>Проверка оплаты - melodico</title>
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 512'%3E%3Cpath d='M0 336c0 79.5 64.5 144 144 144H512c70.7 0 128-57.3 128-128c0-61.9-44-113.6-102.4-125.4c4.1-10.7 6.4-22.4 6.4-34.6c0-53-43-96-96-96c-19.7 0-38.1 6-53.3 16.2C363.2 41.9 311.4 0 256 0C167.6 0 96 71.6 96 160c0 2.7 .1 5.4 .2 8.1C40.2 196.5 0 264 0 336z' fill='white'/%3E%3C/svg%3E" type="image/svg+xml">
+    <link rel="stylesheet" href="custom.css">
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -47,31 +48,22 @@
             document.documentElement.classList.remove('dark');
         }
     </script>
-    <style>
-        .spin-slow {
-            animation: spin 1.6s linear infinite;
-        }
-    </style>
 </head>
-<body class="antialiased min-h-screen flex items-center justify-center p-4 bg-gray-50 dark:bg-dark-900 transition-colors duration-300">
+<body class="site-shell antialiased min-h-screen flex items-center justify-center p-4 bg-gray-50 dark:bg-dark-900 transition-colors duration-300">
 
-    <div class="max-w-md w-full bg-white dark:bg-dark-800 border border-gray-200 dark:border-dark-700 rounded-3xl p-8 text-center shadow-2xl relative overflow-hidden">
-        <!-- Background Glow -->
-        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full z-0 pointer-events-none opacity-20">
-            <div class="absolute top-10 left-10 w-32 h-32 bg-green-500 rounded-full blur-3xl"></div>
-        </div>
-
-        <div id="status-container" class="relative z-10">
-            <div class="w-20 h-20 bg-black/5 dark:bg-white/5 rounded-full flex items-center justify-center mx-auto mb-6 border border-black/10 dark:border-white/10">
+    <div class="liquid-page w-full flex items-center justify-center">
+        <div class="liquid-card liquid-center-card text-center">
+        <div id="status-container" class="relative z-10 liquid-status-loading">
+            <div class="liquid-icon-badge glass-chip mx-auto mb-6">
                 <i class="fa-solid fa-rotate text-3xl text-black/60 dark:text-white/60 spin-slow"></i>
             </div>
 
             <h1 id="status-title" class="text-2xl font-bold text-black dark:text-white mb-4">Проверяем оплату...</h1>
 
             <div id="success-content" class="hidden">
-                <p class="text-gray-500 dark:text-gray-400 mb-4 leading-relaxed">Оплата подтверждена! Ваш код:</p>
+                <p class="liquid-muted mb-4 leading-relaxed">Оплата подтверждена! Ваш код:</p>
                 <h2 id="token-display" class="text-3xl font-bold text-green-500 mb-6"></h2>
-                <a id="bot-link" href="#" class="block w-full bg-[#229ED9] hover:bg-[#1e8dbf] text-white py-4 rounded-xl font-bold text-lg transition-all duration-200 shadow-lg shadow-[#229ED9]/20 transform hover:-translate-y-1 mb-4">
+                <a id="bot-link" href="#" class="glass-button w-full py-4 rounded-full font-bold text-lg inline-flex items-center justify-center mb-4 bg-[#229ED9]/90 border border-white/30 text-white">
                     <i class="fa-brands fa-telegram mr-2"></i>
                     Активировать в Telegram
                 </a>
@@ -79,13 +71,14 @@
 
             <div id="error-content" class="hidden">
                 <p class="text-red-500 mb-6 leading-relaxed">Оплата еще не подтверждена или была отменена.</p>
-                <button type="button" id="retry-payment" class="block w-full bg-dark-900 text-white dark:bg-brand dark:hover:bg-brand-dark dark:text-black py-4 rounded-xl font-bold text-lg transition-all duration-200 shadow-lg shadow-black/5 dark:shadow-white/10 hover:shadow-black/10 dark:hover:shadow-white/20 transform hover:-translate-y-1 mb-4">
+                <button type="button" id="retry-payment" class="glass-button glass-button-primary w-full py-4 font-bold text-lg inline-flex items-center justify-center mb-4">
                     Проверить еще раз
                 </button>
-                <a href="index.html" class="block w-full bg-gray-100 hover:bg-gray-200 dark:bg-dark-700 dark:hover:bg-dark-600 text-black dark:text-white py-4 rounded-xl font-medium transition-all duration-200">
+                <a href="index.html" class="glass-button glass-button-secondary w-full py-4 font-medium inline-flex items-center justify-center">
                     Вернуться на главную
                 </a>
             </div>
+        </div>
         </div>
     </div>
 
@@ -120,14 +113,22 @@
 
         function showSuccess(token) {
             const botUsername = 'melodicowbot';
+            const container = document.getElementById('status-container');
+            container.classList.remove('liquid-status-loading', 'liquid-status-error');
+            container.classList.add('liquid-status-success');
             document.getElementById('status-title').innerText = 'Оплата прошла успешно!';
+            document.getElementById('error-content').classList.add('hidden');
             document.getElementById('success-content').classList.remove('hidden');
             document.getElementById('token-display').innerText = token;
             document.getElementById('bot-link').href = `https://t.me/${botUsername}?start=${encodeURIComponent(token)}`;
         }
 
         function showError() {
+            const container = document.getElementById('status-container');
+            container.classList.remove('liquid-status-loading', 'liquid-status-success');
+            container.classList.add('liquid-status-error');
             document.getElementById('status-title').innerText = 'Упс! Что-то пошло не так';
+            document.getElementById('success-content').classList.add('hidden');
             document.getElementById('error-content').classList.remove('hidden');
         }
 

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Технические работы — melodico</title>
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 512'%3E%3Cpath d='M0 336c0 79.5 64.5 144 144 144H512c70.7 0 128-57.3 128-128c0-61.9-44-113.6-102.4-125.4c4.1-10.7 6.4-22.4 6.4-34.6c0-53-43-96-96-96c-19.7 0-38.1 6-53.3 16.2C363.2 41.9 311.4 0 256 0C167.6 0 96 71.6 96 160c0 2.7 .1 5.4 .2 8.1C40.2 196.5 0 264 0 336z' fill='white'/%3E%3C/svg%3E" type="image/svg+xml">
+    <link rel="stylesheet" href="custom.css">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -28,25 +29,8 @@
             }
         }
     </script>
-    <style>
-        .grid-noise {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.06) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 0, 0, 0.06) 1px, transparent 1px);
-            background-size: 22px 22px;
-            mask-image: radial-gradient(circle at center, rgba(0, 0, 0, 0.7), transparent 70%);
-        }
-
-        .orb {
-            animation: float 8s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-12px); }
-        }
-    </style>
 </head>
-<body class="antialiased min-h-screen bg-white text-black dark:bg-dark-900 dark:text-white transition-colors duration-300">
+<body class="site-shell antialiased min-h-screen bg-white text-black dark:bg-dark-900 dark:text-white transition-colors duration-300">
     <script>
         if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark');
@@ -55,33 +39,26 @@
         }
     </script>
 
-    <div class="relative min-h-screen flex items-center justify-center overflow-hidden px-6">
-        <div class="absolute inset-0">
-            <div class="absolute inset-0 bg-gradient-to-br from-gray-100 via-white to-gray-200 dark:from-black dark:via-dark-900 dark:to-dark-800"></div>
-            <div class="absolute inset-0 grid-noise opacity-60 dark:opacity-20"></div>
-            <div class="orb absolute -top-24 right-10 w-48 h-48 bg-gradient-to-br from-black/10 to-transparent dark:from-white/10 rounded-full blur-3xl"></div>
-            <div class="orb absolute -bottom-24 left-16 w-64 h-64 bg-gradient-to-br from-black/5 to-transparent dark:from-white/5 rounded-full blur-3xl"></div>
-        </div>
-
+    <div class="liquid-page relative min-h-screen flex items-center justify-center overflow-hidden px-6">
         <div class="relative max-w-2xl w-full text-center">
-            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-black/10 dark:border-white/10 bg-white/70 dark:bg-black/50 backdrop-blur">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-chip">
                 <span class="w-2 h-2 rounded-full bg-black dark:bg-white animate-pulse"></span>
                 <span class="text-xs uppercase tracking-[0.3em] text-black/70 dark:text-white/70">Технические работы</span>
             </div>
 
             <h1 class="mt-6 text-4xl md:text-6xl font-bold tracking-tight">Перестраиваем подписку</h1>
-            <p class="mt-4 text-lg text-black/60 dark:text-white/60">Мы проводим масштабную реструктуризацию инфраструктуры подписки. Покупка временно недоступна, но сервис вернется в ближайшее время.</p>
+            <p class="mt-4 text-lg liquid-muted">Мы проводим масштабную реструктуризацию инфраструктуры подписки. Покупка временно недоступна, но сервис вернется в ближайшее время.</p>
 
             <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="index.html" class="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-black text-white dark:bg-white dark:text-black font-semibold shadow-lg shadow-black/10 dark:shadow-white/10">
+                <a href="index.html" class="glass-button glass-button-primary inline-flex items-center justify-center px-6 py-3 font-semibold">
                     На главную
                 </a>
-                <a href="https://t.me/melodiceo" class="inline-flex items-center justify-center px-6 py-3 rounded-xl border border-black/10 dark:border-white/20 text-black dark:text-white font-semibold hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
+                <a href="https://t.me/melodiceo" class="glass-button glass-button-secondary inline-flex items-center justify-center px-6 py-3 font-semibold">
                     Написать в поддержку
                 </a>
             </div>
 
-            <div class="mt-10 text-xs uppercase tracking-[0.25em] text-black/40 dark:text-white/40">melodico</div>
+            <div class="mt-10 text-xs uppercase tracking-[0.25em] liquid-muted">melodico</div>
         </div>
     </div>
 </body>

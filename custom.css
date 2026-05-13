@@ -153,7 +153,17 @@ body {
 }
 
 .glass-button-secondary {
-    color: inherit;
+    color: rgba(15, 23, 42, 0.88);
+    background: color-mix(in srgb, var(--glass-fill-strong) 94%, transparent);
+    border-color: rgba(148, 163, 184, 0.22);
+    box-shadow: 0 18px 38px rgba(15, 23, 42, 0.1), var(--glass-highlight);
+}
+
+.dark .glass-button-secondary {
+    color: rgba(248, 250, 252, 0.92);
+    background: color-mix(in srgb, var(--glass-fill) 86%, transparent);
+    border-color: rgba(255, 255, 255, 0.14);
+    box-shadow: 0 22px 42px rgba(0, 0, 0, 0.28), var(--glass-highlight);
 }
 
 .mobile-drawer {

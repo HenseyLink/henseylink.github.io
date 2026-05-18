@@ -441,8 +441,9 @@ body {
     gap: 0.5rem;
     padding: 0.45rem 0.95rem;
     border-radius: 999px;
-    background: rgba(255, 255, 255, 0.26);
-    border: 1px solid rgba(255, 255, 255, 0.4);
+    background: rgba(148, 163, 184, 0.16);
+    border: 1px solid rgba(71, 85, 105, 0.18);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.42);
     font-size: 0.75rem;
     font-weight: 600;
     letter-spacing: 0.08em;
@@ -484,13 +485,6 @@ body {
     font-weight: 700;
     margin-top: 0.4rem;
     margin-bottom: 0.5rem;
-}
-
-.new-region-kicker {
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: var(--text-muted);
 }
 
 .new-region-text {

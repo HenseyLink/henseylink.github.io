@@ -32,8 +32,6 @@ const translations = {
         feature_privacy_desc: 'мы не ведем логи вашей активности. ваш трафик надежно зашифрован современными протоколами.',
         feature_blocks_title: 'обход блокировок',
         feature_blocks_desc: 'протокол VLESS маскирует трафик под обычный веб-серфинг, обходя любые ограничения.',
-        protocols_title: 'протоколы',
-        protocols_subtitle: 'поддержка всех современных решений',
         pricing_title: 'один тариф для всех задач',
         pricing_subtitle: 'доступ под домашний интернет и мобильные сети без ограничений',
         pricing_plan_name: 'мелодичный интернет',
@@ -42,7 +40,7 @@ const translations = {
         pricing_perk_1: 'безлимитный трафик',
         pricing_perk_2: 'до 5 устройств одновременно',
         pricing_perk_3: 'высокая скорость до 5 Гбит/с',
-        pricing_perk_4: 'поддержка всех протоколов',
+        pricing_perk_4: 'поддержка VLESS',
         pricing_cta: 'купить подписку',
         pricing_guarantee: 'гарантия возврата средств 7 дней',
         faq_title: 'частые вопросы',
@@ -106,8 +104,6 @@ const translations = {
         feature_privacy_desc: 'we keep no logs of your activity. your traffic is reliably encrypted with modern protocols.',
         feature_blocks_title: 'bypass blocks',
         feature_blocks_desc: 'the VLESS protocol masks traffic as regular web browsing, bypassing any restrictions.',
-        protocols_title: 'protocols',
-        protocols_subtitle: 'support for all modern solutions',
         pricing_title: 'one plan for every need',
         pricing_subtitle: 'access for home internet and mobile networks without limits',
         pricing_plan_name: 'melodic internet',
@@ -116,7 +112,7 @@ const translations = {
         pricing_perk_1: 'unlimited traffic',
         pricing_perk_2: 'up to 5 devices simultaneously',
         pricing_perk_3: 'high speed up to 5 Gbps',
-        pricing_perk_4: 'support for all protocols',
+        pricing_perk_4: 'VLESS support',
         pricing_cta: 'buy subscription',
         pricing_guarantee: '7-day money-back guarantee',
         faq_title: 'frequently asked questions',
@@ -499,16 +495,6 @@ const translations = {
         reveal('.feature-icon', { scale: 0.7 }, { duration: 0.5, stagger: 0.08, ease: 'back.out(1.4)' }, '.features-grid', 'top 78%');
     }
 
-    // Protocols
-    const protocolsPanel = document.querySelector('.panel--protocols');
-    const protocolTags = document.querySelectorAll('.protocol-tag');
-    if (protocolsPanel) {
-        reveal(protocolsPanel, {}, { duration: 0.8 }, protocolsPanel, 'top 80%');
-        if (protocolTags.length) {
-            reveal(protocolTags, { scale: 0.92 }, { duration: 0.5, stagger: 0.08 }, protocolsPanel, 'top 75%');
-        }
-    }
-
     // Pricing
     const pricingPanel = document.querySelector('.panel--pricing');
     if (pricingPanel) {
@@ -609,7 +595,7 @@ const translations = {
 (function initMagneticButtons() {
     if (window.matchMedia('(pointer: coarse)').matches) return;
 
-    const buttons = document.querySelectorAll('.btn, .nav-logo, .nav-link, .region-tag, .protocol-tag, .feature-icon');
+    const buttons = document.querySelectorAll('.btn, .nav-logo, .nav-link, .region-tag, .feature-icon, .lang-toggle, .theme-toggle, .platforms-list i');
 
     buttons.forEach(btn => {
         btn.addEventListener('mousemove', (e) => {

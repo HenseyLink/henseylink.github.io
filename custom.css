@@ -235,12 +235,15 @@ body {
     color: var(--text-2);
     font-size: 1rem;
     cursor: pointer;
-    transition: border-color var(--transition), color var(--transition);
+    transition: background-color var(--transition), color var(--transition), border-color var(--transition), transform var(--transition);
+    will-change: transform;
 }
 
 .theme-toggle:hover {
+    background: var(--hover);
     border-color: var(--border-hover);
     color: var(--text-0);
+    transform: translateY(-2px);
 }
 
 .lang-toggle {
@@ -258,12 +261,15 @@ body {
     letter-spacing: 0.05em;
     cursor: pointer;
     padding: 0 12px;
-    transition: border-color var(--transition), color var(--transition);
+    transition: background-color var(--transition), color var(--transition), border-color var(--transition), transform var(--transition);
+    will-change: transform;
 }
 
 .lang-toggle:hover {
+    background: var(--hover);
     border-color: var(--border-hover);
     color: var(--text-0);
+    transform: translateY(-2px);
 }
 
 .lang-current {
@@ -498,8 +504,9 @@ body {
 }
 
 .platforms-list i {
-    transition: color var(--transition);
+    transition: color var(--transition), transform var(--transition);
     cursor: default;
+    will-change: transform;
 }
 
 .platforms-list i:hover {
@@ -587,36 +594,6 @@ body {
     font-size: 0.9rem;
     color: var(--text-4);
     line-height: 1.7;
-}
-
-/* Protocols */
-.panel--protocols {
-    padding: 32px;
-}
-
-.protocols-grid {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
-.protocol-tag {
-    padding: 10px 18px;
-    background: var(--bg-2);
-    border: 1px solid var(--button-border);
-    color: var(--text-4);
-    font-size: 0.85rem;
-    text-transform: lowercase;
-    transition: background-color var(--transition), color var(--transition), border-color var(--transition);
-    will-change: transform, opacity;
-}
-
-.protocol-tag:hover {
-    background: var(--hover);
-    color: var(--text-1);
-    border-color: var(--border-hover);
-    transform: translateY(-2px);
 }
 
 /* Pricing */
@@ -987,29 +964,51 @@ body {
     gap: 10px;
 }
 
-.nav-links.is-open {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    top: 72px;
-    left: 24px;
-    right: 24px;
-    background: var(--bg-3);
-    border: var(--border-thickness) solid var(--border);
-    padding: 12px;
-    z-index: 99;
-}
-
-.nav-links.is-open .nav-link {
-    justify-content: center;
-    width: 100%;
-    padding: 14px 16px;
-}
-
 @media (max-width: 768px) {
     .nav-links {
-        display: none;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        position: absolute;
+        top: 80px;
+        left: 24px;
+        right: 24px;
+        background: var(--bg-3);
+        border: var(--border-thickness) solid var(--border);
+        padding: 12px;
+        z-index: 99;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-12px);
+        pointer-events: none;
+        transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
     }
+
+    .nav-links.is-open {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+        pointer-events: auto;
+    }
+
+    .nav-links .nav-link {
+        justify-content: center;
+        width: 100%;
+        padding: 14px 16px;
+        opacity: 0;
+        transform: translateY(-8px);
+        transition: opacity 0.25s ease, transform 0.25s ease, color var(--transition);
+    }
+
+    .nav-links.is-open .nav-link {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .nav-links.is-open .nav-link:nth-child(1) { transition-delay: 0.05s; }
+    .nav-links.is-open .nav-link:nth-child(2) { transition-delay: 0.1s; }
+    .nav-links.is-open .nav-link:nth-child(3) { transition-delay: 0.15s; }
+    .nav-links.is-open .nav-link:nth-child(4) { transition-delay: 0.2s; }
 
     .nav-toggle {
         display: inline-flex;

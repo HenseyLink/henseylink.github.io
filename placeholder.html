@@ -3,59 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Раздел в разработке — melodico</title>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com data:; img-src 'self' data:; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests">
+    <title data-i18n="placeholder_meta_title">раздел в разработке — melodico</title>
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 512'%3E%3Cpath d='M0 336c0 79.5 64.5 144 144 144H512c70.7 0 128-57.3 128-128c0-61.9-44-113.6-102.4-125.4c4.1-10.7 6.4-22.4 6.4-34.6c0-53-43-96-96-96c-19.7 0-38.1 6-53.3 16.2C363.2 41.9 311.4 0 256 0C167.6 0 96 71.6 96 160c0 2.7 .1 5.4 .2 8.1C40.2 196.5 0 264 0 336z' fill='white'/%3E%3C/svg%3E" type="image/svg+xml">
-    <link rel="stylesheet" href="custom.css?v=20260423-2215">
 
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Unbounded:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+    <link rel="stylesheet" href="custom.css?v=20260704-003">
     <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Unbounded', 'bold'],
-                    },
-                    colors: {
-                        brand: {
-                            DEFAULT: '#ffffff',
-                            dark: '#e5e5e5',
-                        },
-                        dark: {
-                            900: '#000000',
-                            800: '#121212',
-                            700: '#262626',
-                        }
-                    }
-                }
-            }
-        }
+        (function() {
+            const savedTheme = localStorage.getItem('theme');
+            const savedLang = localStorage.getItem('lang');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const theme = savedTheme || (prefersDark ? 'dark' : 'light');
+            const lang = savedLang || 'ru';
+            document.documentElement.setAttribute('data-theme', theme);
+            document.documentElement.setAttribute('data-lang', lang);
+        })();
     </script>
 </head>
-<body class="site-shell antialiased min-h-screen flex items-center justify-center p-6 bg-white text-black dark:bg-dark-900 dark:text-white transition-colors duration-300">
+<body>
+    <canvas id="bg-canvas"></canvas>
+
+    <nav class="site-nav" data-label="navigation" data-i18n-label="label_nav">
+        <div class="container nav-inner">
+            <a href="index.html" class="nav-logo">
+                <i class="fa-solid fa-cloud"></i>
+                <span>melodico</span>
+            </a>
+            <div class="nav-controls">
+                <button class="lang-toggle" aria-label="переключить язык">
+                    <span class="lang-current">RU</span>
+                </button>
+                <button class="theme-toggle" aria-label="переключить тему">
+                    <i class="fa-solid fa-moon theme-icon-dark"></i>
+                    <i class="fa-solid fa-sun theme-icon-light"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="terminal--center">
+        <section class="panel panel--status" data-label="в разработке" data-i18n-label="label_development">
+            <div class="status-icon">
+                <i class="fa-solid fa-screwdriver-wrench"></i>
+            </div>
+
+            <h1 class="status-page-title" data-i18n="placeholder_title">раздел в разработке</h1>
+            <p class="status-page-text" data-i18n="placeholder_text">
+                функционал сайта расширяется постепенно. в скором времени эти возможности будут доступны.
+            </p>
+
+            <a href="index.html" class="btn btn--primary" data-i18n="placeholder_home">вернуться на главную</a>
+        </section>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+    <script src="script.js?v=20260704-003"></script>
+
     <script>
-        // Помещено в body для предотвращения "мерцания" темы при загрузке
-        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark');
-        } else {
-            document.documentElement.classList.remove('dark');
+        Object.assign(translations.ru, {
+            placeholder_meta_title: 'раздел в разработке — melodico',
+            placeholder_title: 'раздел в разработке',
+            placeholder_text: 'функционал сайта расширяется постепенно. в скором времени эти возможности будут доступны.',
+            placeholder_home: 'вернуться на главную'
+        });
+
+        Object.assign(translations.en, {
+            placeholder_meta_title: 'section under development — melodico',
+            placeholder_title: 'section under development',
+            placeholder_text: 'site functionality is expanding gradually. these features will be available soon.',
+            placeholder_home: 'back to home'
+        });
+
+        const currentLang = document.documentElement.getAttribute('data-lang') || 'ru';
+        if (typeof window.applyLanguage === 'function') {
+            window.applyLanguage(currentLang);
         }
     </script>
-    <div class="liquid-page w-full flex items-center justify-center">
-        <div class="liquid-card liquid-center-card text-center">
-            <div class="liquid-icon-badge glass-chip mx-auto mb-6">
-                <i class="fa-solid fa-screwdriver-wrench text-2xl"></i>
-            </div>
-            <div class="text-4xl font-bold mb-4">Раздел в разработке</div>
-            <p class="liquid-muted text-lg mb-8">Функционал сайта расширяется постепенно. В скором времени эти возможности будут доступны.</p>
-            <a href="index.html" class="glass-button glass-button-primary inline-flex items-center justify-center px-6 py-3 font-semibold">Вернуться на главную</a>
-        </div>
-    </div>
 </body>
 </html>

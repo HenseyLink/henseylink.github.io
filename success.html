@@ -3,86 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://yookassa.ru https://yoomoney.ru https://yastatic.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com data:; img-src 'self' data: https://yastatic.net; connect-src 'self' https://pay.melodico.online https://yookassa.ru https://yoomoney.ru https://yastatic.net; form-action https:; frame-src https://yookassa.ru https://yoomoney.ru; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests">
-    <title>Проверка оплаты - melodico</title>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://yookassa.ru https://yoomoney.ru https://yastatic.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com data:; img-src 'self' data: https://yastatic.net; connect-src 'self' https://pay.melodico.online https://yookassa.ru https://yoomoney.ru https://yastatic.net; form-action https:; frame-src https://yookassa.ru https://yoomoney.ru; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests">
+    <title data-i18n="success_meta_title">проверка оплаты — melodico</title>
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 512'%3E%3Cpath d='M0 336c0 79.5 64.5 144 144 144H512c70.7 0 128-57.3 128-128c0-61.9-44-113.6-102.4-125.4c4.1-10.7 6.4-22.4 6.4-34.6c0-53-43-96-96-96c-19.7 0-38.1 6-53.3 16.2C363.2 41.9 311.4 0 256 0C167.6 0 96 71.6 96 160c0 2.7 .1 5.4 .2 8.1C40.2 196.5 0 264 0 336z' fill='white'/%3E%3C/svg%3E" type="image/svg+xml">
-    <link rel="stylesheet" href="custom.css?v=20260423-2215">
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Unbounded:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- FontAwesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="custom.css?v=20260704-003">
     <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Unbounded', 'bold'],
-                    },
-                    colors: {
-                        brand: {
-                            DEFAULT: '#ffffff',
-                            dark: '#e5e5e5',
-                        },
-                        dark: {
-                            900: '#000000',
-                            800: '#121212',
-                            700: '#262626',
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-    <script>
-        // On page load or when changing themes, best to add inline in `head` to avoid FOUC
-        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark');
-        } else {
-            document.documentElement.classList.remove('dark');
-        }
+        (function() {
+            const savedTheme = localStorage.getItem('theme');
+            const savedLang = localStorage.getItem('lang');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const theme = savedTheme || (prefersDark ? 'dark' : 'light');
+            const lang = savedLang || 'ru';
+            document.documentElement.setAttribute('data-theme', theme);
+            document.documentElement.setAttribute('data-lang', lang);
+        })();
     </script>
 </head>
-<body class="site-shell antialiased min-h-screen flex items-center justify-center p-4 bg-gray-50 dark:bg-dark-900 transition-colors duration-300">
+<body>
+    <canvas id="bg-canvas"></canvas>
 
-    <div class="liquid-page w-full flex items-center justify-center">
-        <div class="liquid-card liquid-center-card text-center">
-        <div id="status-container" class="relative z-10 liquid-status-loading">
-            <div class="liquid-icon-badge glass-chip mx-auto mb-6">
-                <i class="fa-solid fa-rotate text-3xl text-black/60 dark:text-white/60 spin-slow"></i>
-            </div>
-
-            <h1 id="status-title" class="text-2xl font-bold text-black dark:text-white mb-4">Проверяем оплату...</h1>
-
-            <div id="success-content" class="hidden">
-                <p class="liquid-muted mb-4 leading-relaxed">Оплата подтверждена! Ваш код:</p>
-                <h2 id="token-display" class="text-3xl font-bold text-green-500 mb-6"></h2>
-                <a id="bot-link" href="#" class="glass-button w-full py-4 rounded-full font-bold text-lg inline-flex items-center justify-center mb-4 bg-[#229ED9]/90 border border-white/30 text-white">
-                    <i class="fa-brands fa-telegram mr-2"></i>
-                    Активировать в Telegram
-                </a>
-            </div>
-
-            <div id="error-content" class="hidden">
-                <p class="text-red-500 mb-6 leading-relaxed">Оплата еще не подтверждена или была отменена.</p>
-                <button type="button" id="retry-payment" class="glass-button glass-button-primary w-full py-4 font-bold text-lg inline-flex items-center justify-center mb-4">
-                    Проверить еще раз
+    <nav class="site-nav" data-label="navigation" data-i18n-label="label_nav">
+        <div class="container nav-inner">
+            <a href="index.html" class="nav-logo">
+                <i class="fa-solid fa-cloud"></i>
+                <span>melodico</span>
+            </a>
+            <div class="nav-controls">
+                <button class="lang-toggle" aria-label="переключить язык">
+                    <span class="lang-current">RU</span>
                 </button>
-                <a href="index.html" class="glass-button glass-button-secondary w-full py-4 font-medium inline-flex items-center justify-center">
-                    Вернуться на главную
-                </a>
+                <button class="theme-toggle" aria-label="переключить тему">
+                    <i class="fa-solid fa-moon theme-icon-dark"></i>
+                    <i class="fa-solid fa-sun theme-icon-light"></i>
+                </button>
             </div>
         </div>
-        </div>
-    </div>
+    </nav>
+
+    <main class="terminal--center">
+                <section class="panel panel--status" data-label="проверка оплаты" data-i18n-label="label_payment_check">
+            <div id="status-container" class="status-inner status-loading">
+                <div class="status-icon">
+                    <i class="fa-solid fa-rotate"></i>
+                </div>
+
+                <h1 id="status-title" class="status-title" data-i18n="success_checking">проверяем оплату...</h1>
+
+                <div id="success-content" class="status-content hidden">
+                    <p class="status-text" data-i18n="success_confirmed">оплата подтверждена! ваш код:</p>
+                    <h2 id="token-display" class="status-token"></h2>
+                    <a id="bot-link" href="#" class="btn btn--primary btn--block">
+                        <i class="fa-brands fa-telegram"></i>
+                        <span data-i18n="success_activate">активировать в telegram</span>
+                    </a>
+                </div>
+
+                <div id="error-content" class="status-content hidden">
+                    <p class="status-text status-text--error" data-i18n="success_error">оплата еще не подтверждена или была отменена.</p>
+                    <button type="button" id="retry-payment" class="btn btn--primary btn--block" data-i18n="success_retry">проверить еще раз</button>
+                    <a href="index.html" class="btn btn--secondary btn--block" data-i18n="success_home">вернуться на главную</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+    <script src="script.js?v=20260704-003"></script>
 
     <script>
+        const pageTranslations = {
+            ru: {
+                success_meta_title: 'проверка оплаты — melodico',
+                success_checking: 'проверяем оплату...',
+                success_confirmed: 'оплата подтверждена! ваш код:',
+                success_activate: 'активировать в telegram',
+                success_success: 'оплата прошла успешно',
+                success_error: 'оплата еще не подтверждена или была отменена.',
+                success_retry: 'проверить еще раз',
+                success_home: 'вернуться на главную',
+                success_oops: 'упс! что-то пошло не так'
+            },
+            en: {
+                success_meta_title: 'payment verification — melodico',
+                success_checking: 'verifying payment...',
+                success_confirmed: 'payment confirmed! your code:',
+                success_activate: 'activate in telegram',
+                success_success: 'payment successful',
+                success_error: 'payment has not been confirmed or was cancelled.',
+                success_retry: 'check again',
+                success_home: 'back to home',
+                success_oops: 'oops! something went wrong'
+            }
+        };
+
+        Object.assign(translations.ru, pageTranslations.ru);
+        Object.assign(translations.en, pageTranslations.en);
+
+        const currentLang = document.documentElement.getAttribute('data-lang') || 'ru';
+        if (typeof window.applyLanguage === 'function') {
+            window.applyLanguage(currentLang);
+        }
+
         async function verifyPayment() {
             const params = new URLSearchParams(window.location.search);
             const token = params.get('token');
@@ -106,17 +135,30 @@
                     showError();
                 }
             } catch (e) {
-                console.error('Ошибка проверки:', e);
+                console.error('ошибка проверки:', e);
                 showError();
+            }
+        }
+
+        function getText(key) {
+            const lang = document.documentElement.getAttribute('data-lang') || 'ru';
+            return translations[lang][key] || translations.ru[key];
+        }
+
+        function setStatusIcon(iconClass) {
+            const icon = document.querySelector('.status-icon i');
+            if (icon) {
+                icon.className = iconClass;
             }
         }
 
         function showSuccess(token) {
             const botUsername = 'melodicowbot';
             const container = document.getElementById('status-container');
-            container.classList.remove('liquid-status-loading', 'liquid-status-error');
-            container.classList.add('liquid-status-success');
-            document.getElementById('status-title').innerText = 'Оплата прошла успешно!';
+            container.classList.remove('status-loading', 'status-error');
+            container.classList.add('status-success');
+            setStatusIcon('fa-solid fa-check');
+            document.getElementById('status-title').innerText = getText('success_success');
             document.getElementById('error-content').classList.add('hidden');
             document.getElementById('success-content').classList.remove('hidden');
             document.getElementById('token-display').innerText = token;
@@ -125,9 +167,10 @@
 
         function showError() {
             const container = document.getElementById('status-container');
-            container.classList.remove('liquid-status-loading', 'liquid-status-success');
-            container.classList.add('liquid-status-error');
-            document.getElementById('status-title').innerText = 'Упс! Что-то пошло не так';
+            container.classList.remove('status-loading', 'status-success');
+            container.classList.add('status-error');
+            setStatusIcon('fa-solid fa-xmark');
+            document.getElementById('status-title').innerText = getText('success_oops');
             document.getElementById('success-content').classList.add('hidden');
             document.getElementById('error-content').classList.remove('hidden');
         }
@@ -139,6 +182,5 @@
             retryButton.addEventListener('click', verifyPayment);
         }
     </script>
-
 </body>
 </html>

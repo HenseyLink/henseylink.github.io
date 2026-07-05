@@ -113,7 +113,8 @@ body {
 .js .pricing-perks li,
 .js .faq-item,
 .js .panel--links,
-.js .site-footer {
+.js .site-footer,
+.js .payment-methods {
     opacity: 0;
 }
 

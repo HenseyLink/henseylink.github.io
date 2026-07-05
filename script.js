@@ -504,6 +504,12 @@ const translations = {
         reveal('.pricing-perks li', { x: -15 }, { duration: 0.5, stagger: 0.1 }, pricingPanel, 'top 70%');
     }
 
+    // Payment methods
+    const paymentMethods = document.querySelector('.payment-methods');
+    if (paymentMethods) {
+        reveal(paymentMethods, { y: 20 }, { duration: 0.7 }, paymentMethods, 'top 88%');
+    }
+
     // FAQ
     const faqItems = document.querySelectorAll('.faq-item');
     if (faqItems.length) {

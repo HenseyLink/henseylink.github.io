@@ -12,7 +12,7 @@ const translations = {
         hero_badge: 'работаем в России, Китае и Иране',
         hero_title_1: 'интернет, каким он',
         hero_title_2: 'должен быть',
-        hero_desc: 'VPN для защиты данных и анонимности в сети. поддержка VLESS обеспечивает максимальную скорость без ограничений.',
+        hero_desc: 'VPN для защиты данных и анонимности в сети. Поддержка VLESS обеспечивает максимальную скорость без ограничений.',
         hero_cta_primary: 'купить доступ',
         hero_cta_secondary: 'узнать больше',
         platforms_label: 'поддерживаемые платформы',
@@ -84,7 +84,7 @@ const translations = {
         hero_badge: 'works in Russia, China and Iran',
         hero_title_1: 'internet as it',
         hero_title_2: 'should be',
-        hero_desc: 'VPN with no logs and no limits. modern protocols, high speed and access to blocked resources from anywhere in the world.',
+        hero_desc: 'VPN with no logs and no limits. Modern protocols, high speed and access to blocked resources from anywhere in the world.',
         hero_cta_primary: 'get access',
         hero_cta_secondary: 'learn more',
         platforms_label: 'supported platforms',
@@ -161,8 +161,6 @@ const translations = {
         html.setAttribute('data-lang', lang);
         localStorage.setItem('lang', lang);
 
-        const translatable = document.querySelectorAll('[data-i18n], [data-i18n-label]');
-
         function updateText() {
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
@@ -198,21 +196,23 @@ const translations = {
                 }
             });
 
-            if (typeof ScrollTrigger !== 'undefined') {
-                ScrollTrigger.refresh();
-            }
+            window.setTimeout(() => {
+                if (typeof ScrollTrigger !== 'undefined') {
+                    ScrollTrigger.refresh();
+                }
+            }, 50);
         }
 
         if (animate && typeof gsap !== 'undefined') {
-            gsap.to(translatable, {
-                opacity: 0,
-                duration: 0.15,
+            gsap.to('.site-main', {
+                opacity: 0.6,
+                duration: 0.12,
                 ease: 'power2.in',
                 onComplete: () => {
                     updateText();
-                    gsap.to(translatable, {
+                    gsap.to('.site-main', {
                         opacity: 1,
-                        duration: 0.25,
+                        duration: 0.2,
                         ease: 'power2.out'
                     });
                 }

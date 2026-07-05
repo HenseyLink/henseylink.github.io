@@ -98,6 +98,25 @@ body {
     color: var(--text-0);
 }
 
+.js .panel--hero,
+.js .hero-badge,
+.js .hero-title,
+.js .hero-desc,
+.js .hero-actions .btn,
+.js .platforms,
+.js .section-header > *,
+.js .region-tag,
+.js .panel--regions,
+.js .panel--feature,
+.js .feature-icon,
+.js .panel--pricing,
+.js .pricing-perks li,
+.js .faq-item,
+.js .panel--links,
+.js .site-footer {
+    opacity: 0;
+}
+
 ::-webkit-scrollbar {
     width: 8px;
     height: 8px;

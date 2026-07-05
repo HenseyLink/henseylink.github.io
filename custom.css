@@ -704,6 +704,46 @@ body {
     text-align: center;
 }
 
+.payment-methods {
+    margin-top: 32px;
+    text-align: center;
+}
+
+.payment-methods-title {
+    font-size: 0.75rem;
+    color: var(--text-4);
+    margin-bottom: 12px;
+    letter-spacing: 0.04em;
+}
+
+.payment-methods-icons {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.payment-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.25s ease;
+    cursor: default;
+}
+
+.payment-icon:hover {
+    transform: translateY(-4px) scale(1.1);
+}
+
+.payment-icon img {
+    height: 24px;
+    width: auto;
+    max-width: 80px;
+    object-fit: contain;
+    display: block;
+}
+
 /* FAQ */
 .faq-list {
     display: flex;

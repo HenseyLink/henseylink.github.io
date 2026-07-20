@@ -821,6 +821,7 @@ body {
 }
 
 .payment-option {
+    position: relative;
     display: flex;
     flex-direction: column;
     gap: 4px;
@@ -841,6 +842,31 @@ body {
     opacity: 0.6;
     pointer-events: none;
     cursor: wait;
+}
+
+.payment-option--crypto {
+    background: var(--bg-3);
+    opacity: 0.45;
+    cursor: not-allowed;
+    border-color: var(--border);
+}
+
+.payment-option--crypto:hover {
+    transform: none;
+    border-color: var(--border);
+    background: var(--bg-3);
+}
+
+.payment-option-soon {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-4);
+    border: 1px solid var(--border);
+    padding: 2px 6px;
 }
 
 .payment-option-label {

@@ -745,6 +745,120 @@ body {
     display: block;
 }
 
+/* Payment modal */
+.payment-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+
+.payment-modal.is-open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.payment-modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(4px);
+}
+
+.payment-modal-panel {
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+    padding: 32px;
+    transform: translateY(20px) scale(0.98);
+    transition: transform 0.25s ease, background-color 0.5s ease, border-color 0.5s ease;
+}
+
+.payment-modal.is-open .payment-modal-panel {
+    transform: translateY(0) scale(1);
+}
+
+.payment-modal-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-3);
+    cursor: pointer;
+    transition: color var(--transition), border-color var(--transition), transform var(--transition);
+}
+
+.payment-modal-close:hover {
+    color: var(--text-0);
+    border-color: var(--border-hover);
+    transform: rotate(90deg);
+}
+
+.payment-modal-title {
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: var(--text-1);
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.payment-modal-options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.payment-option {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 20px;
+    border: 1px solid var(--border);
+    color: inherit;
+    text-decoration: none;
+    transition: border-color var(--transition), background-color var(--transition), transform var(--transition);
+}
+
+.payment-option:hover {
+    border-color: var(--border-hover);
+    background: var(--hover);
+    transform: translateY(-2px);
+}
+
+.payment-option.is-loading {
+    opacity: 0.6;
+    pointer-events: none;
+    cursor: wait;
+}
+
+.payment-option-label {
+    font-size: 1rem;
+    color: var(--text-0);
+}
+
+.payment-option-desc {
+    font-size: 0.8rem;
+    color: var(--text-4);
+}
+
+.payment-option-hint {
+    font-size: 0.75rem;
+    color: var(--text-5);
+    margin-top: 4px;
+}
+
 /* FAQ */
 .faq-list {
     display: flex;

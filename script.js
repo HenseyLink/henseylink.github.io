@@ -44,6 +44,14 @@ const translations = {
         pricing_cta: 'купить подписку',
         pricing_guarantee: 'гарантия возврата средств 7 дней',
         payment_methods_title: 'доступные способы оплаты:',
+        payment_modal_title: 'выберите способ оплаты',
+        payment_option_intl: 'международные карты',
+        payment_option_intl_desc: 'Visa, Mastercard, Apple Pay, Google Pay',
+        payment_option_intl_hint: 'для пользователей за пределами РФ',
+        payment_option_ru: 'карты РФ',
+        payment_option_ru_desc: 'СБП, SberPay, МИР',
+        payment_option_ru_hint: 'для пользователей в РФ',
+        stripe_session_error: 'Не удалось создать платежную сессию. Попробуйте еще раз.',
         faq_title: 'частые вопросы',
         faq_q1: 'как настроить после покупки?',
         faq_a1: 'после оплаты вы получите ключ доступа и подробную инструкцию для вашего устройства (iOS, Android, PC). настройка занимает не более 2 минут.',
@@ -117,6 +125,14 @@ const translations = {
         pricing_cta: 'buy subscription',
         pricing_guarantee: '7-day money-back guarantee',
         payment_methods_title: 'available payment methods:',
+        payment_modal_title: 'choose payment method',
+        payment_option_intl: 'international cards',
+        payment_option_intl_desc: 'Visa, Mastercard, Apple Pay, Google Pay',
+        payment_option_intl_hint: 'for users outside Russia',
+        payment_option_ru: 'Russian cards',
+        payment_option_ru_desc: 'СБП, SberPay, МИР',
+        payment_option_ru_hint: 'for users in Russia',
+        stripe_session_error: 'Failed to create payment session. Please try again.',
         faq_title: 'frequently asked questions',
         faq_q1: 'how to set up after purchase?',
         faq_a1: 'after payment you will receive an access key and detailed instructions for your device (iOS, Android, PC). setup takes no more than 2 minutes.',
@@ -654,4 +670,70 @@ const translations = {
             toggle.innerHTML = '<i class="fa-solid fa-bars"></i>';
         });
     });
+})();
+
+
+/***********************************
+ * Payment method modal
+ ***********************************/
+(function initPaymentModal() {
+    const cta = document.getElementById('paymentCta');
+    const modal = document.getElementById('paymentModal');
+    const stripeOption = document.getElementById('stripePaymentOption');
+    if (!cta || !modal) return;
+
+    const backdrop = modal.querySelector('.payment-modal-backdrop');
+    const closeTriggers = modal.querySelectorAll('[data-close-modal]');
+
+    function openModal(e) {
+        if (e) e.preventDefault();
+        modal.classList.add('is-open');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+        modal.classList.remove('is-open');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+    }
+
+    cta.addEventListener('click', openModal);
+
+    closeTriggers.forEach(trigger => {
+        trigger.addEventListener('click', closeModal);
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('is-open')) {
+            closeModal();
+        }
+    });
+
+    // Stripe Checkout Session creation
+    if (stripeOption) {
+        stripeOption.addEventListener('click', async (e) => {
+            e.preventDefault();
+            stripeOption.classList.add('is-loading');
+
+            try {
+                const response = await fetch('https://pay.melodico.online/create-stripe-session?type=standard');
+                if (!response.ok) {
+                    throw new Error('Failed to create Stripe session');
+                }
+                const data = await response.json();
+                if (data.url) {
+                    window.location.href = data.url;
+                } else {
+                    throw new Error('No checkout URL in response');
+                }
+            } catch (err) {
+                console.error('Stripe session error:', err);
+                stripeOption.classList.remove('is-loading');
+                const lang = document.documentElement.getAttribute('data-lang') || 'ru';
+                const msg = (translations[lang] && translations[lang].stripe_session_error) || translations.ru.stripe_session_error;
+                alert(msg);
+            }
+        });
+    }
 })();

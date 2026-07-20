@@ -13,7 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="custom.css?v=20260705-004">
+    <link rel="stylesheet" href="custom.css?v=20260705-007">
     <script>
         (function() {
             document.documentElement.classList.add('js');
@@ -191,7 +191,7 @@
                             <li><span class="perk-bullet">~</span><span data-i18n="pricing_perk_3">высокая скорость до 5 Гбит/с</span></li>
                             <li><span class="perk-bullet">~</span><span data-i18n="pricing_perk_4">поддержка VLESS</span></li>
                         </ul>
-                        <a href="https://pay.melodico.online/buy?type=standard" class="btn btn--primary btn--block" data-i18n="pricing_cta">купить подписку</a>
+                        <a href="https://pay.melodico.online/buy?type=standard" class="btn btn--primary btn--block" id="paymentCta" data-i18n="pricing_cta">купить подписку</a>
                         <p class="pricing-note-bottom" data-i18n="pricing_guarantee">гарантия возврата средств 7 дней</p>
                     </div>
                 </div>
@@ -295,10 +295,32 @@
         </div>
     </footer>
 
+    <div class="payment-modal" id="paymentModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="paymentModalTitle">
+        <div class="payment-modal-backdrop" data-close-modal></div>
+        <div class="payment-modal-panel panel">
+            <button class="payment-modal-close" data-close-modal aria-label="закрыть">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <h3 class="payment-modal-title" id="paymentModalTitle" data-i18n="payment_modal_title">выберите способ оплаты</h3>
+            <div class="payment-modal-options">
+                <a href="https://pay.melodico.online/create-stripe-session?type=standard" class="payment-option payment-option--intl" id="stripePaymentOption" rel="noopener" data-close-modal>
+                    <span class="payment-option-label" data-i18n="payment_option_intl">международные карты</span>
+                    <span class="payment-option-desc" data-i18n="payment_option_intl_desc">Visa, Mastercard, Apple Pay, Google Pay</span>
+                    <span class="payment-option-hint" data-i18n="payment_option_intl_hint">для пользователей за пределами РФ</span>
+                </a>
+                <a href="https://pay.melodico.online/buy?type=standard" class="payment-option payment-option--ru" target="_blank" rel="noopener" data-close-modal>
+                    <span class="payment-option-label" data-i18n="payment_option_ru">карты РФ</span>
+                    <span class="payment-option-desc" data-i18n="payment_option_ru_desc">СБП, SberPay, МИР</span>
+                    <span class="payment-option-hint" data-i18n="payment_option_ru_hint">для пользователей в РФ</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
-    <script src="script.js?v=20260705-004"></script>
+    <script src="script.js?v=20260705-007"></script>
 </body>
 </html>

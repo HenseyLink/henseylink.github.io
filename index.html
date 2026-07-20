@@ -13,7 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="custom.css?v=20260705-007">
+    <link rel="stylesheet" href="custom.css?v=20260705-008">
     <script>
         (function() {
             document.documentElement.classList.add('js');
@@ -303,11 +303,11 @@
             </button>
             <h3 class="payment-modal-title" id="paymentModalTitle" data-i18n="payment_modal_title">выберите способ оплаты</h3>
             <div class="payment-modal-options">
-                <a href="https://pay.melodico.online/create-stripe-session?type=standard" class="payment-option payment-option--intl" id="stripePaymentOption" rel="noopener" data-close-modal>
-                    <span class="payment-option-label" data-i18n="payment_option_intl">международные карты</span>
-                    <span class="payment-option-desc" data-i18n="payment_option_intl_desc">Visa, Mastercard, Apple Pay, Google Pay</span>
-                    <span class="payment-option-hint" data-i18n="payment_option_intl_hint">для пользователей за пределами РФ</span>
-                </a>
+                <div class="payment-option payment-option--crypto" aria-disabled="true">
+                    <span class="payment-option-soon" data-i18n="payment_option_crypto_soon">скоро</span>
+                    <span class="payment-option-label" data-i18n="payment_option_crypto">криптовалюта</span>
+                    <span class="payment-option-desc" data-i18n="payment_option_crypto_desc">BTC, USDT, ETH</span>
+                </div>
                 <a href="https://pay.melodico.online/buy?type=standard" class="payment-option payment-option--ru" target="_blank" rel="noopener" data-close-modal>
                     <span class="payment-option-label" data-i18n="payment_option_ru">карты РФ</span>
                     <span class="payment-option-desc" data-i18n="payment_option_ru_desc">СБП, SberPay, МИР</span>
@@ -321,6 +321,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
-    <script src="script.js?v=20260705-007"></script>
+    <script src="script.js?v=20260705-008"></script>
 </body>
 </html>

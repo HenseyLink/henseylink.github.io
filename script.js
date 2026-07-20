@@ -133,7 +133,7 @@ const translations = {
         payment_option_intl_desc: 'Visa, Mastercard, Apple Pay, Google Pay',
         payment_option_intl_hint: 'for users outside Russia',
         payment_option_ru: 'russian cards',
-        payment_option_ru_desc: 'СБП, SberPay, МИР',
+        payment_option_ru_desc: 'SBP, SberPay, MIR',
         payment_option_ru_hint: 'for users in Russia',
         payment_option_crypto: 'cryptocurrency',
         payment_option_crypto_desc: 'BTC, USDT, ETH',

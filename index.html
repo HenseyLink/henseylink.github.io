@@ -13,7 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="custom.css?v=20260705-008">
+    <link rel="stylesheet" href="custom.css?v=20260705-012">
     <script>
         (function() {
             document.documentElement.classList.add('js');
@@ -92,6 +92,19 @@
 
         <section id="regions" class="section">
             <div class="container">
+                <div class="region-banner" id="regionBanner" data-banner-id="czech-2026">
+                    <div class="region-banner-flag">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="16" viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="8" fill="#fff"/><rect y="8" width="24" height="8" fill="#D7141A"/><path d="M0 0 L12 8 L0 16 Z" fill="#11457E"/></svg>
+                    </div>
+                    <div class="region-banner-content">
+                        <span class="region-banner-badge" data-i18n="region_banner_badge">новое</span>
+                        <h3 class="region-banner-title" data-i18n="region_banner_title">Новый регион: Чехия</h3>
+                        <p class="region-banner-text" data-i18n="region_banner_text">Подключайтесь к серверам в Праге. Низкий пинг и стабильное соединение для Европы. Создано при поддержке Vodafone.</p>
+                    </div>
+                    <button class="region-banner-close" aria-label="закрыть">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
                 <div class="section-header">
                     <h2 class="section-title" data-i18n="regions_title">доступные регионы</h2>
                     <p class="section-subtitle" data-i18n="regions_subtitle">подключайтесь к серверам в ключевых странах</p>
@@ -115,6 +128,12 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="16" viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="5.33" fill="#ED2939"/><rect y="5.33" width="24" height="5.33" fill="#fff"/><rect y="10.67" width="24" height="5.33" fill="#ED2939"/></svg>
                             </span>
                             <span data-i18n="region_at">Австрия</span>
+                        </span>
+                        <span class="region-tag">
+                            <span class="region-flag">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="16" viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="8" fill="#fff"/><rect y="8" width="24" height="8" fill="#D7141A"/><path d="M0 0 L12 8 L0 16 Z" fill="#11457E"/></svg>
+                            </span>
+                            <span data-i18n="region_cz">Чехия</span>
                         </span>
                         <span class="region-tag">
                             <span class="region-flag">
@@ -321,6 +340,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
-    <script src="script.js?v=20260705-008"></script>
+    <script src="script.js?v=20260705-012"></script>
 </body>
 </html>

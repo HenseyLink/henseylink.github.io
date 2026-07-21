@@ -114,7 +114,8 @@ body {
 .js .faq-item,
 .js .panel--links,
 .js .site-footer,
-.js .payment-methods {
+.js .payment-methods,
+.js .region-banner {
     opacity: 0;
 }
 
@@ -532,6 +533,126 @@ body {
 .platforms-list i:hover {
     color: var(--text-0);
     transform: translateY(-3px);
+}
+
+/* Region banner */
+.region-banner {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 28px;
+    margin-bottom: 32px;
+    border: 1px solid var(--border);
+    background: linear-gradient(135deg, var(--bg-2) 0%, var(--bg-3) 100%);
+    position: relative;
+    overflow: hidden;
+    transition: opacity 0.3s ease, transform 0.3s ease, margin 0.3s ease;
+}
+
+.region-banner::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--text-0);
+}
+
+.region-banner.is-hiding {
+    opacity: 0;
+    transform: translateY(-12px);
+    margin-bottom: 0;
+}
+
+.region-banner-flag {
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+    width: 64px;
+    height: 44px;
+    border-radius: 2px;
+    overflow: hidden;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+.region-banner-flag svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.region-banner-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: relative;
+    z-index: 1;
+}
+
+.region-banner-badge {
+    align-self: flex-start;
+    font-size: 0.6rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 4px 10px;
+    background: var(--text-0);
+    color: var(--bg-4);
+}
+
+.region-banner-title {
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: var(--text-0);
+    line-height: 1.2;
+}
+
+.region-banner-text {
+    font-size: 0.9rem;
+    color: var(--text-3);
+    max-width: 520px;
+    line-height: 1.5;
+}
+
+.region-banner-close {
+    flex-shrink: 0;
+    align-self: flex-start;
+    position: relative;
+    z-index: 1;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-4);
+    cursor: pointer;
+    transition: color var(--transition), border-color var(--transition), transform var(--transition);
+}
+
+.region-banner-close:hover {
+    color: var(--text-0);
+    border-color: var(--border-hover);
+    transform: rotate(90deg);
+}
+
+@media (max-width: 640px) {
+    .region-banner {
+        padding: 20px;
+        gap: 16px;
+    }
+
+    .region-banner-flag {
+        width: 48px;
+        height: 34px;
+    }
+
+    .region-banner-title {
+        font-size: 1.1rem;
+    }
 }
 
 /* Regions */

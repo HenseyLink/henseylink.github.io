@@ -24,6 +24,10 @@ const translations = {
         region_es: 'Испания',
         region_ee: 'Эстония',
         region_us: 'США',
+        region_cz: 'Чехия',
+        region_banner_badge: 'новое',
+        region_banner_title: 'Новый регион: Чехия',
+        region_banner_text: 'Подключайтесь к серверам в Праге. Низкий пинг и стабильное соединение для Европы. Создано при поддержке Vodafone',
         features_title: 'разрабатываем лучший сервис',
         features_subtitle: 'почему пользователи выбирают именно melodico',
         feature_speed_title: 'высокая скорость',
@@ -108,6 +112,10 @@ const translations = {
         region_es: 'Spain',
         region_ee: 'Estonia',
         region_us: 'USA',
+        region_cz: 'Czech Republic',
+        region_banner_badge: 'new',
+        region_banner_title: 'New region: Czech Republic',
+        region_banner_text: 'Connect to servers in Prague. Low ping and stable connection for Europe. Powered by Vodafone',
         features_title: 'building the best service',
         features_subtitle: 'why users choose melodico',
         feature_speed_title: 'high speed',
@@ -505,6 +513,10 @@ const translations = {
     // Regions
     const regionsPanel = document.querySelector('.panel--regions');
     const regionTags = document.querySelectorAll('.region-tag');
+    const regionBanner = document.querySelector('.region-banner');
+    if (regionBanner) {
+        reveal(regionBanner, { y: 20 }, { duration: 0.7 }, regionBanner, 'top 88%');
+    }
     if (regionsPanel) {
         reveal(regionsPanel, {}, { duration: 0.8 }, regionsPanel, 'top 80%');
         if (regionTags.length) {
@@ -614,6 +626,22 @@ const translations = {
                 );
                 item.classList.add('is-open');
             }
+        });
+    });
+})();
+
+
+/***********************************
+ * Dismissible banners
+ ***********************************/
+(function initDismissibleBanners() {
+    document.querySelectorAll('[data-banner-id]').forEach(banner => {
+        const closeBtn = banner.querySelector('.region-banner-close');
+        if (!closeBtn) return;
+
+        closeBtn.addEventListener('click', () => {
+            banner.classList.add('is-hiding');
+            banner.addEventListener('transitionend', () => banner.remove(), { once: true });
         });
     });
 })();

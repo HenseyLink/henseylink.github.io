@@ -13,7 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="custom.css?v=20260705-012">
+    <link rel="stylesheet" href="custom.css?v=20260705-019">
     <script>
         (function() {
             document.documentElement.classList.add('js');
@@ -92,18 +92,15 @@
 
         <section id="regions" class="section">
             <div class="container">
-                <div class="region-banner" id="regionBanner" data-banner-id="czech-2026">
+                <div class="region-banner" id="regionBanner">
                     <div class="region-banner-flag">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="16" viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="8" fill="#fff"/><rect y="8" width="24" height="8" fill="#D7141A"/><path d="M0 0 L12 8 L0 16 Z" fill="#11457E"/></svg>
                     </div>
                     <div class="region-banner-content">
                         <span class="region-banner-badge" data-i18n="region_banner_badge">новое</span>
                         <h3 class="region-banner-title" data-i18n="region_banner_title">Новый регион: Чехия</h3>
-                        <p class="region-banner-text" data-i18n="region_banner_text">Подключайтесь к серверам в Праге. Низкий пинг и стабильное соединение для Европы. Создано при поддержке Vodafone.</p>
+                        <p class="region-banner-text" data-i18n="region_banner_text">Подключайтесь к серверам в Праге. Низкий пинг и стабильное соединение для Европы. Создано при поддержке Vodafone Czechia.</p>
                     </div>
-                    <button class="region-banner-close" aria-label="закрыть">
-                        <i class="fa-solid fa-xmark"></i>
-                    </button>
                 </div>
                 <div class="section-header">
                     <h2 class="section-title" data-i18n="regions_title">доступные регионы</h2>
@@ -111,12 +108,6 @@
                 </div>
                 <div class="panel panel--regions" data-label="серверы" data-i18n-label="label_servers">
                     <div class="regions-grid">
-                        <span class="region-tag">
-                            <span class="region-flag">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="16" viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="5.33" fill="#fff"/><rect y="5.33" width="24" height="5.33" fill="#0039A6"/><rect y="10.67" width="24" height="5.33" fill="#D52B1E"/></svg>
-                            </span>
-                            <span data-i18n="region_ru">Россия</span>
-                        </span>
                         <span class="region-tag">
                             <span class="region-flag">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="16" viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="5.33" fill="#000"/><rect y="5.33" width="24" height="5.33" fill="#DD0000"/><rect y="10.67" width="24" height="5.33" fill="#FFCE00"/></svg>
@@ -193,24 +184,93 @@
         <section id="pricing" class="section">
             <div class="container">
                 <div class="section-header">
-                    <h2 class="section-title" data-i18n="pricing_title">один тариф для всех задач</h2>
-                    <p class="section-subtitle" data-i18n="pricing_subtitle">доступ под домашний интернет и мобильные сети без ограничений</p>
+                    <h2 class="section-title" data-i18n="pricing_title">тарифы</h2>
+                    <p class="section-subtitle" data-i18n="pricing_subtitle">выберите подходящий вариант для ваших задач</p>
                 </div>
-                <div class="pricing-wrap">
-                    <div class="panel panel--pricing" data-label="подписка" data-i18n-label="label_subscription">
-                        <h3 class="pricing-name" data-i18n="pricing_plan_name">мелодичный интернет</h3>
-                        <p class="pricing-note-top" data-i18n="pricing_plan_desc">максимальные возможности без ограничений</p>
+                <div class="pricing-wrap pricing-wrap--two">
+                    <div class="panel panel--pricing" data-label="тариф" data-i18n-label="label_subscription">
+                        <h3 class="pricing-name" data-i18n="pricing_plan_lowkey_name">лайтовый интернет</h3>
+                        <p class="pricing-note-top" data-i18n="pricing_plan_lowkey_desc">для базовых задач и домашнего интернета</p>
                         <div class="pricing-price">
-                            <span class="price-value">3,49€</span>
+                            <span class="price-value" data-i18n="pricing_lowkey_price">2,99€</span>
                             <span class="price-period" data-i18n="pricing_period">/ месяц</span>
                         </div>
                         <ul class="pricing-perks">
-                            <li><span class="perk-bullet">~</span><span data-i18n="pricing_perk_1">безлимитный трафик</span></li>
-                            <li><span class="perk-bullet">~</span><span data-i18n="pricing_perk_2">до 5 устройств одновременно</span></li>
-                            <li><span class="perk-bullet">~</span><span data-i18n="pricing_perk_3">высокая скорость до 5 Гбит/с</span></li>
-                            <li><span class="perk-bullet">~</span><span data-i18n="pricing_perk_4">поддержка VLESS</span></li>
+                            <li><span class="perk-bullet">~</span><span data-i18n="pricing_lowkey_perk_1">безлимитный трафик</span></li>
+                            <li><span class="perk-bullet">~</span><span data-i18n="pricing_lowkey_perk_2">до 5 устройств одновременно</span></li>
+                            <li><span class="perk-bullet">~</span><span data-i18n="pricing_lowkey_perk_3">4 сервера в 3 гео</span></li>
+                            <li><span class="perk-bullet">~</span><span data-i18n="pricing_lowkey_perk_4">оптимизирован под домашний интернет</span></li>
                         </ul>
-                        <a href="https://pay.melodico.online/buy?type=standard" class="btn btn--primary btn--block" id="paymentCta" data-i18n="pricing_cta">купить подписку</a>
+                        <div class="pricing-servers">
+                            <button class="pricing-servers-toggle" aria-expanded="false">
+                                <span data-i18n="pricing_servers_toggle">доступные локации</span>
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </button>
+                            <div class="pricing-servers-list">
+                                <span class="server-tag">
+                                    <span class="server-tag-flag"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="16" viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="5.33" fill="#000"/><rect y="5.33" width="24" height="5.33" fill="#DD0000"/><rect y="10.67" width="24" height="5.33" fill="#FFCE00"/></svg></span>
+                                    <span data-i18n="geo_de">Германия</span>
+                                </span>
+                                <span class="server-tag">
+                                    <span class="server-tag-flag"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="16" viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="5.33" fill="#0072CE"/><rect y="5.33" width="24" height="5.33" fill="#000"/><rect y="10.67" width="24" height="5.33" fill="#fff"/></svg></span>
+                                    <span data-i18n="geo_ee">Эстония</span>
+                                </span>
+                                <span class="server-tag">
+                                    <span class="server-tag-flag"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="16" viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="16" fill="#fff"/><g fill="#B22234"><rect width="24" height="1.23"/><rect y="2.46" width="24" height="1.23"/><rect y="4.92" width="24" height="1.23"/><rect y="7.38" width="24" height="1.23"/><rect y="9.85" width="24" height="1.23"/><rect y="12.31" width="24" height="1.23"/><rect y="14.77" width="24" height="1.23"/></g><rect width="9.6" height="7.38" fill="#3C3B6E"/><g fill="#fff"><circle cx="1.6" cy="1.2" r="0.45"/><circle cx="4.8" cy="1.2" r="0.45"/><circle cx="8" cy="1.2" r="0.45"/><circle cx="3.2" cy="2.4" r="0.45"/><circle cx="6.4" cy="2.4" r="0.45"/><circle cx="1.6" cy="3.6" r="0.45"/><circle cx="4.8" cy="3.6" r="0.45"/><circle cx="8" cy="3.6" r="0.45"/><circle cx="3.2" cy="4.8" r="0.45"/><circle cx="6.4" cy="4.8" r="0.45"/><circle cx="1.6" cy="6" r="0.45"/><circle cx="4.8" cy="6" r="0.45"/><circle cx="8" cy="6" r="0.45"/></g></svg></span>
+                                    <span data-i18n="geo_us">США</span>
+                                </span>
+                            </div>
+                        </div>
+                        <button class="btn btn--primary btn--block payment-cta" data-tariff="lowkey" data-i18n="pricing_cta">купить подписку</button>
+                        <p class="pricing-note-bottom" data-i18n="pricing_guarantee">гарантия возврата средств 7 дней</p>
+                    </div>
+
+                    <div class="panel panel--pricing panel--pricing--featured" data-label="тариф" data-i18n-label="label_subscription">
+                        <h3 class="pricing-name" data-i18n="pricing_plan_name">мелодичный интернет</h3>
+                        <p class="pricing-note-top" data-i18n="pricing_plan_desc">максимальные возможности без ограничений</p>
+                        <div class="pricing-price">
+                            <span class="price-value" data-i18n="pricing_melodic_price">4,49€</span>
+                            <span class="price-period" data-i18n="pricing_period">/ месяц</span>
+                        </div>
+                        <ul class="pricing-perks">
+                            <li><span class="perk-bullet">~</span><span data-i18n="pricing_melodic_perk_1">всё из lowkey internet</span></li>
+                            <li><span class="perk-bullet">~</span><span data-i18n="pricing_melodic_perk_2">+ сервера в Чехии, Австрии и Испании</span></li>
+                            <li><span class="perk-bullet">~</span><span data-i18n="pricing_melodic_perk_3">+ сервер для обхода белых списков</span></li>
+                            <li><span class="perk-bullet">~</span><span data-i18n="pricing_melodic_perk_4">до 5 устройств одновременно</span></li>
+                        </ul>
+                        <div class="pricing-servers">
+                            <button class="pricing-servers-toggle" aria-expanded="false">
+                                <span data-i18n="pricing_servers_toggle">доступные локации</span>
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </button>
+                            <div class="pricing-servers-list">
+                                <span class="server-tag">
+                                    <span class="server-tag-flag"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="16" viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="5.33" fill="#000"/><rect y="5.33" width="24" height="5.33" fill="#DD0000"/><rect y="10.67" width="24" height="5.33" fill="#FFCE00"/></svg></span>
+                                    <span data-i18n="geo_de">Германия</span>
+                                </span>
+                                <span class="server-tag">
+                                    <span class="server-tag-flag"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="16" viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="5.33" fill="#0072CE"/><rect y="5.33" width="24" height="5.33" fill="#000"/><rect y="10.67" width="24" height="5.33" fill="#fff"/></svg></span>
+                                    <span data-i18n="geo_ee">Эстония</span>
+                                </span>
+                                <span class="server-tag">
+                                    <span class="server-tag-flag"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="16" viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="16" fill="#fff"/><g fill="#B22234"><rect width="24" height="1.23"/><rect y="2.46" width="24" height="1.23"/><rect y="4.92" width="24" height="1.23"/><rect y="7.38" width="24" height="1.23"/><rect y="9.85" width="24" height="1.23"/><rect y="12.31" width="24" height="1.23"/><rect y="14.77" width="24" height="1.23"/></g><rect width="9.6" height="7.38" fill="#3C3B6E"/><g fill="#fff"><circle cx="1.6" cy="1.2" r="0.45"/><circle cx="4.8" cy="1.2" r="0.45"/><circle cx="8" cy="1.2" r="0.45"/><circle cx="3.2" cy="2.4" r="0.45"/><circle cx="6.4" cy="2.4" r="0.45"/><circle cx="1.6" cy="3.6" r="0.45"/><circle cx="4.8" cy="3.6" r="0.45"/><circle cx="8" cy="3.6" r="0.45"/><circle cx="3.2" cy="4.8" r="0.45"/><circle cx="6.4" cy="4.8" r="0.45"/><circle cx="1.6" cy="6" r="0.45"/><circle cx="4.8" cy="6" r="0.45"/><circle cx="8" cy="6" r="0.45"/></g></svg></span>
+                                    <span data-i18n="geo_us">США</span>
+                                </span>
+                                <span class="server-tag">
+                                    <span class="server-tag-flag"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="16" viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="8" fill="#fff"/><rect y="8" width="24" height="8" fill="#D7141A"/><path d="M0 0 L12 8 L0 16 Z" fill="#11457E"/></svg></span>
+                                    <span data-i18n="geo_cz">Чехия</span>
+                                </span>
+                                <span class="server-tag">
+                                    <span class="server-tag-flag"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="16" viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="5.33" fill="#ED2939"/><rect y="5.33" width="24" height="5.33" fill="#fff"/><rect y="10.67" width="24" height="5.33" fill="#ED2939"/></svg></span>
+                                    <span data-i18n="geo_at">Австрия</span>
+                                </span>
+                                <span class="server-tag">
+                                    <span class="server-tag-flag"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="16" viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="4" fill="#AA151B"/><rect y="4" width="24" height="8" fill="#F1BF00"/><rect y="12" width="24" height="4" fill="#AA151B"/></svg></span>
+                                    <span data-i18n="geo_es">Испания</span>
+                                </span>
+                            </div>
+                        </div>
+                        <button class="btn btn--primary btn--block payment-cta" data-tariff="standard" data-i18n="pricing_cta">купить подписку</button>
                         <p class="pricing-note-bottom" data-i18n="pricing_guarantee">гарантия возврата средств 7 дней</p>
                     </div>
                 </div>
@@ -340,6 +400,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
-    <script src="script.js?v=20260705-012"></script>
+    <script src="script.js?v=20260705-019"></script>
 </body>
 </html>

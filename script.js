@@ -27,7 +27,7 @@ const translations = {
         region_cz: 'Чехия',
         region_banner_badge: 'новое',
         region_banner_title: 'Новый регион: Чехия',
-        region_banner_text: 'Подключайтесь к серверам в Праге. Низкий пинг и стабильное соединение для Европы. Создано при поддержке Vodafone',
+        region_banner_text: 'Подключайтесь к серверам в Праге. Низкий пинг и стабильное соединение для Европы. Создано при поддержке Vodafone Czechia',
         features_title: 'разрабатываем лучший сервис',
         features_subtitle: 'почему пользователи выбирают именно melodico',
         feature_speed_title: 'высокая скорость',
@@ -36,15 +36,31 @@ const translations = {
         feature_privacy_desc: 'мы не ведем логи вашей активности. ваш трафик надежно зашифрован современными протоколами.',
         feature_blocks_title: 'обход блокировок',
         feature_blocks_desc: 'протокол VLESS маскирует трафик под обычный веб-серфинг, обходя любые ограничения.',
-        pricing_title: 'один тариф для всех задач',
-        pricing_subtitle: 'доступ под домашний интернет и мобильные сети без ограничений',
+        pricing_title: 'тарифы',
+        pricing_subtitle: 'выберите подходящий вариант для ваших задач',
+        pricing_plan_lowkey_name: 'лайтовый интернет',
+        pricing_plan_lowkey_desc: 'для базовых задач и домашнего интернета',
         pricing_plan_name: 'мелодичный интернет',
         pricing_plan_desc: 'максимальные возможности без ограничений',
         pricing_period: '/ месяц',
-        pricing_perk_1: 'безлимитный трафик',
-        pricing_perk_2: 'до 5 устройств одновременно',
-        pricing_perk_3: 'высокая скорость до 5 Гбит/с',
-        pricing_perk_4: 'поддержка VLESS',
+        pricing_lowkey_price: '2,99€',
+        pricing_melodic_price: '4,49€',
+        pricing_lowkey_perk_1: 'безлимитный трафик',
+        pricing_lowkey_perk_2: 'до 5 устройств одновременно',
+        pricing_lowkey_perk_3: '4 сервера в 3 гео',
+        pricing_lowkey_perk_4: 'оптимизирован под домашний интернет',
+        pricing_melodic_perk_1: 'всё из lowkey internet',
+        pricing_melodic_perk_2: '+ сервера в Чехии, Австрии и Испании',
+        pricing_melodic_perk_3: '+ сервер для обхода белых списков',
+        pricing_melodic_perk_4: 'до 5 устройств одновременно',
+        pricing_servers_toggle: 'доступные локации',
+        pricing_server_whitelist: 'обход белых списков',
+        geo_de: 'Германия',
+        geo_ee: 'Эстония',
+        geo_us: 'США',
+        geo_cz: 'Чехия',
+        geo_at: 'Австрия',
+        geo_es: 'Испания',
         pricing_cta: 'купить подписку',
         pricing_guarantee: 'гарантия возврата средств 7 дней',
         payment_methods_title: 'доступные способы оплаты:',
@@ -115,7 +131,7 @@ const translations = {
         region_cz: 'Czech Republic',
         region_banner_badge: 'new',
         region_banner_title: 'New region: Czech Republic',
-        region_banner_text: 'Connect to servers in Prague. Low ping and stable connection for Europe. Powered by Vodafone',
+        region_banner_text: 'Connect to servers in Prague. Low ping and stable connection for Europe. Powered by Vodafone Czechia',
         features_title: 'building the best service',
         features_subtitle: 'why users choose melodico',
         feature_speed_title: 'high speed',
@@ -124,15 +140,31 @@ const translations = {
         feature_privacy_desc: 'we keep no logs of your activity. your traffic is reliably encrypted with modern protocols.',
         feature_blocks_title: 'bypass blocks',
         feature_blocks_desc: 'the VLESS protocol masks traffic as regular web browsing, bypassing any restrictions.',
-        pricing_title: 'one plan for every need',
-        pricing_subtitle: 'access for home internet and mobile networks without limits',
+        pricing_title: 'pricing',
+        pricing_subtitle: 'choose the right option for your needs',
+        pricing_plan_lowkey_name: 'lowkey internet',
+        pricing_plan_lowkey_desc: 'for basic tasks and home internet',
         pricing_plan_name: 'melodic internet',
         pricing_plan_desc: 'maximum possibilities without limits',
         pricing_period: '/ month',
-        pricing_perk_1: 'unlimited traffic',
-        pricing_perk_2: 'up to 5 devices simultaneously',
-        pricing_perk_3: 'high speed up to 5 Gbps',
-        pricing_perk_4: 'VLESS support',
+        pricing_lowkey_price: '2.99€',
+        pricing_melodic_price: '4.49€',
+        pricing_lowkey_perk_1: 'unlimited traffic',
+        pricing_lowkey_perk_2: 'up to 5 devices simultaneously',
+        pricing_lowkey_perk_3: '4 servers in 3 geos',
+        pricing_lowkey_perk_4: 'optimized for home internet',
+        pricing_melodic_perk_1: 'everything from lowkey internet',
+        pricing_melodic_perk_2: '+ servers in Czech Republic, Austria and Spain',
+        pricing_melodic_perk_3: '+ whitelist bypass server',
+        pricing_melodic_perk_4: 'up to 5 devices simultaneously',
+        pricing_servers_toggle: 'geo included',
+        pricing_server_whitelist: 'whitelist bypass',
+        geo_de: 'Germany',
+        geo_ee: 'Estonia',
+        geo_us: 'USA',
+        geo_cz: 'Czech Republic',
+        geo_at: 'Austria',
+        geo_es: 'Spain',
         pricing_cta: 'buy subscription',
         pricing_guarantee: '7-day money-back guarantee',
         payment_methods_title: 'available payment methods:',
@@ -532,10 +564,15 @@ const translations = {
     }
 
     // Pricing
-    const pricingPanel = document.querySelector('.panel--pricing');
-    if (pricingPanel) {
-        reveal(pricingPanel, { scale: 0.96 }, { duration: 0.9 }, pricingPanel, 'top 80%');
-        reveal('.pricing-perks li', { x: -15 }, { duration: 0.5, stagger: 0.1 }, pricingPanel, 'top 70%');
+    const pricingPanels = document.querySelectorAll('.panel--pricing');
+    if (pricingPanels.length) {
+        pricingPanels.forEach((panel) => {
+            reveal(panel, { scale: 0.96 }, { duration: 0.9 }, panel, 'top 80%');
+            const perks = panel.querySelectorAll('.pricing-perks li');
+            if (perks.length) {
+                reveal(perks, { x: -15 }, { duration: 0.5, stagger: 0.1 }, panel, 'top 70%');
+            }
+        });
     }
 
     // Payment methods
@@ -632,22 +669,6 @@ const translations = {
 
 
 /***********************************
- * Dismissible banners
- ***********************************/
-(function initDismissibleBanners() {
-    document.querySelectorAll('[data-banner-id]').forEach(banner => {
-        const closeBtn = banner.querySelector('.region-banner-close');
-        if (!closeBtn) return;
-
-        closeBtn.addEventListener('click', () => {
-            banner.classList.add('is-hiding');
-            banner.addEventListener('transitionend', () => banner.remove(), { once: true });
-        });
-    });
-})();
-
-
-/***********************************
  * Magnetic buttons
  ***********************************/
 (function initMagneticButtons() {
@@ -711,16 +732,21 @@ const translations = {
  * Payment method modal
  ***********************************/
 (function initPaymentModal() {
-    const cta = document.getElementById('paymentCta');
+    const ctas = document.querySelectorAll('.payment-cta');
     const modal = document.getElementById('paymentModal');
+    const ruOption = modal ? modal.querySelector('.payment-option--ru') : null;
     const stripeOption = document.getElementById('stripePaymentOption');
-    if (!cta || !modal) return;
+    if (!ctas.length || !modal) return;
 
-    const backdrop = modal.querySelector('.payment-modal-backdrop');
     const closeTriggers = modal.querySelectorAll('[data-close-modal]');
+    let selectedTariff = 'standard';
 
     function openModal(e) {
         if (e) e.preventDefault();
+        selectedTariff = e.currentTarget.getAttribute('data-tariff') || 'standard';
+        if (ruOption) {
+            ruOption.href = `https://pay.melodico.online/buy?type=${selectedTariff}`;
+        }
         modal.classList.add('is-open');
         modal.setAttribute('aria-hidden', 'false');
         document.body.style.overflow = 'hidden';
@@ -732,7 +758,7 @@ const translations = {
         document.body.style.overflow = '';
     }
 
-    cta.addEventListener('click', openModal);
+    ctas.forEach(cta => cta.addEventListener('click', openModal));
 
     closeTriggers.forEach(trigger => {
         trigger.addEventListener('click', closeModal);
@@ -744,14 +770,14 @@ const translations = {
         }
     });
 
-    // Stripe Checkout Session creation
+    // Stripe Checkout Session creation (для будущего использования)
     if (stripeOption) {
         stripeOption.addEventListener('click', async (e) => {
             e.preventDefault();
             stripeOption.classList.add('is-loading');
 
             try {
-                const response = await fetch('https://pay.melodico.online/create-stripe-session?type=standard');
+                const response = await fetch(`https://pay.melodico.online/create-stripe-session?type=${selectedTariff}`);
                 if (!response.ok) {
                     throw new Error('Failed to create Stripe session');
                 }
@@ -770,4 +796,33 @@ const translations = {
             }
         });
     }
+})();
+
+
+/***********************************
+ * Pricing server toggles
+ ***********************************/
+(function initPricingServerToggles() {
+    document.querySelectorAll('.pricing-servers-toggle').forEach(toggle => {
+        const wrapper = toggle.closest('.pricing-servers');
+        const list = wrapper ? wrapper.querySelector('.pricing-servers-list') : null;
+        if (!wrapper || !list) return;
+
+        gsap.set(list, { maxHeight: 0, opacity: 0 });
+
+        toggle.addEventListener('click', () => {
+            const isOpen = wrapper.classList.contains('is-open');
+
+            if (isOpen) {
+                gsap.to(list, { maxHeight: 0, opacity: 0, duration: 0.35, ease: 'power2.inOut' });
+                wrapper.classList.remove('is-open');
+                toggle.setAttribute('aria-expanded', 'false');
+            } else {
+                const fullHeight = list.scrollHeight;
+                gsap.to(list, { maxHeight: fullHeight, opacity: 1, duration: 0.35, ease: 'power2.inOut' });
+                wrapper.classList.add('is-open');
+                toggle.setAttribute('aria-expanded', 'true');
+            }
+        });
+    });
 })();

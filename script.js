@@ -4,7 +4,7 @@
 const translations = {
     ru: {
         meta_title: 'melodico — интернет, каким он должен быть',
-        meta_description: 'Сервис безопасного интернета для защиты данных и анонимности в сети.',
+        meta_description: 'VPN для защиты данных и анонимности в сети. VLESS, Hysteria2, Shadowsocks, WireGuard.',
         nav_features: 'преимущества',
         nav_regions: 'регионы',
         nav_pricing: 'тариф',
@@ -12,7 +12,7 @@ const translations = {
         hero_badge: 'работаем в России, Китае и Иране',
         hero_title_1: 'интернет, каким он',
         hero_title_2: 'должен быть',
-        hero_desc: 'Сервис безопасного интернета для защиты данных и анонимности в сети. Поддержка VLESS обеспечивает максимальную скорость без ограничений.',
+        hero_desc: 'VPN для защиты данных и анонимности в сети. Поддержка VLESS обеспечивает максимальную скорость без ограничений.',
         hero_cta_primary: 'купить доступ',
         hero_cta_secondary: 'узнать больше',
         platforms_label: 'поддерживаемые платформы',
@@ -47,13 +47,13 @@ const translations = {
         pricing_lowkey_price: '2,99€',
         pricing_melodic_price: '4,49€',
         pricing_lowkey_perk_1: 'безлимитный трафик',
-        pricing_lowkey_perk_2: 'до 8 устройств одновременно',
+        pricing_lowkey_perk_2: 'до 5 устройств одновременно',
         pricing_lowkey_perk_3: '4 сервера в 3 гео',
         pricing_lowkey_perk_4: 'оптимизирован под домашний интернет',
         pricing_melodic_perk_1: 'всё из lowkey internet',
         pricing_melodic_perk_2: '+ сервера в Чехии, Австрии, Испании и Италии',
         pricing_melodic_perk_3: '+ сервер для обхода белых списков',
-        pricing_melodic_perk_4: 'до 8 устройств одновременно',
+        pricing_melodic_perk_4: 'до 5 устройств одновременно',
         pricing_servers_toggle: 'доступные локации',
         pricing_server_whitelist: 'обход белых списков',
         geo_de: 'Германия',
@@ -110,7 +110,7 @@ const translations = {
     },
     en: {
         meta_title: 'melodico — internet as it should be',
-        meta_description: 'Security internet service for data protection and online anonymity.',
+        meta_description: 'VPN for data protection and online anonymity. VLESS, Hysteria2, Shadowsocks, WireGuard.',
         nav_features: 'features',
         nav_regions: 'regions',
         nav_pricing: 'pricing',
@@ -118,7 +118,7 @@ const translations = {
         hero_badge: 'works in Russia, China and Iran',
         hero_title_1: 'internet as it',
         hero_title_2: 'should be',
-        hero_desc: 'Security internet service with no logs and no limits. Modern protocols, high speed and access to blocked resources from anywhere in the world.',
+        hero_desc: 'VPN with no logs and no limits. Modern protocols, high speed and access to blocked resources from anywhere in the world.',
         hero_cta_primary: 'get access',
         hero_cta_secondary: 'learn more',
         platforms_label: 'supported platforms',
@@ -153,13 +153,13 @@ const translations = {
         pricing_lowkey_price: '2.99€',
         pricing_melodic_price: '4.49€',
         pricing_lowkey_perk_1: 'unlimited traffic',
-        pricing_lowkey_perk_2: 'up to 8 devices simultaneously',
+        pricing_lowkey_perk_2: 'up to 5 devices simultaneously',
         pricing_lowkey_perk_3: '4 servers in 3 geos',
         pricing_lowkey_perk_4: 'optimized for home internet',
         pricing_melodic_perk_1: 'everything from lowkey internet',
         pricing_melodic_perk_2: '+ servers in Czech Republic, Austria, Spain and Italy',
         pricing_melodic_perk_3: '+ whitelist bypass server',
-        pricing_melodic_perk_4: 'up to 8 devices simultaneously',
+        pricing_melodic_perk_4: 'up to 5 devices simultaneously',
         pricing_servers_toggle: 'geo included',
         pricing_server_whitelist: 'whitelist bypass',
         geo_de: 'Germany',
@@ -747,13 +747,17 @@ const translations = {
 
     function openModal(e) {
         if (e) e.preventDefault();
-        selectedTariff = e.currentTarget.getAttribute('data-tariff') || 'standard';
-        if (ruOption) {
-            ruOption.href = `https://pay.melodico.online/buy?type=${selectedTariff}`;
-        }
-        modal.classList.add('is-open');
-        modal.setAttribute('aria-hidden', 'false');
-        document.body.style.overflow = 'hidden';
+        // Temporary redirect to maintenance page because subscription purchase is currently unavailable.
+        window.location.href = 'maintenance.html';
+        return;
+        // Original modal logic kept below for re-enabling once payments are restored:
+        // selectedTariff = e.currentTarget.getAttribute('data-tariff') || 'standard';
+        // if (ruOption) {
+        //     ruOption.href = `https://pay.melodico.online/buy?type=${selectedTariff}`;
+        // }
+        // modal.classList.add('is-open');
+        // modal.setAttribute('aria-hidden', 'false');
+        // document.body.style.overflow = 'hidden';
     }
 
     function closeModal() {

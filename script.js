@@ -747,17 +747,13 @@ const translations = {
 
     function openModal(e) {
         if (e) e.preventDefault();
-        // Temporary redirect to maintenance page because subscription purchase is currently unavailable.
-        window.location.href = 'maintenance.html';
-        return;
-        // Original modal logic kept below for re-enabling once payments are restored:
-        // selectedTariff = e.currentTarget.getAttribute('data-tariff') || 'standard';
-        // if (ruOption) {
-        //     ruOption.href = `https://pay.melodico.online/buy?type=${selectedTariff}`;
-        // }
-        // modal.classList.add('is-open');
-        // modal.setAttribute('aria-hidden', 'false');
-        // document.body.style.overflow = 'hidden';
+        selectedTariff = e.currentTarget.getAttribute('data-tariff') || 'standard';
+        if (ruOption) {
+            ruOption.href = `https://pay.melodico.online/buy?type=${selectedTariff}`;
+        }
+        modal.classList.add('is-open');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
     }
 
     function closeModal() {

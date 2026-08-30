@@ -726,25 +726,22 @@ body {
     justify-content: center;
 }
 
-.pricing-wrap--two {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 24px;
-    max-width: 900px;
-    margin: 0 auto;
+.pricing-wrap--single {
+    display: flex;
+    justify-content: center;
 }
 
 .panel--pricing {
     width: 100%;
-    max-width: 420px;
+    max-width: 480px;
     padding: 40px;
     display: flex;
     flex-direction: column;
     gap: 24px;
 }
 
-.pricing-wrap--two .panel--pricing {
-    max-width: none;
+.pricing-wrap--single .panel--pricing {
+    max-width: 520px;
 }
 
 .panel--pricing--featured {
@@ -896,8 +893,8 @@ body {
 }
 
 @media (max-width: 800px) {
-    .pricing-wrap--two {
-        grid-template-columns: 1fr;
+    .pricing-wrap--single .panel--pricing {
+        max-width: 100%;
     }
 }
 

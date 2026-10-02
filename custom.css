@@ -750,10 +750,20 @@ body {
 }
 
 .pricing-name {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
     font-size: 1.6rem;
     font-weight: 400;
     color: var(--text-1);
     text-align: center;
+}
+
+.pricing-name-icon {
+    width: 1.1em;
+    height: 1.1em;
+    flex-shrink: 0;
 }
 
 .pricing-note-top {
@@ -780,6 +790,7 @@ body {
     line-height: 0.95;
 }
 
+.price-from,
 .price-period {
     font-size: 0.95rem;
     color: var(--text-4);
@@ -936,146 +947,6 @@ body {
     max-width: 80px;
     object-fit: contain;
     display: block;
-}
-
-/* Payment modal */
-.payment-modal {
-    position: fixed;
-    inset: 0;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.25s ease, visibility 0.25s ease;
-}
-
-.payment-modal.is-open {
-    opacity: 1;
-    visibility: visible;
-}
-
-.payment-modal-backdrop {
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.75);
-    backdrop-filter: blur(4px);
-}
-
-.payment-modal-panel {
-    position: relative;
-    width: 100%;
-    max-width: 420px;
-    padding: 32px;
-    transform: translateY(20px) scale(0.98);
-    transition: transform 0.25s ease, background-color 0.5s ease, border-color 0.5s ease;
-}
-
-.payment-modal.is-open .payment-modal-panel {
-    transform: translateY(0) scale(1);
-}
-
-.payment-modal-close {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    width: 36px;
-    height: 36px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: transparent;
-    border: 1px solid var(--border);
-    color: var(--text-3);
-    cursor: pointer;
-    transition: color var(--transition), border-color var(--transition), transform var(--transition);
-}
-
-.payment-modal-close:hover {
-    color: var(--text-0);
-    border-color: var(--border-hover);
-    transform: rotate(90deg);
-}
-
-.payment-modal-title {
-    font-size: 1.1rem;
-    font-weight: 400;
-    color: var(--text-1);
-    text-align: center;
-    margin-bottom: 24px;
-}
-
-.payment-modal-options {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.payment-option {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    padding: 20px;
-    border: 1px solid var(--border);
-    color: inherit;
-    text-decoration: none;
-    transition: border-color var(--transition), background-color var(--transition), transform var(--transition);
-}
-
-.payment-option:hover {
-    border-color: var(--border-hover);
-    background: var(--hover);
-    transform: translateY(-2px);
-}
-
-.payment-option.is-loading {
-    opacity: 0.6;
-    pointer-events: none;
-    cursor: wait;
-}
-
-.payment-option--crypto {
-    background: var(--bg-3);
-    opacity: 0.45;
-    cursor: not-allowed;
-    border-color: var(--border);
-}
-
-.payment-option--crypto:hover {
-    transform: none;
-    border-color: var(--border);
-    background: var(--bg-3);
-}
-
-.payment-option-soon {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    font-size: 0.6rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--text-4);
-    border: 1px solid var(--border);
-    padding: 2px 6px;
-}
-
-.payment-option-label {
-    font-size: 1rem;
-    color: var(--text-0);
-}
-
-.payment-option-desc {
-    font-size: 0.8rem;
-    color: var(--text-4);
-}
-
-.payment-option-hint {
-    font-size: 0.75rem;
-    color: var(--text-5);
-    margin-top: 4px;
 }
 
 /* FAQ */

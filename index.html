@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://yookassa.ru https://yoomoney.ru https://yastatic.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com data:; img-src 'self' data: https://yastatic.net; connect-src 'self' https://pay.melodico.online https://yookassa.ru https://yoomoney.ru https://yastatic.net; form-action https:; frame-src https://yookassa.ru https://yoomoney.ru; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests">
+        content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://yookassa.ru https://yoomoney.ru https://yastatic.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com data:; img-src 'self' data: https://yastatic.net; connect-src 'self' https://yookassa.ru https://yoomoney.ru https://yastatic.net; form-action https:; frame-src https://yookassa.ru https://yoomoney.ru; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests">
     <title data-i18n="meta_title">melodico — интернет, каким он должен быть</title>
     <meta name="description" data-i18n="meta_description"
         content="VPN для защиты данных и анонимности в сети. VLESS, Hysteria2, Shadowsocks, WireGuard.">
@@ -170,17 +170,6 @@
                             <span class="region-flag">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="16" viewBox="0 0 24 16"
                                     aria-hidden="true">
-                                    <rect width="8" height="16" fill="#008751" />
-                                    <rect x="8" width="8" height="16" fill="#FFFFFF" />
-                                    <rect x="16" width="8" height="16" fill="#008751" />
-                                </svg>
-                            </span>
-                            <span data-i18n="region_ng">Нигерия</span>
-                        </span>
-                        <span class="region-tag">
-                            <span class="region-flag">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="16" viewBox="0 0 24 16"
-                                    aria-hidden="true">
                                     <rect width="24" height="16" fill="#fff" />
                                     <g fill="#B22234">
                                         <rect width="24" height="1.23" />
@@ -276,7 +265,8 @@
                         <p class="pricing-note-top" data-i18n="pricing_plan_desc">все сервера, все гео, без ограничений
                         </p>
                         <div class="pricing-price">
-                            <span class="price-value" data-i18n="pricing_melodic_price">399₽</span>
+                            <span class="price-from" data-i18n="pricing_price_from">от</span>
+                            <span class="price-value" data-i18n="pricing_melodic_price">400₽</span>
                             <span class="price-period" data-i18n="pricing_period">/ месяц</span>
                         </div>
                         <ul class="pricing-perks">
@@ -333,15 +323,6 @@
                                 <span class="server-tag">
                                     <span class="server-tag-flag"><svg xmlns="http://www.w3.org/2000/svg" width="24"
                                             height="16" viewBox="0 0 24 16" aria-hidden="true">
-                                            <rect width="8" height="16" fill="#008751" />
-                                            <rect x="8" width="8" height="16" fill="#FFFFFF" />
-                                            <rect x="16" width="8" height="16" fill="#008751" />
-                                        </svg></span>
-                                    <span data-i18n="geo_ng">Нигерия</span>
-                                </span>
-                                <span class="server-tag">
-                                    <span class="server-tag-flag"><svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                            height="16" viewBox="0 0 24 16" aria-hidden="true">
                                             <rect width="24" height="16" fill="#fff" />
                                             <g fill="#B22234">
                                                 <rect width="24" height="1.23" />
@@ -381,8 +362,8 @@
                                 </span>
                             </div>
                         </div>
-                        <button class="btn btn--primary btn--block payment-cta" data-tariff="standard"
-                            data-i18n="pricing_cta">купить подписку</button>
+                        <a class="btn btn--primary btn--block" href="https://checkout.melodico.online"
+                            data-i18n="pricing_cta">перейти к оплате</a>
                         <p class="pricing-note-bottom" data-i18n="pricing_guarantee">гарантия возврата средств 7 дней
                         </p>
                     </div>
@@ -490,31 +471,6 @@
             <p data-i18n="footer_copyright">made with patience / © 2026 melodico. все права защищены.</p>
         </div>
     </footer>
-
-    <div class="payment-modal" id="paymentModal" aria-hidden="true" role="dialog" aria-modal="true"
-        aria-labelledby="paymentModalTitle">
-        <div class="payment-modal-backdrop" data-close-modal></div>
-        <div class="payment-modal-panel panel">
-            <button class="payment-modal-close" data-close-modal aria-label="закрыть">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-            <h3 class="payment-modal-title" id="paymentModalTitle" data-i18n="payment_modal_title">выберите способ
-                оплаты</h3>
-            <div class="payment-modal-options">
-                <div class="payment-option payment-option--crypto" aria-disabled="true">
-                    <span class="payment-option-soon" data-i18n="payment_option_crypto_soon">скоро</span>
-                    <span class="payment-option-label" data-i18n="payment_option_crypto">криптовалюта</span>
-                    <span class="payment-option-desc" data-i18n="payment_option_crypto_desc">BTC, USDT, ETH</span>
-                </div>
-                <a href="https://pay.melodico.online/buy?type=standard" class="payment-option payment-option--ru"
-                    target="_blank" rel="noopener" data-close-modal>
-                    <span class="payment-option-label" data-i18n="payment_option_ru">карты РФ</span>
-                    <span class="payment-option-desc" data-i18n="payment_option_ru_desc">СБП, SberPay, МИР</span>
-                    <span class="payment-option-hint" data-i18n="payment_option_ru_hint">для пользователей в РФ</span>
-                </a>
-            </div>
-        </div>
-    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>

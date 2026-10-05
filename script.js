@@ -4,7 +4,7 @@
 const translations = {
     ru: {
         meta_title: 'melodico — интернет, каким он должен быть',
-        meta_description: 'VPN для защиты данных и анонимности в сети. VLESS, Hysteria2, Shadowsocks, WireGuard.',
+        meta_description: 'Безопасный интернет для защиты данных и анонимности в сети. VLESS, Hysteria2',
         nav_features: 'преимущества',
         nav_regions: 'регионы',
         nav_pricing: 'тариф',
@@ -12,7 +12,7 @@ const translations = {
         hero_badge: 'работаем в России, Китае и Иране',
         hero_title_1: 'интернет, каким он',
         hero_title_2: 'должен быть',
-        hero_desc: 'VPN для защиты данных и анонимности в сети. Поддержка VLESS обеспечивает максимальную скорость без ограничений.',
+        hero_desc: 'Безопасный интернет для защиты данных и анонимности в сети. Поддержка VLESS обеспечивает максимальную скорость без ограничений.',
         hero_cta_primary: 'купить доступ',
         hero_cta_secondary: 'узнать больше',
         platforms_label: 'поддерживаемые платформы',
@@ -102,7 +102,7 @@ const translations = {
     },
     en: {
         meta_title: 'melodico — internet as it should be',
-        meta_description: 'VPN for data protection and online anonymity. VLESS, Hysteria2, Shadowsocks, WireGuard.',
+        meta_description: 'Security internet for data protection and online anonymity. VLESS, Hysteria2, Shadowsocks, WireGuard.',
         nav_features: 'features',
         nav_regions: 'regions',
         nav_pricing: 'tariffs',
@@ -110,7 +110,7 @@ const translations = {
         hero_badge: 'works in Russia, China and Iran',
         hero_title_1: 'internet as it',
         hero_title_2: 'should be',
-        hero_desc: 'VPN with no logs and no limits. Modern protocols, high speed and access to blocked resources from anywhere in the world.',
+        hero_desc: 'Security internet with no logs and no limits. Modern protocols, high speed and access to blocked resources from anywhere in the world.',
         hero_cta_primary: 'get access',
         hero_cta_secondary: 'learn more',
         platforms_label: 'supported platforms',

@@ -81,6 +81,7 @@ const translations = {
         lang_label: 'язык',
         nav_login: 'войти',
         nav_login_aria: 'войти в личный кабинет',
+        nav_login_full: 'личный кабинет',
         cookie_text: 'мы используем',
         cookie_essential: 'только необходимые',
         cookie_all: 'принять все',
@@ -180,6 +181,7 @@ const translations = {
         lang_label: 'language',
         nav_login: 'sign in',
         nav_login_aria: 'sign in to your account',
+        nav_login_full: 'my account',
         cookie_text: 'we use',
         cookie_essential: 'essential only',
         cookie_all: 'accept all',
@@ -246,21 +248,26 @@ const melodicoPrefs = (function () {
             + (window.location.protocol === 'https:' ? '; Secure' : '');
     }
 
+    // ответ на запрос о cookie хранится в самой cookie melodico_prefs (необходимая, без отдельного согласия):
+    // очистили cookie — плашка снова появится. Раньше ответ лежал в localStorage, который браузеры
+    // при очистке cookie часто не трогают, — старую запись убираем.
+    try {
+        localStorage.removeItem(CONSENT_KEY);
+    } catch (e) { /* storage unavailable */ }
+
     function consent() {
-        try {
-            const saved = JSON.parse(ls('get', CONSENT_KEY) || 'null');
-            return saved && CHOICES.includes(saved.choice) ? saved.choice : null;
-        } catch (e) {
-            return null;
-        }
+        const saved = readCookie();
+        return saved && CHOICES.includes(saved.consent) ? saved.consent : null;
     }
 
     function apply(choice, lang, theme) {
         if (!CHOICES.includes(choice)) return;
-        ls('set', CONSENT_KEY, JSON.stringify({ choice, date: new Date().toISOString() }));
         if (choice === 'all') {
             if (lang === 'ru' || lang === 'en') ls('set', 'lang', lang);
             if (theme === 'dark' || theme === 'light') ls('set', 'theme', theme);
+            writeCookie({ consent: choice, lang: ls('get', 'lang'), theme: ls('get', 'theme') });
+        } else {
+            writeCookie({ consent: choice });
         }
     }
 
@@ -279,8 +286,12 @@ const melodicoPrefs = (function () {
         ['consent', 'lang', 'theme'].forEach(key => url.searchParams.delete(key));
         window.history.replaceState(null, '', url.toString());
     } else {
+        // язык и тема из общей cookie (на общем домене .cloud её пишут и другие сайты)
         const shared = readCookie();
-        if (shared) apply(shared.consent, shared.lang, shared.theme);
+        if (shared && shared.consent === 'all') {
+            if (shared.lang === 'ru' || shared.lang === 'en') ls('set', 'lang', shared.lang);
+            if (shared.theme === 'dark' || shared.theme === 'light') ls('set', 'theme', shared.theme);
+        }
     }
 
     // переход на checkout / кабинет: дописываем выбор в ссылку прямо перед переходом
@@ -307,7 +318,6 @@ const melodicoPrefs = (function () {
         consent,
         save(choice) {
             apply(choice);
-            writeCookie(current());
         },
         // запомнить язык/тему в общей cookie (только при «принять все»)
         remember() {
@@ -376,51 +386,44 @@ const melodicoPrefs = (function () {
         face.textContent = '^_^';
         face.setAttribute('aria-hidden', 'true');
 
-        // FLIP: запоминаем размер плашки, убираем лишнее, анимируем к новому размеру
-        const from = bar.getBoundingClientRect();
+        // плашка не меняет размер (на телефоне она прибита к обоим краям), а обрезается маской
+        // до нажатой кнопки — кнопка остаётся на месте, без пересчёта раскладки на каждом кадре
+        const barRect = bar.getBoundingClientRect();
+        const btnRect = button.getBoundingClientRect();
+        const inset = {
+            top: btnRect.top - barRect.top,
+            right: barRect.right - btnRect.right,
+            bottom: barRect.bottom - btnRect.bottom,
+            left: btnRect.left - barRect.left
+        };
+        const clip = (k) => `inset(${inset.top * k}px ${inset.right * k}px ${inset.bottom * k}px ${inset.left * k}px)`;
+        bar.style.backdropFilter = 'none';
+        bar.style.webkitBackdropFilter = 'none';
+        bar.style.transformOrigin = `${btnRect.left - barRect.left + btnRect.width / 2}px ${btnRect.top - barRect.top + btnRect.height / 2}px`;
+        gsap.set(bar, { clipPath: clip(0) });
+
         const tl = gsap.timeline({ onComplete: () => bar.remove() });
 
-        tl.to(others, {
-            opacity: 0,
-            x: -14,
-            filter: 'blur(4px)',
-            duration: 0.28,
-            ease: 'power2.in',
-            stagger: 0.06
-        });
+        tl.to(others, { opacity: 0, duration: 0.22, ease: 'power1.out' });
+        tl.to(bar, { clipPath: clip(1), duration: 0.5, ease: 'power3.inOut' }, 0.08);
 
-        tl.add(() => {
-            others.forEach(el => { el.style.display = 'none'; });
-            bar.style.padding = '6px';
-            const to = bar.getBoundingClientRect();
-            gsap.fromTo(bar,
-                { width: from.width, height: from.height },
-                { width: to.width, height: to.height, duration: 0.45, ease: 'power3.inOut', clearProps: 'width,height' }
-            );
-        });
-
-        // смена подписи: старая уходит вверх с размытием, ^_^ приходит снизу
+        // смена подписи: старая уходит вверх, ^_^ приходит снизу
         tl.add(() => {
             stack.appendChild(face);
-            gsap.to(oldLabel, { y: -14, opacity: 0, filter: 'blur(6px)', duration: 0.35, ease: 'power2.in' });
-            gsap.fromTo(face,
-                { y: 14, opacity: 0, filter: 'blur(6px)' },
-                { y: 0, opacity: 1, filter: 'blur(0px)', duration: 0.4, ease: 'power3.out', delay: 0.12 }
-            );
-        }, '+=0.15');
-
-        tl.add(() => { oldLabel.remove(); }, '+=0.5');
+            gsap.to(oldLabel, { yPercent: -120, opacity: 0, duration: 0.3, ease: 'power2.in' });
+            gsap.fromTo(face, { yPercent: 120, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 0.38, ease: 'power3.out', delay: 0.1 });
+        }, 0.45);
 
         // подмигивание
-        tl.add(() => { face.textContent = '^_~'; }, '+=0.35');
-        tl.to(button, { scale: 1.06, duration: 0.12, ease: 'power2.out' }, '<');
-        tl.to(button, { scale: 1, duration: 0.4, ease: 'elastic.out(1, 0.5)' });
-        tl.add(() => { face.textContent = '^_^'; }, '-=0.15');
+        tl.add(() => { face.textContent = '^_~'; }, '+=0.75');
+        tl.to(bar, { scale: 1.06, duration: 0.12, ease: 'power2.out' }, '<');
+        tl.to(bar, { scale: 1, duration: 0.45, ease: 'elastic.out(1, 0.5)' });
+        tl.add(() => { face.textContent = '^_^'; }, '-=0.2');
 
         // сжатие и рассыпание
-        tl.to(bar, { scale: 0.92, duration: 0.15, ease: 'power2.in' }, '+=0.45');
+        tl.to(bar, { scale: 0.92, duration: 0.15, ease: 'power2.in' }, '+=0.4');
         tl.add(() => burst(button.getBoundingClientRect()));
-        tl.to(bar, { scale: 0.4, opacity: 0, filter: 'blur(3px)', duration: 0.3, ease: 'power2.in' });
+        tl.to(bar, { scale: 0.4, opacity: 0, duration: 0.28, ease: 'power2.in' });
     }
 
     bar.querySelectorAll('[data-consent]').forEach(button => {

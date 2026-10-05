@@ -72,6 +72,11 @@ const translations = {
         footer_about: 'современный сервис для свободы в интернете. безопасность, анонимность и высокая скорость без компромиссов.',
         footer_copyright: 'made with patience / © 2026 melodico. все права защищены.',
         lang_label: 'язык',
+        nav_login: 'войти',
+        nav_login_aria: 'войти в личный кабинет',
+        cookie_text: 'мы используем',
+        cookie_essential: 'только необходимые',
+        cookie_all: 'принять все',
         label_hero: 'melodico / vpn',
         label_servers: 'серверы',
         label_speed: 'скорость',
@@ -159,6 +164,11 @@ const translations = {
         footer_about: 'a modern service for freedom on the internet. security, anonymity and high speed without compromise.',
         footer_copyright: 'made with patience / © 2026 melodico. all rights reserved.',
         lang_label: 'language',
+        nav_login: 'sign in',
+        nav_login_aria: 'sign in to your account',
+        cookie_text: 'we use',
+        cookie_essential: 'essential only',
+        cookie_all: 'accept all',
         label_hero: 'melodico / vpn',
         label_servers: 'servers',
         label_speed: 'speed',
@@ -180,6 +190,232 @@ const translations = {
 
 
 /***********************************
+ * Общие настройки сайтов melodico: согласие на cookie, язык, тема.
+ * Плашка согласия живёт здесь, на лендинге. Пока лендинг (.xyz) и checkout/кабинет (.online)
+ * на разных доменах, cookie у них не общие, поэтому выбор передаётся в ссылке:
+ *   ?consent=essential|all[&lang=ru|en&theme=dark|light]   (язык и тема — только при «принять все»)
+ * Checkout и кабинет принимают эти параметры и убирают их из адреса.
+ * На общем домене (.cloud) настройки лежат в cookie melodico_prefs с Domain=.melodico.cloud,
+ * её видят все поддомены — ссылки тогда ничего не меняют.
+ ***********************************/
+const melodicoPrefs = (function () {
+    const COOKIE = 'melodico_prefs';
+    const CONSENT_KEY = 'melodico_cookie_consent';
+    const SHARED_DOMAIN = 'melodico.cloud';
+    const CHOICES = ['essential', 'all'];
+    // куда передавать настройки ссылкой (свои сайты на других доменах)
+    const OWN_HOSTS = /(^|\.)melodico\.(xyz|online|cloud)$/;
+
+    function ls(method, key, value) {
+        try {
+            return method === 'get' ? localStorage.getItem(key) : localStorage.setItem(key, value);
+        } catch (e) {
+            return null;
+        }
+    }
+
+    function readCookie() {
+        const match = document.cookie.match(new RegExp(`(?:^|;\\s*)${COOKIE}=([^;]*)`));
+        if (!match) return null;
+        try {
+            return JSON.parse(decodeURIComponent(match[1]));
+        } catch (e) {
+            return null;
+        }
+    }
+
+    function writeCookie(prefs) {
+        const host = window.location.hostname;
+        const shared = host === SHARED_DOMAIN || host.endsWith(`.${SHARED_DOMAIN}`);
+        document.cookie = `${COOKIE}=${encodeURIComponent(JSON.stringify(prefs))}; Max-Age=31536000; Path=/; SameSite=Lax`
+            + (shared ? `; Domain=.${SHARED_DOMAIN}` : '')
+            + (window.location.protocol === 'https:' ? '; Secure' : '');
+    }
+
+    function consent() {
+        try {
+            const saved = JSON.parse(ls('get', CONSENT_KEY) || 'null');
+            return saved && CHOICES.includes(saved.choice) ? saved.choice : null;
+        } catch (e) {
+            return null;
+        }
+    }
+
+    function apply(choice, lang, theme) {
+        if (!CHOICES.includes(choice)) return;
+        ls('set', CONSENT_KEY, JSON.stringify({ choice, date: new Date().toISOString() }));
+        if (choice === 'all') {
+            if (lang === 'ru' || lang === 'en') ls('set', 'lang', lang);
+            if (theme === 'dark' || theme === 'light') ls('set', 'theme', theme);
+        }
+    }
+
+    function current() {
+        const choice = consent();
+        if (!choice) return null;
+        return choice === 'all'
+            ? { consent: choice, lang: ls('get', 'lang'), theme: ls('get', 'theme') }
+            : { consent: choice };
+    }
+
+    // настройки, пришедшие ссылкой или из общей cookie
+    const url = new URL(window.location.href);
+    if (url.searchParams.has('consent')) {
+        apply(url.searchParams.get('consent'), url.searchParams.get('lang'), url.searchParams.get('theme'));
+        ['consent', 'lang', 'theme'].forEach(key => url.searchParams.delete(key));
+        window.history.replaceState(null, '', url.toString());
+    } else {
+        const shared = readCookie();
+        if (shared) apply(shared.consent, shared.lang, shared.theme);
+    }
+
+    // переход на checkout / кабинет: дописываем выбор в ссылку прямо перед переходом
+    function decorate(event) {
+        const link = event.target.closest && event.target.closest('a[href]');
+        const prefs = current();
+        if (!link || !prefs) return;
+        let target;
+        try {
+            target = new URL(link.href, window.location.href);
+        } catch (e) {
+            return;
+        }
+        if (target.host === window.location.host || !OWN_HOSTS.test(target.hostname)) return;
+        Object.entries(prefs).forEach(([key, value]) => {
+            if (value) target.searchParams.set(key, value);
+        });
+        link.href = target.toString();
+    }
+    document.addEventListener('click', decorate, true);
+    document.addEventListener('auxclick', decorate, true);
+
+    return {
+        consent,
+        save(choice) {
+            apply(choice);
+            writeCookie(current());
+        },
+        // запомнить язык/тему в общей cookie (только при «принять все»)
+        remember() {
+            if (consent()) writeCookie(current());
+        }
+    };
+})();
+
+
+/***********************************
+ * Cookie consent
+ * Анимация по референсу: лишнее уезжает, плашка схлопывается в нажатую кнопку,
+ * подпись уходит вверх, снизу приходит ^_^, подмигивает (^_~) и рассыпается на частицы.
+ ***********************************/
+(function initCookieConsent() {
+    const bar = document.getElementById('cookieBar');
+    if (!bar || melodicoPrefs.consent()) return;
+
+    bar.hidden = false;
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const animated = typeof gsap !== 'undefined' && !reduced;
+    if (animated) {
+        gsap.fromTo(bar, { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.5, ease: 'power3.out', delay: 0.8 });
+    }
+
+    function burst(rect) {
+        const cx = rect.left + rect.width / 2;
+        const cy = rect.top + rect.height / 2;
+        for (let i = 0; i < 16; i += 1) {
+            const dot = document.createElement('span');
+            dot.className = 'cookie-particle';
+            dot.style.left = `${cx + (Math.random() - 0.5) * rect.width * 0.6}px`;
+            dot.style.top = `${cy + (Math.random() - 0.5) * rect.height * 0.6}px`;
+            document.body.appendChild(dot);
+            const angle = Math.random() * Math.PI * 2;
+            const dist = 24 + Math.random() * 56;
+            gsap.to(dot, {
+                x: Math.cos(angle) * dist,
+                y: Math.sin(angle) * dist - 10,
+                opacity: 0,
+                scale: 0.4,
+                duration: 0.7 + Math.random() * 0.5,
+                ease: 'power2.out',
+                onComplete: () => dot.remove()
+            });
+        }
+    }
+
+    function choose(button) {
+        if (bar.classList.contains('is-done')) return;
+        bar.classList.add('is-done');
+        melodicoPrefs.save(button.dataset.consent);
+
+        if (!animated) {
+            bar.remove();
+            return;
+        }
+
+        const others = Array.from(bar.children).filter(el => el !== button);
+        // выбранная кнопка становится контрастной, чтобы ^_^ было видно при любом выборе
+        button.classList.add('cookie-btn--primary');
+        const stack = button.querySelector('.cookie-btn-stack');
+        const oldLabel = stack.querySelector('.cookie-btn-label');
+        const face = document.createElement('span');
+        face.className = 'cookie-face';
+        face.textContent = '^_^';
+        face.setAttribute('aria-hidden', 'true');
+
+        // FLIP: запоминаем размер плашки, убираем лишнее, анимируем к новому размеру
+        const from = bar.getBoundingClientRect();
+        const tl = gsap.timeline({ onComplete: () => bar.remove() });
+
+        tl.to(others, {
+            opacity: 0,
+            x: -14,
+            filter: 'blur(4px)',
+            duration: 0.28,
+            ease: 'power2.in',
+            stagger: 0.06
+        });
+
+        tl.add(() => {
+            others.forEach(el => { el.style.display = 'none'; });
+            bar.style.padding = '6px';
+            const to = bar.getBoundingClientRect();
+            gsap.fromTo(bar,
+                { width: from.width, height: from.height },
+                { width: to.width, height: to.height, duration: 0.45, ease: 'power3.inOut', clearProps: 'width,height' }
+            );
+        });
+
+        // смена подписи: старая уходит вверх с размытием, ^_^ приходит снизу
+        tl.add(() => {
+            stack.appendChild(face);
+            gsap.to(oldLabel, { y: -14, opacity: 0, filter: 'blur(6px)', duration: 0.35, ease: 'power2.in' });
+            gsap.fromTo(face,
+                { y: 14, opacity: 0, filter: 'blur(6px)' },
+                { y: 0, opacity: 1, filter: 'blur(0px)', duration: 0.4, ease: 'power3.out', delay: 0.12 }
+            );
+        }, '+=0.15');
+
+        tl.add(() => { oldLabel.remove(); }, '+=0.5');
+
+        // подмигивание
+        tl.add(() => { face.textContent = '^_~'; }, '+=0.35');
+        tl.to(button, { scale: 1.06, duration: 0.12, ease: 'power2.out' }, '<');
+        tl.to(button, { scale: 1, duration: 0.4, ease: 'elastic.out(1, 0.5)' });
+        tl.add(() => { face.textContent = '^_^'; }, '-=0.15');
+
+        // сжатие и рассыпание
+        tl.to(bar, { scale: 0.92, duration: 0.15, ease: 'power2.in' }, '+=0.45');
+        tl.add(() => burst(button.getBoundingClientRect()));
+        tl.to(bar, { scale: 0.4, opacity: 0, filter: 'blur(3px)', duration: 0.3, ease: 'power2.in' });
+    }
+
+    bar.querySelectorAll('[data-consent]').forEach(button => {
+        button.addEventListener('click', () => choose(button));
+    });
+})();
+
+
+/***********************************
  * Internationalization
  ***********************************/
 (function initI18n() {
@@ -190,6 +426,7 @@ const translations = {
         html.setAttribute('lang', lang);
         html.setAttribute('data-lang', lang);
         localStorage.setItem('lang', lang);
+        melodicoPrefs.remember();
 
         function updateText() {
             document.querySelectorAll('[data-i18n]').forEach(el => {
@@ -200,6 +437,13 @@ const translations = {
                     } else {
                         el.textContent = translations[lang][key];
                     }
+                }
+            });
+
+            document.querySelectorAll('[data-i18n-aria]').forEach(el => {
+                const key = el.getAttribute('data-i18n-aria');
+                if (translations[lang] && translations[lang][key]) {
+                    el.setAttribute('aria-label', translations[lang][key]);
                 }
             });
 
@@ -284,6 +528,7 @@ const translations = {
         }
         html.setAttribute('data-theme', theme);
         localStorage.setItem('theme', theme);
+        melodicoPrefs.remember();
 
         if (typeof window.updateShaderTheme === 'function') {
             window.updateShaderTheme(theme === 'light' ? 1.0 : 0.0);
@@ -640,7 +885,7 @@ const translations = {
 (function initMagneticButtons() {
     if (window.matchMedia('(pointer: coarse)').matches) return;
 
-    const buttons = document.querySelectorAll('.btn, .nav-logo, .nav-link, .region-tag, .feature-icon, .lang-toggle, .theme-toggle, .platforms-list i');
+    const buttons = document.querySelectorAll('.btn, .nav-logo, .nav-link, .nav-login, .region-tag, .feature-icon, .lang-toggle, .theme-toggle, .platforms-list i');
 
     buttons.forEach(btn => {
         btn.addEventListener('mousemove', (e) => {

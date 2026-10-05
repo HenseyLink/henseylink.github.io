@@ -1304,6 +1304,10 @@ body {
 }
 
 /* Вход в личный кабинет — контрастная кнопка той же высоты, что переключатели */
+.nav-link--login {
+    display: none;
+}
+
 .nav-login {
     height: 44px;
     display: inline-flex;
@@ -1390,16 +1394,29 @@ body {
         display: inline-flex;
     }
 
-    /* на узком экране — только иконка, квадрат как у соседних кнопок */
-    .nav-login {
-        width: 44px;
-        padding: 0;
-        justify-content: center;
-    }
-
-    .nav-login span {
+    /* на узком экране вход — пунктом выезжающего меню, а не кнопкой в шапке */
+    .nav-controls .nav-login {
         display: none;
     }
+
+    .nav-links .nav-link--login {
+        display: inline-flex;
+        gap: 10px;
+        margin-top: 8px;
+        color: var(--bg-4);
+        background: var(--text-0);
+    }
+
+    .nav-links .nav-link--login:hover {
+        color: var(--bg-4);
+        background: var(--text-2);
+    }
+
+    .nav-links .nav-link--login::after {
+        display: none;
+    }
+
+    .nav-links.is-open .nav-link:nth-child(5) { transition-delay: 0.25s; }
 
     .section {
         padding: 56px 0;

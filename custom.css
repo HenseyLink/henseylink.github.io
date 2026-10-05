@@ -909,6 +909,141 @@ body {
     }
 }
 
+.faq-link {
+    display: block;
+    width: fit-content;
+    margin-top: 10px;
+    color: var(--text-1);
+    text-underline-offset: 3px;
+}
+
+/* баннер теста под тарифом — ведёт в кабинет (#/trial) */
+.trial-banner-wrap {
+    display: flex;
+    justify-content: center;
+    margin-top: 28px;
+}
+
+.trial-banner.panel {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    max-width: 520px;
+    padding: 24px 28px;
+    color: inherit;
+    text-decoration: none;
+    /* рамку рисует ::after (пунктир), своя — прозрачная, чтобы не менять размеры */
+    border-color: transparent;
+}
+
+.trial-banner.panel:hover {
+    border-color: transparent;
+}
+
+/* подпись «тест» поверх пунктира */
+.trial-banner::before {
+    z-index: 1;
+}
+
+/* пунктир: 4 полоски, узор повторяется по всей длине (repeat-x / repeat-y), поэтому сдвиг бесшовный.
+   период штриха постоянный (12px): при наведении штрих растёт с 7px до 12px — промежутки плавно
+   затягиваются в сплошную линию, а бег по кругу не дёргается */
+@property --dash {
+    syntax: '<length>';
+    inherits: false;
+    initial-value: 7px;
+}
+
+@property --dash-color {
+    syntax: '<color>';
+    inherits: false;
+    initial-value: transparent;
+}
+
+.trial-banner::after {
+    --dash: 7px;
+    --dash-color: var(--border-hover);
+    --bt: var(--border-thickness, 1px);
+    --stripe-x: linear-gradient(90deg, var(--dash-color) 0 var(--dash), transparent var(--dash) 12px);
+    --stripe-y: linear-gradient(180deg, var(--dash-color) 0 var(--dash), transparent var(--dash) 12px);
+    content: '';
+    position: absolute;
+    inset: calc(var(--bt) * -1);
+    pointer-events: none;
+    background:
+        var(--stripe-x) 0 0 / 12px var(--bt) repeat-x,
+        var(--stripe-y) 100% 0 / var(--bt) 12px repeat-y,
+        var(--stripe-x) 0 100% / 12px var(--bt) repeat-x,
+        var(--stripe-y) 0 0 / var(--bt) 12px repeat-y;
+    transition: --dash 0.9s cubic-bezier(0.65, 0, 0.35, 1), --dash-color 0.4s ease;
+    animation: trial-dash-march 0.9s linear infinite paused;
+}
+
+.trial-banner:hover::after,
+.trial-banner:focus-visible::after {
+    --dash: 12px;
+    --dash-color: var(--text-3);
+    animation-play-state: running;
+}
+
+/* сдвиг ровно на период — цикл бесшовный; верх вправо, правая сторона вниз, низ влево, левая вверх */
+@keyframes trial-dash-march {
+    from {
+        background-position: 0 0, 100% 0, 0 100%, 0 0;
+    }
+    to {
+        background-position: 12px 0, 100% 12px, -12px 100%, 0 -12px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .trial-banner::after {
+        animation: none;
+    }
+}
+
+.trial-banner-icon {
+    font-size: 1.4rem;
+    color: var(--text-1);
+}
+
+.trial-banner-main {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+    min-width: 0;
+}
+
+.trial-banner-title {
+    font-size: 0.95rem;
+    color: var(--text-0);
+}
+
+.trial-banner-sub {
+    font-size: 0.78rem;
+    color: var(--text-4);
+    line-height: 1.5;
+}
+
+.trial-banner-btn.btn {
+    padding: 12px 18px;
+    font-size: 0.85rem;
+    white-space: nowrap;
+}
+
+@media (max-width: 600px) {
+    .trial-banner.panel {
+        flex-wrap: wrap;
+        padding: 22px 20px;
+    }
+
+    .trial-banner-btn.btn {
+        width: 100%;
+    }
+}
+
 .payment-methods {
     margin-top: 32px;
     text-align: center;

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://yookassa.ru https://yoomoney.ru https://yastatic.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com data:; img-src 'self' data: https://yastatic.net; connect-src 'self' https://yookassa.ru https://yoomoney.ru https://yastatic.net; form-action https:; frame-src https://yookassa.ru https://yoomoney.ru; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests">
+        content="default-src 'self'; script-src 'self' 'unsafe-inline' https://yookassa.ru https://yoomoney.ru https://yastatic.net; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https://yastatic.net; connect-src 'self' https://yookassa.ru https://yoomoney.ru https://yastatic.net; form-action https:; frame-src https://yookassa.ru https://yoomoney.ru; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests">
     <title data-i18n="meta_title">melodico — интернет, каким он должен быть</title>
     <meta name="description" data-i18n="meta_description"
         content="VPN для защиты данных и анонимности в сети. VLESS, Hysteria2, Shadowsocks, WireGuard.">
@@ -13,12 +13,11 @@
         href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 512'%3E%3Cpath d='M0 336c0 79.5 64.5 144 144 144H512c70.7 0 128-57.3 128-128c0-61.9-44-113.6-102.4-125.4c4.1-10.7 6.4-22.4 6.4-34.6c0-53-43-96-96-96c-19.7 0-38.1 6-53.3 16.2C363.2 41.9 311.4 0 256 0C167.6 0 96 71.6 96 160c0 2.7 .1 5.4 .2 8.1C40.2 196.5 0 264 0 336z' fill='white'/%3E%3C/svg%3E"
         type="image/svg+xml">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <!-- все библиотеки лежат локально в vendor/: CDN (Cloudflare) режутся ТСПУ без VPN -->
+    <link rel="stylesheet" href="vendor/fonts/dm-mono.css">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="custom.css?v=20261002-001">
+    <link rel="stylesheet" href="vendor/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="custom.css?v=20261005-002">
     <script>
         (function () {
             document.documentElement.classList.add('js');
@@ -49,6 +48,11 @@
                 <a href="#faq" class="nav-link" data-i18n="nav_faq">faq</a>
             </div>
             <div class="nav-controls">
+                <!-- вход в личный кабинет (выбор cookie, язык и тема передаются ссылкой — см. melodicoPrefs) -->
+                <a class="nav-login" href="https://cabinet.melodico.online/#/login" data-i18n-aria="nav_login_aria" aria-label="войти в личный кабинет">
+                    <i class="fa-solid fa-right-to-bracket" aria-hidden="true"></i>
+                    <span data-i18n="nav_login">войти</span>
+                </a>
                 <button class="lang-toggle" aria-label="переключить язык">
                     <span class="lang-current">RU</span>
                 </button>
@@ -482,11 +486,22 @@
         </div>
     </footer>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
-    <script src="script.js?v=20261002-001"></script>
+    <!-- согласие на cookie: выбор передаётся в checkout и кабинет (см. melodicoPrefs в script.js) -->
+    <div class="cookie-bar" id="cookieBar" role="region" aria-label="cookie" hidden>
+        <span class="cookie-text"><span data-i18n="cookie_text">мы используем</span> <u>cookie</u></span>
+        <button class="cookie-btn" type="button" data-consent="essential">
+            <span class="cookie-btn-stack"><span class="cookie-btn-label" data-i18n="cookie_essential">только необходимые</span></span>
+        </button>
+        <button class="cookie-btn cookie-btn--primary" type="button" data-consent="all">
+            <span class="cookie-btn-stack"><span class="cookie-btn-label" data-i18n="cookie_all">принять все</span></span>
+        </button>
+    </div>
+
+    <script src="vendor/js/three.min.js"></script>
+    <script src="vendor/js/gsap.min.js"></script>
+    <script src="vendor/js/ScrollTrigger.min.js"></script>
+    <script src="vendor/js/lenis.min.js"></script>
+    <script src="script.js?v=20261005-002"></script>
 </body>
 
 </html>

@@ -8,7 +8,7 @@
         content="default-src 'self'; script-src 'self' 'unsafe-inline' https://yookassa.ru https://yoomoney.ru https://yastatic.net; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https://yastatic.net; connect-src 'self' https://yookassa.ru https://yoomoney.ru https://yastatic.net; form-action https:; frame-src https://yookassa.ru https://yoomoney.ru; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests">
     <title data-i18n="meta_title">melodico — интернет, каким он должен быть</title>
     <meta name="description" data-i18n="meta_description"
-        content="Безопасный интернет для защиты данных и анонимности в сети. VLESS, Hysteria2, Shadowsocks, WireGuard.">
+        content="Безопасный интернет для защиты данных и анонимности в сети. VLESS, Hysteria2.">
     <link rel="icon"
         href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 512'%3E%3Cpath d='M0 336c0 79.5 64.5 144 144 144H512c70.7 0 128-57.3 128-128c0-61.9-44-113.6-102.4-125.4c4.1-10.7 6.4-22.4 6.4-34.6c0-53-43-96-96-96c-19.7 0-38.1 6-53.3 16.2C363.2 41.9 311.4 0 256 0C167.6 0 96 71.6 96 160c0 2.7 .1 5.4 .2 8.1C40.2 196.5 0 264 0 336z' fill='white'/%3E%3C/svg%3E"
         type="image/svg+xml">
@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="vendor/fonts/dm-mono.css">
 
     <link rel="stylesheet" href="vendor/fontawesome/css/all.min.css">
-    <link rel="stylesheet" href="custom.css?v=20261005-006">
+    <link rel="stylesheet" href="custom.css?v=20261005-007">
     <script>
         (function () {
             document.documentElement.classList.add('js');
@@ -49,7 +49,8 @@
             </div>
             <div class="nav-controls">
                 <!-- вход в личный кабинет (выбор cookie, язык и тема передаются ссылкой — см. melodicoPrefs) -->
-                <a class="nav-login" href="https://cabinet.melodico.online/#/login" data-i18n-aria="nav_login_aria" aria-label="войти в личный кабинет">
+                <a class="nav-login" href="https://cabinet.melodico.online/#/login" data-i18n-aria="nav_login_aria"
+                    aria-label="войти в личный кабинет">
                     <i class="fa-solid fa-right-to-bracket" aria-hidden="true"></i>
                     <span data-i18n="nav_login">войти</span>
                 </a>
@@ -80,7 +81,8 @@
                         <span class="accent" data-i18n="hero_title_2">должен быть</span>
                     </h1>
                     <p class="hero-desc" data-i18n="hero_desc">
-                        VPN для защиты данных и анонимности в сети. Поддержка VLESS обеспечивает максимальную скорость
+                        Безопасный интернет для защиты данных и анонимности в сети. Поддержка VLESS обеспечивает
+                        максимальную скорость
                         без ограничений.
                     </p>
                     <div class="hero-actions">
@@ -266,11 +268,16 @@
                     <div class="panel panel--pricing panel--pricing--featured" data-label="тариф"
                         data-i18n-label="label_subscription">
                         <h3 class="pricing-name">
-                            <svg class="pricing-name-icon" viewBox="0 0 48 48" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                <path d="M14.037,22c0.239-6.944,1.708-13.047,3.885-17.053C10.46,7.326,4.9,13.96,4.101,22H14.037z" />
-                                <path d="M14.037,26H4.101C4.9,34.04,10.46,40.674,17.922,43.053C15.745,39.047,14.276,32.944,14.037,26z" />
-                                <path d="M33.963,22h9.936C43.1,13.96,37.54,7.326,30.078,4.947C32.255,8.953,33.724,15.056,33.963,22z" />
-                                <path d="M33.963,26c-0.239,6.944-1.708,13.047-3.885,17.053C37.54,40.674,43.1,34.04,43.899,26H33.963z" />
+                            <svg class="pricing-name-icon" viewBox="0 0 48 48" fill="currentColor"
+                                xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path
+                                    d="M14.037,22c0.239-6.944,1.708-13.047,3.885-17.053C10.46,7.326,4.9,13.96,4.101,22H14.037z" />
+                                <path
+                                    d="M14.037,26H4.101C4.9,34.04,10.46,40.674,17.922,43.053C15.745,39.047,14.276,32.944,14.037,26z" />
+                                <path
+                                    d="M33.963,22h9.936C43.1,13.96,37.54,7.326,30.078,4.947C32.255,8.953,33.724,15.056,33.963,22z" />
+                                <path
+                                    d="M33.963,26c-0.239,6.944-1.708,13.047-3.885,17.053C37.54,40.674,43.1,34.04,43.899,26H33.963z" />
                                 <path d="M29.958,26H18.042C18.466,37.815,22.539,44,24,44S29.534,37.815,29.958,26z" />
                                 <path d="M24,4c-1.461,0-5.534,6.185-5.958,18h11.916C29.534,10.185,25.461,4,24,4z" />
                             </svg>
@@ -288,7 +295,8 @@
                                     трафик</span></li>
                             <li><span class="perk-bullet">~</span><span data-i18n="pricing_melodic_perk_2">до 5
                                     устройств одновременно</span></li>
-                            <li><span class="perk-bullet">~</span><span data-i18n="pricing_melodic_perk_3">высокоскоростные сервера от 5 гбит/с</span></li>
+                            <li><span class="perk-bullet">~</span><span
+                                    data-i18n="pricing_melodic_perk_3">высокоскоростные сервера от 5 гбит/с</span></li>
                             <li><span class="perk-bullet">~</span><span data-i18n="pricing_melodic_perk_4">+ сервер для
                                     обхода белых списков</span></li>
                         </ul>
@@ -430,9 +438,15 @@
                             <span class="faq-chevron"><i class="fa-solid fa-chevron-down"></i></span>
                         </button>
                         <div class="faq-answer">
-                            <div class="faq-answer-inner" data-i18n="faq_a1">
-                                после оплаты вы получите ключ доступа и подробную инструкцию для вашего устройства (iOS,
-                                Android, PC). настройка занимает не более 2 минут.
+                            <div class="faq-answer-inner">
+                                <span data-i18n="faq_a1">после оплаты нажмите «активировать в telegram» — бот подставит
+                                    код сам, останется придумать никнейм. бот пришлёт ссылку на подписку, она же появится
+                                    в личном кабинете. дальше установите приложение — happ, v2raytun или incy (ссылки
+                                    есть в кабинете, раздел «приложения» у подписки) — и добавьте в него подписку: по
+                                    ссылке, из буфера обмена или по QR-коду. это пара минут, а при продлении ссылка не
+                                    меняется — ничего перенастраивать не нужно.</span>
+                                <a class="faq-link" href="https://cabinet.melodico.online/" data-i18n="faq_a1_link">открыть
+                                    личный кабинет</a>
                             </div>
                         </div>
                     </div>
@@ -485,7 +499,8 @@
                             <h4 class="links-title" data-i18n="footer_support">поддержка</h4>
                             <ul class="link-list">
                                 <li><a href="placeholder.html" data-i18n="footer_kb">база знаний</a></li>
-                                <li><a href="https://t.me/melodicosupportbot" target="_blank" rel="noopener">telegram</a></li>
+                                <li><a href="https://t.me/melodicosupportbot" target="_blank"
+                                        rel="noopener">telegram</a></li>
                             </ul>
                         </div>
                         <div class="links-col links-col--wide">
@@ -509,10 +524,12 @@
     <div class="cookie-bar" id="cookieBar" role="region" aria-label="cookie" hidden>
         <span class="cookie-text"><span data-i18n="cookie_text">мы используем</span> <u>cookie</u></span>
         <button class="cookie-btn" type="button" data-consent="essential">
-            <span class="cookie-btn-stack"><span class="cookie-btn-label" data-i18n="cookie_essential">только необходимые</span></span>
+            <span class="cookie-btn-stack"><span class="cookie-btn-label" data-i18n="cookie_essential">только
+                    необходимые</span></span>
         </button>
         <button class="cookie-btn cookie-btn--primary" type="button" data-consent="all">
-            <span class="cookie-btn-stack"><span class="cookie-btn-label" data-i18n="cookie_all">принять все</span></span>
+            <span class="cookie-btn-stack"><span class="cookie-btn-label" data-i18n="cookie_all">принять
+                    все</span></span>
         </button>
     </div>
 
@@ -520,7 +537,7 @@
     <script src="vendor/js/gsap.min.js"></script>
     <script src="vendor/js/ScrollTrigger.min.js"></script>
     <script src="vendor/js/lenis.min.js"></script>
-    <script src="script.js?v=20261005-004"></script>
+    <script src="script.js?v=20261005-005"></script>
 </body>
 
 </html>

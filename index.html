@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="vendor/fonts/dm-mono.css">
 
     <link rel="stylesheet" href="vendor/fontawesome/css/all.min.css">
-    <link rel="stylesheet" href="custom.css?v=20261005-007">
+    <link rel="stylesheet" href="custom.css?v=20261005-008">
     <script>
         (function () {
             document.documentElement.classList.add('js');
@@ -46,6 +46,11 @@
                 <a href="#regions" class="nav-link" data-i18n="nav_regions">регионы</a>
                 <a href="#pricing" class="nav-link" data-i18n="nav_pricing">тариф</a>
                 <a href="#faq" class="nav-link" data-i18n="nav_faq">faq</a>
+                <!-- вход в кабинет внутри выезжающего меню — только на телефоне (в шапке там тесно) -->
+                <a href="https://cabinet.melodico.online/#/login" class="nav-link nav-link--login">
+                    <i class="fa-solid fa-right-to-bracket" aria-hidden="true"></i>
+                    <span data-i18n="nav_login_full">личный кабинет</span>
+                </a>
             </div>
             <div class="nav-controls">
                 <!-- вход в личный кабинет (выбор cookie, язык и тема передаются ссылкой — см. melodicoPrefs) -->
@@ -537,7 +542,7 @@
     <script src="vendor/js/gsap.min.js"></script>
     <script src="vendor/js/ScrollTrigger.min.js"></script>
     <script src="vendor/js/lenis.min.js"></script>
-    <script src="script.js?v=20261005-005"></script>
+    <script src="script.js?v=20261005-007"></script>
 </body>
 
 </html>

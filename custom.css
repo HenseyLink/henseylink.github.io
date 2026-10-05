@@ -1116,78 +1116,6 @@ body {
     padding: 40px;
 }
 
-.status-inner {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    gap: 24px;
-}
-
-.status-icon {
-    width: 72px;
-    height: 72px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid var(--button-border);
-    background: var(--bg-2);
-    color: var(--text-4);
-    font-size: 1.6rem;
-    transition: color var(--transition), border-color var(--transition);
-}
-
-.status-loading .status-icon {
-    color: var(--text-3);
-}
-
-.status-loading .status-icon i {
-    animation: spin 1.6s linear infinite;
-}
-
-.status-success .status-icon {
-    color: var(--text-0);
-    border-color: var(--text-4);
-}
-
-.status-error .status-icon {
-    color: var(--text-2);
-    border-color: var(--border-hover);
-}
-
-.status-title {
-    font-size: 1.4rem;
-    font-weight: 400;
-    color: var(--text-1);
-}
-
-.status-content {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
-
-.status-text {
-    font-size: 0.95rem;
-    color: var(--text-4);
-    line-height: 1.6;
-}
-
-.status-text--error {
-    color: var(--text-2);
-}
-
-.status-token {
-    font-size: 2rem;
-    font-weight: 400;
-    color: var(--text-0);
-    word-break: break-all;
-    padding: 16px;
-    background: var(--bg-2);
-    border: 1px solid var(--border);
-}
-
 .status-badge {
     display: inline-flex;
     align-items: center;
@@ -1224,13 +1152,34 @@ body {
     text-transform: lowercase;
 }
 
-.hidden {
-    display: none !important;
+/* Вход в личный кабинет — контрастная кнопка той же высоты, что переключатели */
+.nav-login {
+    height: 44px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 16px;
+    font-family: inherit;
+    font-size: 0.85rem;
+    font-weight: 400;
+    text-transform: lowercase;
+    text-decoration: none;
+    color: var(--bg-4);
+    background: var(--text-0);
+    border: 1px solid var(--text-0);
+    transition: background-color var(--transition), border-color var(--transition), color var(--transition), transform var(--transition);
+    will-change: transform;
 }
 
-@keyframes spin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
+.nav-login:hover {
+    background: var(--text-2);
+    border-color: var(--text-2);
+    color: var(--bg-4);
+    transform: translateY(-2px);
+}
+
+.nav-login i {
+    font-size: 0.85rem;
 }
 
 /* Mobile nav */
@@ -1290,6 +1239,17 @@ body {
         display: inline-flex;
     }
 
+    /* на узком экране — только иконка, квадрат как у соседних кнопок */
+    .nav-login {
+        width: 44px;
+        padding: 0;
+        justify-content: center;
+    }
+
+    .nav-login span {
+        display: none;
+    }
+
     .section {
         padding: 56px 0;
     }
@@ -1328,6 +1288,116 @@ body {
     .status-actions {
         flex-direction: column;
         width: 100%;
+    }
+}
+
+/***********************************
+ * Cookie consent
+ ***********************************/
+.cookie-bar {
+    position: fixed;
+    right: 24px;
+    bottom: calc(24px + env(safe-area-inset-bottom));
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 6px 6px 18px;
+    overflow: hidden;
+    font-family: var(--font);
+    background: color-mix(in srgb, var(--bg-3) 92%, transparent);
+    border: 1px solid var(--border-hover);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    white-space: nowrap;
+}
+
+.cookie-bar[hidden] {
+    display: none;
+}
+
+.cookie-text {
+    margin-right: 10px;
+    font-size: 0.8rem;
+    color: var(--text-2);
+}
+
+.cookie-text u {
+    text-underline-offset: 3px;
+}
+
+.cookie-btn {
+    position: relative;
+    padding: 10px 14px;
+    font-family: inherit;
+    font-size: 0.78rem;
+    font-weight: 400;
+    text-transform: lowercase;
+    color: var(--text-4);
+    background: transparent;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: color var(--transition), border-color var(--transition), background-color var(--transition);
+}
+
+.cookie-btn:hover {
+    color: var(--text-0);
+    border-color: var(--border);
+}
+
+.cookie-btn--primary {
+    color: var(--bg-4);
+    background: var(--text-0);
+    border-color: var(--text-0);
+}
+
+.cookie-btn--primary:hover {
+    color: var(--bg-4);
+    background: var(--text-2);
+    border-color: var(--text-2);
+}
+
+/* старая и новая подписи лежат в одной ячейке — для смены «снизу вверх» */
+.cookie-btn-stack {
+    display: inline-grid;
+    justify-items: center;
+}
+
+.cookie-btn-stack > * {
+    grid-area: 1 / 1;
+}
+
+.cookie-face {
+    letter-spacing: 0.02em;
+}
+
+.cookie-bar.is-done .cookie-btn {
+    pointer-events: none;
+}
+
+.cookie-particle {
+    position: fixed;
+    z-index: 201;
+    width: 3px;
+    height: 3px;
+    background: var(--text-0);
+    pointer-events: none;
+}
+
+@media (max-width: 600px) {
+    .cookie-bar {
+        left: 16px;
+        right: 16px;
+        bottom: calc(16px + env(safe-area-inset-bottom));
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        white-space: normal;
+        padding: 10px 10px 10px 14px;
+    }
+
+    .cookie-text {
+        flex: 1 0 100%;
+        margin: 0 0 4px;
     }
 }
 
